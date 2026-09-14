@@ -5,7 +5,7 @@
 > `dev-archive/` and `modding-notes/` folders; this file is the *distilled current
 > truth*. Update it whenever a fact changes; correct false leads in place.
 
-**Status:** M0, static recon done on both machines (2026-09-13 home, 2026-09-14 dev PC); the game has **not** been launched yet. · **VR-readiness verdict:** potentially the cheapest project on the account — the game ships **its own stereo renderer controls**, a real console, and an embedded scripting language with a run-a-file-from-disk command. Every part of that is `[inferred-static]` and one launch decides whether any of it is live.
+**Status:** M0, static recon done on both machines (2026-09-13 home, 2026-09-14 dev PC, 2026-09-14 archive + shader pass); the game has **not** been launched yet. · **VR-readiness verdict:** still one of the cheapest projects on the account, for a different reason than first thought. The stereo controls are **almost certainly NVIDIA 3D Vision** (driver-side, dead on modern hardware), but the game ships its **shaders as readable HLSL source** with the view and projection matrices uploaded **separately and by name**, a fixed module base, no protection, a real console and embedded Squirrel. All `[inferred-static]`; nothing has been run.
 
 ## 1. Identity
 - Game / build / version: Hard Reset, Steam build, exe `hardreset.exe` (linked 2012-04-26, the Extended Edition era rather than the later Redux).
@@ -15,7 +15,7 @@
 ## 2. Engine lineage
 - Family / base engine and how it was modified: Flying Wild Hog's own Road Hog Engine `[reported]`. Havok, FMOD, Bink and NVAPI are in use `[inferred-static 2026-09-13]`.
 - Middleware (animation, audio, physics, megatexture, CUDA, etc.): Havok (physics, `hkxCamera`/`Tthkp*` symbols), FMOD Ex + FMOD Event (audio), Bink (video), NVAPI — all confirmed in the import table `[inferred-static 2026-09-14]`. **Scripting is Squirrel**: `Custom version based on Squirrel 2.2.2`, with `CSquirrelTreeWindow`, `CSquirrelValueTweaker`, `Squirrel tweakables` and a build step `..\tools\sqcompile.exe -r -i %s -o %s` visible in the strings.
-- Distinctive file formats / build tags / symbol naming: Data under `data\`, not yet looked at.
+- Distinctive file formats / build tags / symbol naming: **`data\*.bin` are ordinary ZIP archives with every file ZipCrypto-locked; the password is a plain string in `hardreset.exe`** — one hit among 20,830 exe strings, opening all 22 archives `[verified-numerically 2026-09-14, n=22]`. Recover it with `dev-archive/recon/2026-09-14-archive-and-shader-pass/unlock_archives.py`; the key itself is deliberately kept out of this public repo. Game scripts are compiled Squirrel under `data/scriptsbin/`.
 
 ## 3. Binary & memory
 - 32/64-bit, size, module base, ASLR behaviour (stable base? relocations?): **32-bit** (PE32), `hardreset.exe` 7.3 MB, linked 2012-04-26. Plain sections (`.text`, `BINK`, `.rdata`, `.data`, `.rsrc`), no protection-shaped section. ⭐ **Module base `0x400000`, ASLR OFF, relocations stripped — the base never moves** `[inferred-static 2026-09-14]`, so every address found here stays valid across runs and across sessions. (Portal, by contrast, has ASLR on.) Also imports `dbghelp.dll` (`StackWalk64`, `SymFromAddr`) — it symbolises its own crashes.
@@ -34,10 +34,10 @@
 
 ## 6. Camera & projection delivery (the crucial section)
 - How the world transform reaches the GPU (shared VP buffer / per-draw MVP /
-  other), with **shader-reflection / disassembly evidence**:
+  other), with **shader-reflection / disassembly evidence**: ⭐ **shared camera constants, by name, in shipped HLSL source** (`data/shaders/common.hlsl` inside `data_10_shaders.bin`), compiled by the game at runtime (`D3DCompile` import, `r_shader_cache*` cvars) `[inferred-static 2026-09-14]`. D3D9, so these are vertex-shader float constant registers, not constant buffers.
 - Exact constant-buffer slot, parameter name(s), byte offset(s), layout,
-  handedness, row/column convention:
-- Where projection `P` / FOV comes from:
+  handedness, row/column convention: VS `c0`–`c3` `mWorldToScreen` (4x4, view × projection) · `c4`–`c6` `mWorldToCamera` (4x3, view) · `c8`–`c11` `mCameraToScreen` (4x4, projection — **shares `c8` with `vShadowBiasParams`**, so it is only meaningful in some passes) · `c15` `vVSCameraPosWS` (`w` = time) · `c16`–`c18` `mObjectToWorld` · `c29` `vHUDStereoParams`. PS `c0.w` = viewport aspect, `c51` `vPSCameraPosWS`, `c44` `vPosDecodingParams` (deferred position rebuild) `[inferred-static 2026-09-14]`. **Row-vector convention**: every use is `mul( pos, M )` `[inferred-static 2026-09-14]`. ⚠️ **Almost all world geometry goes through the combined `mWorldToScreen` directly** (`compose`, `decal`, `texture`, `shadow`, `fogVolume`, `rainBox`…); only `particle_sprites` goes view-then-projection. So a per-eye override has to rewrite **`c0`–`c3`**, not just the view at `c4`. Handedness not yet read. Table: `dev-archive/recon/2026-09-14-archive-and-shader-pass/README.md` §2.
+- Where projection `P` / FOV comes from: `mCameraToScreen`; FOV as a number via `r_fov` / `r_gameplay_fov` `[inferred-static 2026-09-14]`.
 - The per-eye override maths (`K_eye = …`):
 
 ## 7. Constant-buffer fill mechanism
@@ -63,9 +63,9 @@ in an executable. Not one has been typed into a console.** The prefixes are `r_`
 
 | command / cvar | effect (from the game's own menu text where quoted) | use |
 |---|---|---|
-| `r_stereo_enable` | "Stereo enable"; menu also shows "Force stereo, need restart" | ⭐ the stereo renderer's master switch |
-| `r_stereo_eye_separation` | "Stereo eye separation" | ⭐ interpupillary distance |
-| `r_stereo_convergence` | "Stereo convergence" | ⭐ where the eyes converge |
+| `r_stereo_enable` | "Stereo enable" | master switch for **NVIDIA 3D Vision via NVAPI**, almost certainly — see §11 `[inferred-static 2026-09-14]`. (The "Force stereo, need restart" text is the audio option `s_sound_forcestereo` — its reading as a render setting is `[disproved 2026-09-14]`.) |
+| `r_stereo_eye_separation` | "Stereo eye separation" | 3D Vision separation, passed to the driver `[inferred-static 2026-09-14]` |
+| `r_stereo_convergence` | "Stereo convergence" | 3D Vision convergence `[inferred-static 2026-09-14]` |
 | `r_stereo_separation` | — | a second separation knob; relationship to the above unknown |
 | `SetStereoDist`, `SetStereoDepthCrosshair` | script-side stereo helpers | a crosshair at correct depth is a stereo-only need |
 | `r_fov`, `r_gameplay_fov` | field of view, gameplay FOV separately | FOV as a number |
@@ -84,11 +84,13 @@ in an executable. Not one has been typed into a console.** The prefixes are `r_`
 - Frame-capture method; where images land:
 
 ## 11. Dead ends & false leads (save future time)
-- none yet.
+- **The "built-in stereo renderer" is very probably NVIDIA 3D Vision, not the game's own doubling** `[inferred-static 2026-09-14]`. Evidence: the exe imports `nvapi.dll` / `nvapi_QueryInterface` (how a game sets 3D Vision separation and convergence); and across ~40 shipped HLSL sources the **only** per-eye code is `vHUDStereoParams.x` added to x position in the three HUD/text shaders (`font`, `font_out`, `animatix`) — no world shader does anything per eye. That is the 3D Vision pattern: driver doubles the world, the game places its own HUD at a depth. NVIDIA dropped 3D Vision in 2019, so expect `r_stereo_enable 1` to do nothing. **Still possible:** CPU-side doubling with two `mWorldToCamera` uploads that no shader would show. Separating observation: one flat launch with `r_stereo_enable 1`. Supersedes the §12 hope recorded earlier the same day.
+- "Force stereo, need restart" is **audio** (`s_sound_forcestereo`), not a render option `[disproved 2026-09-14]`.
 
 ## 12. Open risks toward the North Star
 - Nothing blocking seen yet. A small, unprotected 32-bit Direct3D 9 exe with a fixed module base is the friendliest starting point of this batch.
-- ⭐ **The game appears to ship its own stereo renderer** (`r_stereo_enable` / `_eye_separation` / `_convergence`, plus menu text and script helpers) `[inferred-static 2026-09-14]`. On every other project here the expensive half is making the game draw the world twice with the right maths; this one may have that already.
-- ⚠️ **The specific way that find could be worthless:** 2011-era stereo is often implemented **in the graphics driver** (3D Vision), with the game only passing the two numbers through. If so, `r_stereo_enable 1` may do nothing on a modern machine. The strings prove the *controls* exist and prove nothing about what is behind them `[hypothesis]`.
+- ~~The game appears to ship its own stereo renderer~~ — **probably not**: the controls drive NVIDIA 3D Vision (§11) `[inferred-static 2026-09-14]`. One flat launch confirms.
+- ⭐ **What replaces that hope:** shaders are compiled at runtime from shipped HLSL source, with view and projection uploaded separately by name (§6). **Open question worth a flat run: will the game compile a loose, edited `data\shaders\*.hlsl` from disk in preference to the archive copy** (with `r_shader_cache 0`)? If yes, a first per-eye camera test needs no injected code at all `[hypothesis]`. If no, the archive can be rebuilt with the recovered key, or the constants set from a D3D9 hook at the known slots.
+- The HUD already knows how to be pushed to a per-eye depth (`vHUDStereoParams`) — useful later for a readable VR HUD `[inferred-static 2026-09-14]`.
 - ⚠️ **Debug-only console commands are routinely compiled out of retail builds while their strings survive.** That applies to the Squirrel run-a-file command and to much of the `r_show_*` family. A string is not a command.
 - **Nothing has been run.** The whole entry above is static reading.
