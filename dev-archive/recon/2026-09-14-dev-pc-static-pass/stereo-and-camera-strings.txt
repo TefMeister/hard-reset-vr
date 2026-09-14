@@ -1,0 +1,18 @@
+Camera far z
+Camera near z
+Force stereo, need restart
+SetStereoDepthCrosshair
+SetStereoDist
+Stereo convergence
+Stereo enable
+Stereo eye separation
+UI_option_audio_force_stereo
+r_fov
+r_gameplay_fov
+r_stereo_convergence
+r_stereo_enable
+r_stereo_eye_separation
+r_stereo_separation
+s_sound_forcestereo
+sound_speakermode_stereo
+sound_speakermode_stereo_prologic
