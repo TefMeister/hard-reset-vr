@@ -1,0 +1,27 @@
+======================================================================
+D:/Program Files (x86)/Steam/steamapps/common/HardReset/hardreset.exe
+  bits=32  linked=2012-04-26T14:58:58  imagebase=0x400000
+  ASLR(DYNAMIC_BASE)=NO  NX=no  relocs_stripped=yes
+  sections:
+    .text      vaddr=    0x1000 vsize=   6543691 rawsize=   6543872 chars=0x60000020
+    BINK       vaddr=  0x63f000 vsize=      4300 rawsize=      4608 chars=0x60000020
+    .rdata     vaddr=  0x641000 vsize=    494908 rawsize=    495104 chars=0x40000040
+    .data      vaddr=  0x6ba000 vsize=   5048124 rawsize=     88576 chars=0xc0000040
+    .rsrc      vaddr=  0xb8b000 vsize=    124796 rawsize=    124928 chars=0x40000040
+  imports:
+    KERNEL32.dll                 ( 128) QueryPerformanceCounter, Sleep, GetLastError, CreateMutexA, QueryPerformanceFrequency, SetEnvironmentVariableA
+    USER32.dll                   (  43) GetDesktopWindow, LoadCursorA, RegisterClassA, CreateWindowExA, ShowWindow, SetWindowLongA
+    steam_api.dll                (  13) SteamFriends, SteamAPI_RestartAppIfNecessary, SteamAPI_UnregisterCallResult, SteamAPI_RunCallbacks, SteamAPI_Shutdown, SteamAPI_RegisterCallResult
+    d3d9.dll                     (   1) Direct3DCreate9
+    d3dx9_43.dll                 (  12) D3DXCreateTexture, D3DXSaveSurfaceToFileA, D3DXSaveSurfaceToFileInMemory, D3DXCreateTextureFromFileInMemoryEx, D3DXGetShaderConstantTable, D3DXSaveTextureToFileA
+    XINPUT9_1_0.dll              (   2) XInputSetState, XInputGetState
+    VERSION.dll                  (   3) GetFileVersionInfoA, GetFileVersionInfoSizeA, VerQueryValueA
+    fmodex.dll                   (  25) ?getChannel@ChannelGroup@FMOD@@QAG?AW4FMOD_RESULT@@HPAPAVChannel@2@@Z, ?getNumChannels@ChannelGroup@FMOD@@QAG?AW4FMOD_RESULT@@PAH@Z, ?getPosition@Channel@FMOD@@QAG?AW4FMOD_RESULT@@PAII@Z, ?setSpeakerLevels@Channel@FMOD@@QAG?AW4FMOD_RESULT@@W4FMOD_SPEAKER@@PAMH@Z, ?setFileSystem@System@FMOD@@QAG?AW4FMOD_RESULT@@P6G?AW43@PBDHPAIPAPAX2@ZP6G?AW43@PAX4@ZP6G?AW43@44I14@ZP6G?AW43@4I4@ZP6G?AW43@PAUFMOD_ASYNCREADINFO@@4@Z5H@Z, ?setPosition@Channel@FMOD@@QAG?AW4FMOD_RESULT@@II@Z
+    fmod_event.dll               (  35) ?getSystemObject@EventSystem@FMOD@@QAG?AW4FMOD_RESULT@@PAPAVSystem@2@@Z, ?stop@Event@FMOD@@QAG?AW4FMOD_RESULT@@_N@Z, ?getState@Event@FMOD@@QAG?AW4FMOD_RESULT@@PAI@Z, ?setValue@EventParameter@FMOD@@QAG?AW4FMOD_RESULT@@M@Z, ?getParameter@Event@FMOD@@QAG?AW4FMOD_RESULT@@PBDPAPAVEventParameter@2@@Z, _FMOD_EventSystem_Create@4
+    binkw32.dll                  (  16) _BinkClose@4, _BinkGetFrameBuffersInfo@8, _BinkSetWillLoop@8, _BinkOpen@8, _BinkSetIO@4, _BinkPause@8
+    dbghelp.dll                  (   7) SymInitialize, StackWalk64, SymGetModuleBase64, SymFunctionTableAccess64, SymGetLineFromAddr64, SymFromAddr
+    WSOCK32.dll                  (  21) send, connect, gethostbyname, inet_addr, htons, WSAAsyncSelect
+    GDI32.dll                    (   8) DeleteDC, CreateCompatibleDC, GetObjectA, CreateCompatibleBitmap, SelectObject, GetPixel
+    SHELL32.dll                  (   1) SHGetSpecialFolderPathA
+    ole32.dll                    (   3) CoCreateInstance, CoInitialize, CoUninitialize
+    OLEAUT32.dll                 (   3) SysFreeString, SysAllocString, VariantClear

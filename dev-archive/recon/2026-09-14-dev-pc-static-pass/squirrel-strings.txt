@@ -1,0 +1,20 @@
+#memory::allocated::squirrel
+#memory::allocations::squirrel
+%s..\tools\sqcompile.exe -r -i %s -o %s -x -d %smain\common\const.nut -d %smain\common\cppConst.nut
+.?AUAcceptor@?1??GetRandomAccessiblePointInTrigger@CPhysicsManager@SquirrelBind@@SA?AVVec3@@PAVCMoveAgent@@PAVCAreaTrigger@@@Z@
+.?AVCSquirrelTreeWindow@@
+.?AVCSquirrelValueTweaker@@
+// To re-generate it use 'sqexportconstants' console command.
+CSquirrelTreeWindow
+Custom version based on Squirrel 2.2.2
+Run external squirrel file (by default in data/scripts/debug directory).
+SetInitSquirrelProgress
+SetSquirrelId
+Squirrel callstack:
+Squirrel tweakables
+[Squirrel callstack]
+gameplay/beginGame.nut
+gameplay/debug/%s.nut
+init.nut
+main/common/cppConst.nut
+squirrel
