@@ -5,7 +5,7 @@
 > `dev-archive/` and `modding-notes/` folders; this file is the *distilled current
 > truth*. Update it whenever a fact changes; correct false leads in place.
 
-**Status:** M0, static recon done on both machines (2026-09-13 home, 2026-09-14 dev PC, 2026-09-14 archive + shader pass); the game has **not** been launched yet. · **VR-readiness verdict:** still one of the cheapest projects on the account, for a different reason than first thought. The stereo controls are **almost certainly NVIDIA 3D Vision** (driver-side, dead on modern hardware), but the game ships its **shaders as readable HLSL source** with the view and projection matrices uploaded **separately and by name**, a fixed module base, no protection, a real console and embedded Squirrel. All `[inferred-static]`; nothing has been run.
+**Status:** M0, static recon done on both machines (2026-09-13 home, 2026-09-14 dev PC, 2026-09-14 archive + shader pass); **first launch 2026-09-14** (`/ms`, dev PC): console works, `r_stereo_enable` is live, loose-shader test set up but not yet run (`modding-notes/2026-09-14-first-launch-console-and-stereo.md`). · **VR-readiness verdict:** still one of the cheapest projects on the account, for a different reason than first thought. The stereo controls are **almost certainly NVIDIA 3D Vision** (driver-side, dead on modern hardware), but the game ships its **shaders as readable HLSL source** with the view and projection matrices uploaded **separately and by name**, a fixed module base, no protection, a real console and embedded Squirrel. Mostly `[inferred-static]`; see §9 and §11 for what the first launch confirmed and overturned.
 
 ## 1. Identity
 - Game / build / version: Hard Reset, Steam build, exe `hardreset.exe` (linked 2012-04-26, the Extended Edition era rather than the later Redux).
@@ -20,7 +20,7 @@
 ## 3. Binary & memory
 - 32/64-bit, size, module base, ASLR behaviour (stable base? relocations?): **32-bit** (PE32), `hardreset.exe` 7.3 MB, linked 2012-04-26. Plain sections (`.text`, `BINK`, `.rdata`, `.data`, `.rsrc`), no protection-shaped section. ⭐ **Module base `0x400000`, ASLR OFF, relocations stripped — the base never moves** `[inferred-static 2026-09-14]`, so every address found here stays valid across runs and across sessions. (Portal, by contrast, has ASLR on.) Also imports `dbghelp.dll` (`StackWalk64`, `SymFromAddr`) — it symbolises its own crashes.
 - Renderer API (D3D11/12, DXGI, GL, Vulkan) with evidence: **Direct3D 9, confirmed from the import table** (not just strings): `d3d9.dll → Direct3DCreate9` `[inferred-static 2026-09-14]`. ⭐ It also imports **`d3dx9_43.dll → D3DXGetShaderConstantTable`**, so the game reflects its own shaders and knows its constants **by name** — the `flat-to-vr-RE-toolkit/tools/d3d9-ctab.py` case exactly. `D3DCompiler_43.dll` ships beside it.
-- Developer console / cvar system present? how opened?: **Yes, a real one** `[inferred-static 2026-09-14]`. The binary carries `CConsole`, a `CVar` class with its own AVL-tree registry, `ListenToCVar`, the help line `Prints list of all console commands.`, and the cvars `r_draw_hud_console`, `s_console_lines_always_visible`, `s_console_commands_history`, `s_console_show_custom_logs`. ⚠️ **How it opens is unknown** — no key binding was found in the strings. Full cvar list: `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt` (891 names).
+- Developer console / cvar system present? how opened?: **Yes, a real one** `[inferred-static 2026-09-14]`. The binary carries `CConsole`, a `CVar` class with its own AVL-tree registry, `ListenToCVar`, the help line `Prints list of all console commands.`, and the cvars `r_draw_hud_console`, `s_console_lines_always_visible`, `s_console_commands_history`, `s_console_show_custom_logs`. **Opens with Ctrl + ~** in the retail build `[verified-live 2026-09-14, n=1]` (the shipped patch notes' "console commands removed" line is out of date). Typed commands persist in the profile `config.cfg` as `s_console_commands_history`. Some cvars are start-up only and answer "read only" (`r_shader_cache`) `[verified-live 2026-09-14, n=1]`. **User state:** `Documents\Hard Reset Extended\profiles\<name>\config.cfg` (`name "value"`, CRLF), `binds.cfg`, saves; shader cache copied to `Documents\Hard Reset Extended\cache\cache.bin` `[measured 2026-09-14]`. Full cvar list: `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt` (891 names).
 
 ## 4. DRM / anti-debug & injection foothold
 - DRM (CEG/Denuvo/GOG/none); launch-time-debugger behaviour: Steam API only; no wrapper or protection section found `[inferred-static 2026-09-13]`. Not tested live.
@@ -56,15 +56,15 @@
 ## 9. cvar / console cheat sheet
 
 891 identifier-shaped names were extracted from the exe `[inferred-static 2026-09-14]`; the full list
-is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Every row below is a string
-in an executable. Not one has been typed into a console.** The prefixes are `r_` render (173),
+is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Rows are strings in an executable unless marked live.** Typed so far (2026-09-14):
+`_version`, `r_stereo_enable`, `r_stereo_eye_separation`, `r_shader_cache`. The prefixes are `r_` render (173),
 `s_` settings (51), `g_` game (41), `p_` physics (15), `e_` editor (10), plus large `UI_` and `HK`
 (Havok) groups.
 
 | command / cvar | effect (from the game's own menu text where quoted) | use |
 |---|---|---|
-| `r_stereo_enable` | "Stereo enable" | master switch for **NVIDIA 3D Vision via NVAPI**, almost certainly — see §11 `[inferred-static 2026-09-14]`. (The "Force stereo, need restart" text is the audio option `s_sound_forcestereo` — its reading as a render setting is `[disproved 2026-09-14]`.) |
-| `r_stereo_eye_separation` | "Stereo eye separation" | 3D Vision separation, passed to the driver `[inferred-static 2026-09-14]` |
+| `r_stereo_enable` | "Stereo enable" | **Live, no restart:** `1` blows the picture out to white/magenta with a quarter-size foreign buffer in the top-left corner; `0` restores it `[verified-live 2026-09-14, n=3 cycles]`. Built for **NVIDIA 3D Vision via NVAPI** `[inferred-static 2026-09-14]` — see §11. (The "Force stereo, need restart" text is the audio option `s_sound_forcestereo` — its reading as a render setting is `[disproved 2026-09-14]`.) |
+| `r_stereo_eye_separation` | "Stereo eye separation" | 3D Vision separation `[inferred-static 2026-09-14]`. 0 vs 5 with stereo on: no visible difference, eyeballed `[verified-live 2026-09-14, n=1]` |
 | `r_stereo_convergence` | "Stereo convergence" | 3D Vision convergence `[inferred-static 2026-09-14]` |
 | `r_stereo_separation` | — | a second separation knob; relationship to the above unknown |
 | `SetStereoDist`, `SetStereoDepthCrosshair` | script-side stereo helpers | a crosshair at correct depth is a stereo-only need |
@@ -84,7 +84,7 @@ in an executable. Not one has been typed into a console.** The prefixes are `r_`
 - Frame-capture method; where images land:
 
 ## 11. Dead ends & false leads (save future time)
-- **The "built-in stereo renderer" is very probably NVIDIA 3D Vision, not the game's own doubling** `[inferred-static 2026-09-14]`. Evidence: the exe imports `nvapi.dll` / `nvapi_QueryInterface` (how a game sets 3D Vision separation and convergence); and across ~40 shipped HLSL sources the **only** per-eye code is `vHUDStereoParams.x` added to x position in the three HUD/text shaders (`font`, `font_out`, `animatix`) — no world shader does anything per eye. That is the 3D Vision pattern: driver doubles the world, the game places its own HUD at a depth. NVIDIA dropped 3D Vision in 2019, so expect `r_stereo_enable 1` to do nothing. **Still possible:** CPU-side doubling with two `mWorldToCamera` uploads that no shader would show. Separating observation: one flat launch with `r_stereo_enable 1`. Supersedes the §12 hope recorded earlier the same day.
+- **The "built-in stereo renderer" is very probably NVIDIA 3D Vision, not the game's own doubling** `[inferred-static 2026-09-14]`. Evidence: the exe imports `nvapi.dll` / `nvapi_QueryInterface` (how a game sets 3D Vision separation and convergence); and across ~40 shipped HLSL sources the **only** per-eye code is `vHUDStereoParams.x` added to x position in the three HUD/text shaders (`font`, `font_out`, `animatix`) — no world shader does anything per eye. That is the 3D Vision pattern: driver doubles the world, the game places its own HUD at a depth. ~~NVIDIA dropped 3D Vision in 2019, so expect `r_stereo_enable 1` to do nothing~~ — **that prediction was wrong** `[disproved 2026-09-14]`: it visibly changes rendering (§9). What it does looks like a render-target mix-up (wrong buffer composed, a buffer shown in a corner), and eye separation 0 vs 5 changed nothing visible, so **game-side doubling is still unshown** `[hypothesis]`. Patch 1.2 notes: "Full Nvidia 3dVision support" `[reported]`. **Separating step, no game needed:** follow the `r_stereo_enable` cvar in the exe (fixed base `0x400000`) and read what it switches — render targets, NVAPI calls, or a second camera upload. Supersedes the §12 hope recorded earlier the same day.
 - "Force stereo, need restart" is **audio** (`s_sound_forcestereo`), not a render option `[disproved 2026-09-14]`.
 
 ## 12. Open risks toward the North Star
