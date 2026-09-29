@@ -94,3 +94,8 @@ is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Ro
 - The HUD already knows how to be pushed to a per-eye depth (`vHUDStereoParams`) — useful later for a readable VR HUD `[inferred-static 2026-09-14]`.
 - ⚠️ **Debug-only console commands are routinely compiled out of retail builds while their strings survive.** That applies to the Squirrel run-a-file command and to much of the `r_show_*` family. A string is not a command.
 - **Nothing has been run.** The whole entry above is static reading.
+
+## Inbox folds, 2026-09-29
+
+**Hard Reset is listed as a 3D Vision DIRECT MODE game (`/gr` 2026-09-29).** wiz3D lists it among games that render both eyes themselves and choose the eye with `SetActiveEye`; its maintainer reports it working after a September 2026 fix, in which the game's start-up `Stereo_Deactivate` is a handshake, not an off-switch `[reported]`. §11's "no per-eye code in any world shader" is also what Direct Mode looks like, and the 2026-09-14 live result fits "the stereo path started but the driver never said stereo was active" `[hypothesis]`. Separating step, static: find the NVAPI stereo call order in the exe (Deactivate → IsActivated → Activate → SetActiveEye per frame); if present, a logging `nvapi.dll` of our own that answers "active" is the lever. Topic: `external-research/topics/2026-09-29-hard-reset-is-a-3d-vision-direct-mode-game.md`.
+
