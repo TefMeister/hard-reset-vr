@@ -84,7 +84,7 @@ is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Ro
 - Frame-capture method; where images land:
 
 ## 11. Dead ends & false leads (save future time)
-- **The "built-in stereo renderer" is very probably NVIDIA 3D Vision, not the game's own doubling** `[inferred-static 2026-09-14]`. Evidence: the exe imports `nvapi.dll` / `nvapi_QueryInterface` (how a game sets 3D Vision separation and convergence); and across ~40 shipped HLSL sources the **only** per-eye code is `vHUDStereoParams.x` added to x position in the three HUD/text shaders (`font`, `font_out`, `animatix`) — no world shader does anything per eye. That is the 3D Vision pattern: driver doubles the world, the game places its own HUD at a depth. ~~NVIDIA dropped 3D Vision in 2019, so expect `r_stereo_enable 1` to do nothing~~ — **that prediction was wrong** `[disproved 2026-09-14]`: it visibly changes rendering (§9). What it does looks like a render-target mix-up (wrong buffer composed, a buffer shown in a corner), and eye separation 0 vs 5 changed nothing visible, so **game-side doubling is still unshown** `[hypothesis]`. Patch 1.2 notes: "Full Nvidia 3dVision support" `[reported]`. **Separating step, no game needed:** follow the `r_stereo_enable` cvar in the exe (fixed base `0x400000`) and read what it switches — render targets, NVAPI calls, or a second camera upload. Supersedes the §12 hope recorded earlier the same day.
+- **The "built-in stereo renderer" is very probably NVIDIA 3D Vision, not the game's own doubling** `[inferred-static 2026-09-14]`. Evidence: the exe loads `nvapi.dll` / `nvapi_QueryInterface` (⚠️ by `LoadLibrary` at run time, `0x6bd0c0`, not the import table — corrected 2026-10-01) (how a game sets 3D Vision separation and convergence); and across ~40 shipped HLSL sources the **only** per-eye code is `vHUDStereoParams.x` added to x position in the three HUD/text shaders (`font`, `font_out`, `animatix`) — no world shader does anything per eye. That is the 3D Vision pattern: driver doubles the world, the game places its own HUD at a depth. ~~NVIDIA dropped 3D Vision in 2019, so expect `r_stereo_enable 1` to do nothing~~ — **that prediction was wrong** `[disproved 2026-09-14]`: it visibly changes rendering (§9). What it does looks like a render-target mix-up (wrong buffer composed, a buffer shown in a corner), and eye separation 0 vs 5 changed nothing visible, so **game-side doubling is still unshown** `[hypothesis]`. Patch 1.2 notes: "Full Nvidia 3dVision support" `[reported]`. **Separating step, no game needed:** follow the `r_stereo_enable` cvar in the exe (fixed base `0x400000`) and read what it switches — render targets, NVAPI calls, or a second camera upload. Supersedes the §12 hope recorded earlier the same day.
 - "Force stereo, need restart" is **audio** (`s_sound_forcestereo`), not a render option `[disproved 2026-09-14]`.
 
 ## 12. Open risks toward the North Star
@@ -96,6 +96,16 @@ is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Ro
 - **Nothing has been run.** The whole entry above is static reading.
 
 ## Inbox folds, 2026-09-29
+
+**⭐ 2026-10-01 (`/pd`): THE GAME'S OWN TWO-EYE LOOP, TRACED** `[inferred-static 2026-10-01]`. Start-up `0x973694`:
+NvAPI Initialize → `SetDriverMode(2)` (direct) → IsEnabled/Enable. Every frame `0x973700`: eye count `[0xdccfe8]` =
+1 + (cvar byte `[eax+0xdcc134]` ≠ 0, very probably `r_stereo_enable`); driver stereo is activated (`0x9731a0`) only if
+the driver reports it enabled and `[0xbc1bb8] == 120`. The eye loop (`0x976336`, `0x8a6b60` per eye) runs from the
+cvar alone; before each eye `SetActiveEye(handle, idx 0 → 2, 1 → 1)` (`0x976d4f`, `0x96b036`); per-eye ± constant at
+`0x96f14b`. This explains the 2026-09-14 blown-out picture (both eyes into one screen). **VR route:** a stand-in
+`nvapi.dll` beside the exe (the game `LoadLibrary`s it by name) that reports stereo on and uses `SetActiveEye` as the
+per-eye signal to switch render target and projection `[hypothesis]`. Note
+`modding-notes/2026-10-01-pd-the-game-draws-two-eyes-from-a-console-setting.md`.
 
 **Hard Reset is listed as a 3D Vision DIRECT MODE game (`/gr` 2026-09-29).** wiz3D lists it among games that render both eyes themselves and choose the eye with `SetActiveEye`; its maintainer reports it working after a September 2026 fix, in which the game's start-up `Stereo_Deactivate` is a handshake, not an off-switch `[reported]`. §11's "no per-eye code in any world shader" is also what Direct Mode looks like, and the 2026-09-14 live result fits "the stereo path started but the driver never said stereo was active" `[hypothesis]`. Separating step, static: find the NVAPI stereo call order in the exe (Deactivate → IsActivated → Activate → SetActiveEye per frame); if present, a logging `nvapi.dll` of our own that answers "active" is the lever. Topic: `external-research/topics/2026-09-29-hard-reset-is-a-3d-vision-direct-mode-game.md`.
 
