@@ -102,7 +102,8 @@ NvAPI Initialize → `SetDriverMode(2)` (direct) → IsEnabled/Enable. Every fra
 1 + (cvar byte `[eax+0xdcc134]` ≠ 0, very probably `r_stereo_enable`); driver stereo is activated (`0x9731a0`) only if
 the driver reports it enabled and `[0xbc1bb8] == 120`. The eye loop (`0x976336`, `0x8a6b60` per eye) runs from the
 cvar alone; before each eye `SetActiveEye(handle, idx 0 → 2, 1 → 1)` (`0x976d4f`, `0x96b036`); per-eye ± constant at
-`0x96f14b`. This explains the 2026-09-14 blown-out picture (both eyes into one screen). **VR route:** a stand-in
+`0x96f14b` = `vHUDStereoParams` (c29.x = −1 / +1): the game shifts only the **HUD** per eye; the world shift was the
+driver's. This explains the 2026-09-14 blown-out picture (both eyes into one screen). **VR route:** a stand-in
 `nvapi.dll` beside the exe (the game `LoadLibrary`s it by name) that reports stereo on and uses `SetActiveEye` as the
 per-eye signal to switch render target and projection `[hypothesis]`. Note
 `modding-notes/2026-10-01-pd-the-game-draws-two-eyes-from-a-console-setting.md`.
