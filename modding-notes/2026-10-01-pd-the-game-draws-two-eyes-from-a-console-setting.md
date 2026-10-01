@@ -35,11 +35,17 @@ to be drawn**. That is the moment to switch the render target to that eye's text
 projection), and the frame then arrives already split by eye. Everything else in the library can return "not
 supported".
 
+## Later the same session: what the per-eye sign moves
+
+`0x96f14b` builds `(±1, 0, 0, 0)` (eye index 0 → −1.0 at `[0xa9574c]`, 1 → +1.0 at `[0xa71064]`) and uploads it with
+`SetVertexShaderConstantF(29, …, 1)` (device vtable +0x178). `data/shaders/common.hlsl` names c29
+**`vHUDStereoParams`**. So the only per-eye term the game sets itself moves the **HUD**; the world's eye shift was
+the 3D Vision driver's job `[inferred-static 2026-10-01]`. For VR that is the right split: we supply each eye's world
+view ourselves (the camera constants are uploaded by name, §6), and the game already places the HUD per eye.
+
 ## Not established
 
 - That `[eax+0xdcc134]` is `r_stereo_enable` (name not tied to the address yet; the live toggle behaves exactly as
   this predicts).
-- What the per-eye constants are, and whether the eye shift reaches the world shaders (the shipped HLSL only shows a
-  per-eye term in the HUD shaders, so the separation may be applied CPU-side to the camera).
 - Whether the game creates its own per-eye targets or relies on the driver to split the back buffer (the latter
   fits the live picture).
