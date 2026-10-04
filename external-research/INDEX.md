@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-09-29 (estate sweep) — CHECK-IN.** The open-source wiz3D stereo wrapper lists Hard Reset as a 3D Vision Direct Mode game that draws both eyes itself, and got it working in September 2026; topic filed and a pointer sent to the dossier.
+**Last `/gr` pass: 2026-10-04 (estate sweep) — CHECK-IN.** Inbox empty. Read our fake `nvapi.dll` against wiz3D's Hard Reset fix: ours always answers "stereo not activated", the answer wiz3D found makes the game drop to mono; pointer sent to the dossier inbox.
+
+_Previous: **Last `/gr` pass: 2026-09-29 (estate sweep) — CHECK-IN.** The open-source wiz3D stereo wrapper lists Hard Reset as a 3D Vision Direct Mode game that draws both eyes itself, and got it working in September 2026; topic filed and a pointer sent to the dossier._
 
 _Previous: **Last `/gr` pass: 2026-09-23 (estate sweep) — CHECK-IN.** Checked phunkaeg's *VR Modding Playbook*: no entry for this engine or game. Nothing new.
 
