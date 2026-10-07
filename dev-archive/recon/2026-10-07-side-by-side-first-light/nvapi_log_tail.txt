@@ -1,0 +1,8 @@
+[14:47:16.473] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:17.474] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:18.474] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:19.474] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:20.140] SetActiveEye per 5 s: left 597, right 597, mono 0, non-zero answers 0
+[14:47:20.475] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:21.476] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
+[14:47:22.476] watch: r_stereo_enable=1, eye count 2; refresh setting[0xbc1bb8]=0 (needs 120:FAIL), driver-enabled gateA[0xbc1daa]=1, r_fullscreen gateB[0xbc1bec]=0, game's stereo state[0xbc1dab]=0, handle 5e5e0001; our flag activated=0
