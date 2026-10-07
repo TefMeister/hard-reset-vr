@@ -193,3 +193,16 @@ Folded and deleted: inbox `2026-10-07-pd-headset-fov-and-tracking.md`. Evidence:
   eye (replaces the game's own S/convergence shift), wider culling lens, head rotation into the view before culling,
   pose carried with each picture to the headset layer. Yaw/pitch/roll all follow; the horizon stays level in the
   headset. Head position off until units per metre is measured (camera position is logged).
+
+## 2026-10-07 (`/pd`): THE HUD ON A PANEL AT A SET DISTANCE (built, not yet run in the game)
+
+- Only `font`, `font_out` and `animatix` are per eye: `clip = pos * mWorldToScreen (c0..c3)`, then `clip.x +=
+  vHUDStereoParams.x (c29) * factor` `[inferred-static 2026-10-07]` (shader sources). The device is PURE (`0x454`), so
+  no constant can be read back; our stand-in copies them as they are set.
+- `d3d9_hud.txt` (d3d9 `172eb78aa4ca`, staging `972fcee`): HUD-shader draws with an orthographic `c0..c3` get
+  `mWorldToScreen * A_eye`, `c29.x = 0`; `A_eye` puts the screen on a panel `hud_distance_m` ahead (2.0),
+  `hud_width_deg` wide (50), through each eye's lens, depth pinned in front of everything `[verified-numerically
+  2026-10-07, n=1]` (simulator device test, within 2 px). The game's own packing ("by columns" expected) and its
+  HUD matrix being orthographic are `[hypothesis]` until the `hud per s` log line, live. Note
+  `modding-notes/2026-10-07-pd-hud-on-a-panel.md`.
+
