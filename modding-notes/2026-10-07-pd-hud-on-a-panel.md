@@ -25,10 +25,10 @@ A world-space `animatix` draw (a perspective `c0..c3`) is left alone, and counte
 
 ## How well it is known
 
-- The maths: `[verified-numerically 2026-10-07, n=10 checks]` - both eyes triangulate to exactly 2 m, the screen
+- The maths: `[verified-numerically 2026-10-07, n=10]` (ten checks) - both eyes triangulate to exactly 2 m, the screen
   edge sits at 25 degrees, the HUD stays on the same eye pixels when the head turns (head-locked), both register
   packings give exactly `pos * M * A`, and a planted wrong packing is told apart.
-- The dll on a real device with the simulator: `[verified-numerically 2026-10-07, n=1 run]` (recon
+- The dll on a real device with the simulator: `[verified-numerically 2026-10-07, n=1]` (one run) (recon
   `2026-10-07-hud-panel`). Each eye's square within 2 px of an independent expectation.
 - NOT established: that the game's HUD matrix really is orthographic and "by columns" (`[hypothesis]`; the log line
   `hud per s` says, live); that no other game draw uses these shaders in screen space (menus and the console use
