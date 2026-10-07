@@ -1,0 +1,34 @@
+[13:44:53.824] nvapi stand-in loaded: real nvapi.dll found, mode pass-through (changes nothing)
+[13:44:53.842] Initialize -> 0
+[13:44:53.878] Stereo_SetDriverMode(2 = DIRECT, the game draws each eye) -> -219
+[13:50:00.651] SetActiveEye(RIGHT) call #1
+[13:50:00.651] SetActiveEye per 5 s: left 0, right 1, mono 0
+[13:50:00.651] SetActiveEye(LEFT) call #2
+[13:50:00.657] SetActiveEye(RIGHT) call #3
+[13:50:00.660] SetActiveEye(LEFT) call #4
+[13:50:00.668] SetActiveEye(RIGHT) call #5
+[13:50:00.668] SetActiveEye(LEFT) call #6
+[13:50:00.676] SetActiveEye(RIGHT) call #7
+[13:50:00.679] SetActiveEye(LEFT) call #8
+[13:50:00.685] SetActiveEye(RIGHT) call #9
+[13:50:00.685] SetActiveEye(LEFT) call #10
+[13:50:00.692] SetActiveEye(RIGHT) call #11
+[13:50:00.695] SetActiveEye(LEFT) call #12
+[13:50:05.639] SetActiveEye per 5 s: left 594, right 593, mono 0
+[13:50:10.642] SetActiveEye per 5 s: left 584, right 585, mono 0
+[13:50:15.641] SetActiveEye per 5 s: left 600, right 599, mono 0
+[13:50:20.641] SetActiveEye per 5 s: left 598, right 598, mono 0
+[13:50:25.649] SetActiveEye per 5 s: left 588, right 589, mono 0
+[13:50:30.642] SetActiveEye per 5 s: left 591, right 591, mono 0
+[13:50:35.641] SetActiveEye per 5 s: left 597, right 596, mono 0
+[13:50:40.641] SetActiveEye per 5 s: left 591, right 592, mono 0
+[13:50:45.643] SetActiveEye per 5 s: left 599, right 599, mono 0
+[13:50:50.643] SetActiveEye per 5 s: left 596, right 596, mono 0
+[13:50:55.643] SetActiveEye per 5 s: left 590, right 590, mono 0
+[13:51:00.642] SetActiveEye per 5 s: left 599, right 599, mono 0
+[13:51:05.641] SetActiveEye per 5 s: left 589, right 588, mono 0
+[13:51:10.641] SetActiveEye per 5 s: left 598, right 599, mono 0
+[13:51:15.642] SetActiveEye per 5 s: left 597, right 597, mono 0
+[13:51:20.644] SetActiveEye per 5 s: left 596, right 596, mono 0
+[13:51:25.648] SetActiveEye per 5 s: left 584, right 584, mono 0
+... plus 5137 lines 'Stereo_IsActivated -> -140 (activated=1)' from 13:50:00 on
