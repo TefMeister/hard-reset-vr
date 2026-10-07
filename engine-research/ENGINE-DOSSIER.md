@@ -180,3 +180,16 @@ Folded and deleted: inbox `2026-10-07-pd-openxr-bridge.md`. Evidence: `dev-archi
   copy. ASYNC readback (own system-memory surface per ring slot, locked only after its event query lands;
   `d3d9_readback_async.txt`) costs 1.1 ms and hands over every frame. The game creates 18 MANAGED textures, so D3D9Ex
   would need them re-pooled.
+
+## 🏆 2026-10-07 (late, `/lm`): HEAD TRACKING AND THE HEADSET'S LENS, IN THE SIMULATOR
+
+Folded and deleted: inbox `2026-10-07-pd-headset-fov-and-tracking.md`. Evidence: `dev-archive/recon/2026-10-07-head-tracking-simulator/`.
+
+- **Camera** `[inferred-static 2026-10-07]`: class vtable `0xa8df64`; slot 25 `0x9a9770` per-frame update writes fov
+  `+0x2c`, near/far `+0x34/+0x38`, view `+0x40` (fresh from the scene node each frame), eye-0/eye-1/mono projections
+  `+0x200/+0x240/+0x280`, products `+0x2c0..`, inverses `+0x80..`/`+0x140..`; slot 26 `0x9a9dd0` publishes into the
+  render frame at `0xdcbec0 + 0x560·([0xdcca58]^[0xdcca60])`. Row vectors, right-handed, −z forward = OpenXR's frame.
+- **Our wrap of slots 25/26** (vtable patch, checks the exe first) `[verified-live 2026-10-07, n=1]`: headset lens per
+  eye (replaces the game's own S/convergence shift), wider culling lens, head rotation into the view before culling,
+  pose carried with each picture to the headset layer. Yaw/pitch/roll all follow; the horizon stays level in the
+  headset. Head position off until units per metre is measured (camera position is logged).
