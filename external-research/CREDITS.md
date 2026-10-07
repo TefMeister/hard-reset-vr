@@ -19,3 +19,8 @@ are not, or you are a rights holder who wants something corrected or removed, em
 - **AkshayUHegde**, author of wiz3D PR #29 (the stereo "Deactivate handshake" diagnosis): https://github.com/effcol/wiz3D/pull/29
 - **Wikipedia**, List of Nvidia 3D Vision Ready games: https://en.wikipedia.org/wiki/List_of_Nvidia_3D_Vision_Ready_games
 - **NVIDIA**, NVAPI stereo API reference: https://docs.nvidia.com/nvapi/group__stereoapi.html
+
+**Added 2026-10-07 (`/gr`):**
+
+- **vr.org**, SteamVR 2.17 and 32-bit OpenXR (2026-09-12): https://vr.org/articles/steamvr-2-17-stable-32-bit-openxr-runtime-2026
+- **GamingOnLinux**, SteamVR 2.17 (2026-09): https://www.gamingonlinux.com/2026/09/steamvr-2-17-arrives-ready-to-go-for-the-steam-frame/
