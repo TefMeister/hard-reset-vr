@@ -79,7 +79,9 @@ is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Ro
 | (Squirrel) | "Run external squirrel file (by default in data/scripts/debug directory)." | ⭐ **script execution from a folder, no injection** — if it survived into the retail build |
 
 ## 10. Autonomous harness recipe (this game)
-- Launch to a known scene (commands used):
+- Launch to a known scene (commands used): `steam://run/98400` → Escape/Enter through the films → the main menu
+  answers absolute mouse clicks ("Resume game" at client 636,288 in 1280x720) → ~70 s of loading and comic panels →
+  any key (Space) → gameplay `[verified-live 2026-10-07, n=1]`. Console: Ctrl+~, then type (SendInput unicode).
 - In-process input / camera drive method that worked:
 - Frame-capture method; where images land:
 
@@ -110,3 +112,23 @@ per-eye signal to switch render target and projection `[hypothesis]`. Note
 
 **Hard Reset is listed as a 3D Vision DIRECT MODE game (`/gr` 2026-09-29).** wiz3D lists it among games that render both eyes themselves and choose the eye with `SetActiveEye`; its maintainer reports it working after a September 2026 fix, in which the game's start-up `Stereo_Deactivate` is a handshake, not an off-switch `[reported]`. §11's "no per-eye code in any world shader" is also what Direct Mode looks like, and the 2026-09-14 live result fits "the stereo path started but the driver never said stereo was active" `[hypothesis]`. Separating step, static: find the NVAPI stereo call order in the exe (Deactivate → IsActivated → Activate → SetActiveEye per frame); if present, a logging `nvapi.dll` of our own that answers "active" is the lever. Topic: `external-research/topics/2026-09-29-hard-reset-is-a-3d-vision-direct-mode-game.md`.
 
+
+## Inbox folds and live results, 2026-10-07 (`/lm`, dev PC)
+
+Folded and deleted: `2026-10-04-gr-fake-stereo-answers-not-activated.md`, `2026-10-07-pd-fake-stereo-flag.md`.
+Evidence: `dev-archive/recon/2026-10-07-two-eyes-and-loose-shaders/`.
+
+- ⭐⭐⭐ **The game draws both eyes itself** `[verified-live 2026-10-07, n=1]`: `r_stereo_enable 1` from the console,
+  our nvapi.dll in PASS-THROUGH: SetActiveEye LEFT/RIGHT ~119/s each, mono 0. So the eye loop runs on this PC's real
+  driver (it answers IsActivated with status -140 but activated=1); `/gr`'s worry that a "not activated" answer stops
+  it did not arise here. **But the window stops updating** in stereo mode (last frame frozen, the game keeps running):
+  the eye pictures are not reaching the window. Next: a d3d9 proxy that captures each eye (reader building it).
+- ⭐⭐ **Loose shaders are compiled** `[verified-live 2026-10-07, n=1]`: `data\shaders\<name>.hlsl` plus
+  `r_shader_cache "0"` replaced the shipped tone-mapping shader (the world turned red, the HUD did not). A
+  no-injection route for per-eye shader edits.
+- How the game decides on driver stereo (function `0x9731a0`) `[inferred-static 2026-10-07]`: it forces "want" off
+  unless [0xbc1daa] ≠ 0, [0xbc1bec] ≠ 0 and the DWORD [0xbc1bb8] == 120; then Activate/Deactivate if the answer
+  differs; an IsActivated "no" does not stop the eye loop there.
+- Fake mode now remembers Activate (ignores a Deactivate before the first Activate; `nvapi_fake_always_activated.txt`
+  forces yes), and a read-only watch logs [0xbc1bb8] once a second: staging `15efcc6`, `cfd70f900faf`
+  `[compile-verified 2026-10-07]`, not installed (pass-through was enough).
