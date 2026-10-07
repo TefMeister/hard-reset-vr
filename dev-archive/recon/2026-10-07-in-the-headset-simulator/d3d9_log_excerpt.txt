@@ -1,0 +1,10 @@
+[15:25:13.352] clear fix (d3d9_clear_fix.txt) off; eyes in NVAPI order (d3d9_swap_eyes.txt); headset (d3d9_openxr.txt) ON; switch files are looked for again once a second
+[15:25:13.352] xr: ON - headset thread started (own D3D11 device, projection layers, CPU handover)
+[15:25:13.361] xr: runtime for this game only: D:\claude video game stuff\tools\OpenXR-Simulator\openxr_simulator-32.json
+[15:25:13.779] xr: session created on the headset thread's own D3D11 device; waiting for the runtime to start it
+[15:25:13.861] xr: session running
+[15:25:16.072] headset per s: eyes read back 0, frames handed over 0, not ready 0, failed 0 (0x00000000), readback ms avg 0.00 max 0.00; headset frames submitted 0, empty 127, pictures uploaded 0; headset running
+[15:28:24.843] headset per s: eyes read back 78, frames handed over 39, not ready 0, failed 0 (0x00000000), readback ms avg 15.67 max 22.41; headset frames submitted 59, empty 0, pictures uploaded 39; headset running
+[15:28:25.856] headset per s: eyes read back 92, frames handed over 46, not ready 0, failed 0 (0x00000000), readback ms avg 12.70 max 19.14; headset frames submitted 61, empty 0, pictures uploaded 46; headset running
+[15:28:26.881] headset per s: eyes read back 76, frames handed over 38, not ready 0, failed 0 (0x00000000), readback ms avg 16.54 max 29.84; headset frames submitted 61, empty 0, pictures uploaded 38; headset running
+[15:28:27.889] headset per s: eyes read back 74, frames handed over 37, not ready 0, failed 0 (0x00000000), readback ms avg 16.13 max 25.45; headset frames submitted 61, empty 0, pictures uploaded 37; headset running
