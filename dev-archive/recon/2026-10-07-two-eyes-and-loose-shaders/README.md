@@ -30,3 +30,9 @@ answers absolute mouse clicks), "press any key" after the comic. Console: Ctrl+~
    flag, then stopped: eye count back to 1, no failed Clears, a normal mono picture. Reading: in this path an
    IsActivated "no" makes the game fall back to one eye `[hypothesis]`. Next run: add
    `nvapi_fake_always_activated.txt` (forces yes) from game start, keep `d3d9_sbs.txt`, then `r_stereo_enable 1`.
+
+6. **Always-activated from game start** `[verified-live 2026-10-07, n=1]` (+ `nvapi_fake_always_activated.txt`):
+   `r_stereo_enable 1` → IsActivated answered 1 → **the game called Stereo_Deactivate itself** → mono. The watch showed
+   [0xbc1bb8] = 0 (the "== 120" test fails) and [0xbc1bec] = 0 the whole time, so the game's own "want stereo" is
+   forced off by those two gates. With gate A on the game follows the driver path and stays mono; with gate A off
+   (pass-through) the eye loop runs but its second-eye surfaces are never built. Next: the two gates (reader, static).

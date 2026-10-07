@@ -1,0 +1,24 @@
+[14:24:05.155] nvapi stand-in loaded: real nvapi.dll found, mode FAKE STEREO (answers the stereo calls itself)
+[14:24:05.155] fake mode: IsActivated answers ALWAYS 1 (nvapi_fake_always_activated.txt)
+[14:24:05.174] Initialize -> 0
+[14:24:05.175] Stereo_SetDriverMode(2 = DIRECT, the game draws each eye) -> 0
+[14:24:05.175] Stereo_IsEnabled -> 0 (enabled=1)
+[14:24:05.175] Stereo_Enable -> 0
+[14:24:05.175] Stereo_IsEnabled -> 0 (enabled=1)
+[14:24:05.394] Stereo_CreateHandleFromIUnknown(device 0A05F140) -> 0, handle 5E5E0001
+[14:24:05.394] Stereo_IsActivated(5E5E0001) -> 0 (activated=1 from the always-1 option)
+[14:24:05.394] Stereo_GetEyeSeparation -> 0 (0.0000)
+[14:24:05.394] Stereo_GetSeparation -> 0 (0.0000)
+[14:24:05.394] Stereo_IsActivated(5E5E0001) -> 0 (activated=1 from the always-1 option)
+[14:24:05.394] Stereo_Deactivate(5E5E0001) -> 0
+[14:24:05.394]   fake mode: Deactivate before the first Activate - IGNORED, flag stays 0
+[14:25:49.403] Stereo_IsActivated(5E5E0001) -> 0 (activated=1 from the always-1 option)
+[14:25:49.403] Stereo_Deactivate(5E5E0001) -> 0
+[14:25:49.403]   fake mode: Deactivate before the first Activate - IGNORED, flag stays 0
+[14:25:49.403] our d3d9.dll found: every SetActiveEye is passed on to it
+[14:25:49.403] SetActiveEye(RIGHT) call #1 -> 0
+[14:25:49.403] SetActiveEye per 5 s: left 0, right 1, mono 0, non-zero answers 0
+[14:25:49.404] SetActiveEye(LEFT) call #2 -> 0
+[14:25:49.409] SetActiveEye(RIGHT) call #3 -> 0
+[14:25:49.411] SetActiveEye(LEFT) call #4 -> 0
+[14:26:38.148] Stereo_DestroyHandle(5E5E0001) -> 0
