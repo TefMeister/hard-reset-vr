@@ -159,3 +159,19 @@ Folded and deleted: inbox `2026-10-07-pd-eye-capture-proxy.md`, `-stereo-clear-f
   second.
 - UAC at every launch: Steam re-runs the DirectX installer (`HKLM\SOFTWARE\WOW6432Node\Valve\Steam\Apps\98400` has
   `vcredist` but no `directx`).
+
+## 🏆 2026-10-07 (evening, `/lm`): IN THE OPENXR HEADSET SIMULATOR
+
+Folded and deleted: inbox `2026-10-07-pd-openxr-bridge.md`. Evidence: `dev-archive/recon/2026-10-07-in-the-headset-simulator/`.
+
+- **Eye numbers** (supersedes "eye 0 is RIGHT"): NVAPI's `NV_StereoActiveEye` is RIGHT = 1, LEFT = 2 `[reported]`; our
+  proxies had them backwards. Fixed in d3d9 `ae49c7b1b487`; live, far scenery now sits 32 px further left in the left
+  half `[measured 2026-10-07]`. `d3d9_swap_eyes.txt` crosses them if ever needed. (The nvapi log still prints the old
+  names; behaviour is right.)
+- **OpenXR bridge in the d3d9 proxy** `[verified-live 2026-10-07, n=1]`: `d3d9_openxr.txt` on, `d3d9_vr.ini`
+  `runtime_json=` (32-bit runtime; the dev PC uses `openxr_simulator-32.json`), 32-bit `openxr_loader.dll`
+  `fb1e06de9653` beside the exe. Own D3D11 device + session on a headset thread, projection layers. Handover by CPU:
+  each Present copies the two-eye surface into a ring of 3 GPU copies, reads the oldest finished one back
+  (GetRenderTargetData) into a 3-slot CPU frame; the headset thread uploads it. Live: ~14 ms per readback, ~40 new
+  frames/s reach the headset, 60 headset frames/s submitted. Speeding this up is the next job.
+- The game pauses itself when its window loses focus.
