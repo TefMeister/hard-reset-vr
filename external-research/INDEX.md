@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-10-04 (estate sweep) — CHECK-IN.** Inbox empty. Read our fake `nvapi.dll` against wiz3D's Hard Reset fix: ours always answers "stereo not activated", the answer wiz3D found makes the game drop to mono; pointer sent to the dossier inbox.
+**Last `/gr` pass: 2026-10-07 (estate sweep) — CHECK-IN.** Inbox empty. SteamVR 2.17 (2026-09-10) ships a 32-bit OpenXR runtime, which answers the home-PC row's first question; topic filed and a pointer sent to the dossier inbox.
+
+_Previous: **Last `/gr` pass: 2026-10-04 (estate sweep) — CHECK-IN.** Inbox empty. Read our fake `nvapi.dll` against wiz3D's Hard Reset fix: ours always answers "stereo not activated", the answer wiz3D found makes the game drop to mono; pointer sent to the dossier inbox._
 
 _Previous: **Last `/gr` pass: 2026-09-29 (estate sweep) — CHECK-IN.** The open-source wiz3D stereo wrapper lists Hard Reset as a 3D Vision Direct Mode game that draws both eyes itself, and got it working in September 2026; topic filed and a pointer sent to the dossier._
 
@@ -18,5 +20,6 @@ write-up in `topics/`. Status tags:
 
 | Date | Topic | Status | Why it matters |
 | --- | --- | --- | --- |
+| 2026-10-07 | [SteamVR 2.17 ships a 32-bit OpenXR runtime](topics/2026-10-07-steamvr-2-17-ships-a-32-bit-openxr-runtime.md) | 🆕 | Answers the home-PC row: point `runtime_json=` at `steamxr_win32.json`, VDXR as fallback |
 | 2026-09-29 | [Hard Reset is listed as a 3D Vision "Direct Mode" game: it may draw each eye itself](topics/2026-09-29-hard-reset-is-a-3d-vision-direct-mode-game.md) | 🆕 | Answers the NVAPI `[PD]` row's question in public: the game may render both eyes itself, and an `nvapi.dll` of ours could switch that on |
 | 2026-09-17 | [Public notes confirm loose files override archives and give the console key; `r_stereo_enable` is undocumented](topics/2026-09-17-loose-files-and-console-public-notes.md) | 🆕 | Backs the loose-shader test already set up, and marks the stereo cvar as ours to find |
