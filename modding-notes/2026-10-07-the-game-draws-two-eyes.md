@@ -11,3 +11,10 @@ Dev PC, `/lm`, unattended (Tefa at work).
 - Recorded with OBS (game window only).
 
 Not established: where the eye pictures go; whether they really differ (no picture of either eye yet).
+
+## Later the same day: both eyes side by side, with depth
+
+- Our two small helper files now fool the game's stereo checks, catch each eye's picture and show both side by side
+  in the window, at full speed, with the HUD in both.
+- With a real eye distance, far-away things sit 32 pixels apart and the gun only 3: real depth.
+- Not yet known: whether left and right are the right way round. That needs eyes (or the headset).
