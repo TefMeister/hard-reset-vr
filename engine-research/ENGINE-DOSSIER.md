@@ -132,3 +132,30 @@ Evidence: `dev-archive/recon/2026-10-07-two-eyes-and-loose-shaders/`.
 - Fake mode now remembers Activate (ignores a Deactivate before the first Activate; `nvapi_fake_always_activated.txt`
   forces yes), and a read-only watch logs [0xbc1bb8] once a second: staging `15efcc6`, `cfd70f900faf`
   `[compile-verified 2026-10-07]`, not installed (pass-through was enough).
+
+## ⭐⭐⭐ 2026-10-07 (later, `/lm`): STEREO SIDE BY SIDE IN THE WINDOW, WITH REAL DEPTH
+
+Folded and deleted: inbox `2026-10-07-pd-eye-capture-proxy.md`, `-stereo-clear-fails.md`, `-stereo-gates.md`,
+`-separation.md`. Evidence: `dev-archive/recon/2026-10-07-side-by-side-first-light/`.
+
+- **Working recipe** `[verified-live 2026-10-07, n=1]`: our `nvapi.dll` (`1921f0ddd086`) in FAKE mode
+  (`nvapi_fake_stereo.txt`) + our `d3d9.dll` (`4fdd7e04b0b4`) with `d3d9_sbs.txt`; load in, then type
+  `r_stereo_enable 1` (the game resets it at device set-up). The window shows left | right, 60 fps, HUD in both,
+  far scenery 32 px apart, the gun ~3 px `[measured 2026-10-07]`. Halves possibly swapped (eye 0 is RIGHT)
+  `[hypothesis]`. Menus are doubled too while it is on (clicks must go to the left half, or switch sbs off).
+- **Three gates** `[inferred-static 2026-10-07]`, each confirmed by a live run:
+  (A) [0xbc1daa] "driver says stereo is enabled", set at start-up only after SetDriverMode(DIRECT) succeeds; without
+  it the second eye's surfaces are never built and every eye-1 Clear fails (D3DERR_INVALIDCALL), frames smear.
+  (B) [0xbc1bec] = `r_fullscreen`, (C) [0xbc1bb8] = the `r_fullscreen_refreshes` number, must be 120. Every frame
+  `0x9731a0` asks IsActivated; if that SUCCEEDS the game forces its wish off unless A, B and C pass and writes it back
+  into `r_stereo_enable` (→ one eye when windowed). So fake mode answers IsActivated with an error (-140), and the
+  console setting alone keeps both eyes.
+- **Eye shift is the game's own** (supersedes the 2026-10-01 note that it was the driver's job): per eye,
+  clip.x += sign·S·(w − convergence), S = `r_stereo_separation` × `r_stereo_eye_separation`, taken at device set-up
+  from GetSeparation×0.01 and GetEyeSeparation; convergence is the game's own `r_stereo_convergence` (0.35). Our
+  fake answers 50 % and 0.1 (settable in `nvapi_stereo.ini`).
+- **d3d9 capture**: at each SetActiveEye (handed over from our nvapi), the back buffer is copied into that eye's half
+  of a double-width surface; at Present it is stretched back over the back buffer. Switch files are re-read each
+  second.
+- UAC at every launch: Steam re-runs the DirectX installer (`HKLM\SOFTWARE\WOW6432Node\Valve\Steam\Apps\98400` has
+  `vcredist` but no `directx`).
