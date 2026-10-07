@@ -17,3 +17,9 @@ answers absolute mouse clicks), "press any key" after the comic. Console: Ctrl+~
    `r_stereo_enable 0` typed blind did not visibly land, so the game was ended with taskkill (it was not saved to
    the config). The eye pictures go somewhere we cannot see yet: the next step is a d3d9 proxy that sends each eye's
    draws to its own half of a surface (the wiz3D DX9 shape, idea only).
+
+4. **Why the window "froze"** `[verified-live 2026-10-07, n=1]` (second run, the reader's log-only d3d9 proxy
+   `ca21c86a78e5` + nvapi `593876cb8aa5`): with stereo on the game still Presents 60/s with no failures and draws both
+   eyes, but **every Clear of the back buffer fails** (120/s, `0x8876086c` D3DERR_INVALIDCALL), so frames pile up
+   into an over-bright smear (`stereo-on-no-clear-smear.png`) — the earlier "frozen" picture was the same thing.
+   `r_stereo_enable 0` recovers cleanly. Next: why the per-eye Clear is invalid (reader, static).
