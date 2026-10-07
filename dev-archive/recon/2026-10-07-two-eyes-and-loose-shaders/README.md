@@ -23,3 +23,10 @@ answers absolute mouse clicks), "press any key" after the comic. Console: Ctrl+~
    eyes, but **every Clear of the back buffer fails** (120/s, `0x8876086c` D3DERR_INVALIDCALL), so frames pile up
    into an over-bright smear (`stereo-on-no-clear-smear.png`) — the earlier "frozen" picture was the same thing.
    `r_stereo_enable 0` recovers cleanly. Next: why the per-eye Clear is invalid (reader, static).
+
+5. **FAKE mode from game start** `[verified-live 2026-10-07, n=1]` (d3d9 `4fdd7e04b0b4`, nvapi `593876cb8aa5`,
+   `nvapi_fake_stereo.txt`): SetDriverMode → 0, IsEnabled → 1, so the start-up gate [0xbc1daa] = 1 (watched live). Then
+   `r_stereo_enable 1` gave only 4 SetActiveEye calls (R, L, R, L) right after an IsActivated answered **0** from our
+   flag, then stopped: eye count back to 1, no failed Clears, a normal mono picture. Reading: in this path an
+   IsActivated "no" makes the game fall back to one eye `[hypothesis]`. Next run: add
+   `nvapi_fake_always_activated.txt` (forces yes) from game start, keep `d3d9_sbs.txt`, then `r_stereo_enable 1`.
