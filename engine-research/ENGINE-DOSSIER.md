@@ -175,3 +175,8 @@ Folded and deleted: inbox `2026-10-07-pd-openxr-bridge.md`. Evidence: `dev-archi
   (GetRenderTargetData) into a 3-slot CPU frame; the headset thread uploads it. Live: ~14 ms per readback, ~40 new
   frames/s reach the headset, 60 headset frames/s submitted. Speeding this up is the next job.
 - The game pauses itself when its window loses focus.
+- **Hand-over speed** `[verified-live 2026-10-07, n=1]` (folded from inbox `2026-10-07-pd-faster-handover.md`, which
+  supersedes "the WAIT readback is never waited for"): the 14 ms was LockRect waiting for GetRenderTargetData's queued
+  copy. ASYNC readback (own system-memory surface per ring slot, locked only after its event query lands;
+  `d3d9_readback_async.txt`) costs 1.1 ms and hands over every frame. The game creates 18 MANAGED textures, so D3D9Ex
+  would need them re-pooled.

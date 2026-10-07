@@ -13,3 +13,8 @@ bridge, CPU handover), `nvapi.dll` `1921f0ddd086` (fake mode), 32-bit `openxr_lo
   the home PC, where the dev PC's speed does not count).
 - The game pauses itself when its window loses focus (clicking the simulator window).
 - Not yet: the headset's own field of view, head tracking. The game's own FOV is shown.
+
+**Faster hand-over, live** `[verified-live 2026-10-07, n=1]` (d3d9 `2fbd17857ae0`): WAIT (old) readback 11.5–13.9 ms
+per Present, nearly all in LockRect (waiting for the copy); ASYNC (`d3d9_readback_async.txt`) **1.1 ms**, LockRect 0,
+and every game frame handed over (49 of 49 at the dev PC's ~49 fps). Created by pool: MANAGED total 18 textures, so a
+D3D9Ex shared-surface route would need those moved — not needed now (`faster-handover-log.txt`).
