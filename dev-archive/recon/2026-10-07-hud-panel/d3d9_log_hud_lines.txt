@@ -1,0 +1,5 @@
+[17:28:27.681] hud: CreateVertexShader, SetVertexShader and SetVertexShaderConstantF watched (all three)
+[17:28:27.684] hud: HUD vertex shader 084FD0C0 created (1 so far)
+[17:28:30.741] hud: panel placement switched ON (distance 2.00 m, width 50.0 deg, aspect 1.778)
+[17:28:31.741] hud per s: HUD draws placed 64 (registers by columns 64, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 1
+[17:28:32.741] hud per s: HUD draws placed 66 (registers by columns 66, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 1

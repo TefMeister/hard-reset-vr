@@ -1,0 +1,34 @@
+HUD panel maths self-test (no game)
+  ok    ortho HUD matrix packed by columns is read as COLUMNS
+  ok    the same matrix packed by rows is read as ROWS
+  ok    a perspective (world) matrix is left alone (columns)
+  ok    a perspective (world) matrix is left alone (rows)
+  ok    rewritten registers == pos * M * A in the shader, both packings (max diff 0)
+  ok    a planted wrong packing is told apart (the test can fail)
+  ok    both eyes agree: HUD at depth 2.0 m (max error 2.1e-06 m), panel x/y error 1e-06/4.8e-07 m
+  ok    the right edge of the screen sits 25.00 deg right of the head (want 25.0)
+  ok    head turned 35 deg + pitched: HUD on the same eye pixels (max diff 6e-08 ndc)
+  ok    panel depth 0.000100 is just above 0 (in front of everything, never clipped)
+checks 10, failures 0
+RESULT: PASS
+
+HUD panel self-test (no game): 640x360 eyes, runtime D:\claude video game stuff\tools\OpenXR-Simulator\openxr_simulator-32.json
+  ok    our d3d9.dll loads with its exports
+  ok    d3dcompiler_47.dll is there to compile the test shaders
+  ok    a PURE device is created through our dll (as the game's is)
+  ok    the HUD and plain test shaders compile and are created
+  ok    side-by-side surface exists
+        off: white L 335.5,179.5 (w 40) R 303.5,179.5 (w 40); green L 319.5 R 319.5
+  ok    switch off: the white HUD square sits where the game put it, with the game's own per-eye shift
+        on:  white L 402.0,147.5 (w 17) R 238.0,147.5 (w 17); green L 319.5 R 319.5
+  ok    switch on: the white HUD square is resized
+  ok    switch on: the HUD square has moved
+  ok    the plain square never moves (told apart; c0..c3 given back after HUD draws)
+        log: most HUD draws placed in a second 66; HUD shader tagged: yes
+        expected from the lens -54.0/40.0/44.0/-54.3 deg: L 402.2, R 237.8, y 147.5, width 16.8 px
+  ok    switch on: each eye shows the square exactly where a panel 2 m ahead belongs (within 2 px)
+  ok    switch on: crossed disparity once the lens shape is taken out (in front of you, not behind)
+  ok    exactly one shader tagged as the HUD's (the plain one is not)
+  ok    the log counts placed HUD draws
+checks 13, failures 0
+RESULT: PASS
