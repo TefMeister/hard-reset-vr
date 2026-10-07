@@ -8,3 +8,9 @@ SetDriverMode 0, IsEnabled 1, IsActivated -140 so the game never rewrites `r_ste
 - `side-by-side.png`: two complete pictures, HUD in both.
 - **The eyes are not yet apart**: best horizontal shift between the halves is 0 px for far scenery and for the gun
   `[measured 2026-10-07]`; our fake GetEyeSeparation/GetSeparation answer 0.0. Next: a real separation.
+
+**With separation** `[verified-live 2026-10-07, n=1]` (nvapi `1921f0ddd086`: fake GetSeparation 50 %, GetEyeSeparation
+0.1 → S 0.05, convergence 0.35, read back from the game's own settings): the halves now differ —
+`side-by-side-with-separation.png`. Best horizontal match: far scenery **32 px**, the gun ~3 px (near the
+convergence depth, as predicted) `[measured 2026-10-07]`. The far shift has the sign of crossed eyes in a parallel
+left|right layout, so **the halves may be swapped** (eye 0 is RIGHT) `[hypothesis]` — check in the headset or swap.
