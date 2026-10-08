@@ -106,6 +106,14 @@ Note `modding-notes/2026-10-08-lm-units-are-metres-and-head-position-works.md`; 
   the panel test (`d3d9_hud.txt`) placed only ~1 draw per frame with no visible change `[verified-live 2026-10-08, n=1]`.
   The orthographic-HUD idea is wrong for the dial `[disproved 2026-10-08]`; it may still hold for text.
 
+## 2026-10-08 evening (`/lm`): THE HUD PANEL LIVE, PARTLY
+
+Note `modding-notes/2026-10-08-lm-the-panel-takes-the-menu-but-not-its-frames.md`. With `d3d9_hud.txt` on and stereo
+on, the pause menu's words and fills land on the panel exactly where a screen 2 m ahead belongs in each eye (centre x
+402 / 237 against 402 / 238 by the lens maths, 640 px per eye) `[measured 2026-10-08, n=1]`; placed 2,100/s in the
+menu, ~550/s in gameplay. The menu's outline frames are NOT placed: same image position in both eyes (wrong depth,
+divergent) `[measured 2026-10-08, n=1]`. Panel off: the menu is whole again. Next: find the frame-line shader.
+
 ## 10. Autonomous harness recipe (this game)
 - Launch to a known scene (commands used): `steam://run/98400` → Escape/Enter through the films → the main menu
   answers absolute mouse clicks ("Resume game" at client 636,288 in 1280x720) → ~70 s of loading and comic panels →
