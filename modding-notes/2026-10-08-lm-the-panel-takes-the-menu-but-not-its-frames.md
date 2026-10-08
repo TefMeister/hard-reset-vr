@@ -33,3 +33,15 @@ the panel off puts the menu back to normal. The crosshair could not be judged at
 
 Find the frame-line draws (static, from the shaders and the log), add them to the panel. Then look again,
 with the simulator preview bigger or a per-eye capture at full size.
+
+## Later the same session: lighting follows a leaning head (second launch)
+
+The reader traced the eye position the lighting uses (c15 vertex, c51 pixel, and the light sorting) to the inverse
+of the published view, which our head wrap has already moved, and fog uses depth and height only
+`[inferred-static 2026-10-08]`. It built a log-only check (d3d9 `f413b2778afe`, staging `97a8202`; nothing written to
+the game). Live, head centred: renderer eye = our eye = the game's own. Head leaned x = +0.3 m: renderer
+(0.385, -0.883, 0.981) = our moved eye, the game's own stays at 0.085: **renderer - ours = 0.000 m**
+`[verified-live 2026-10-08, n=1]`. So the "c15/c51 not moved" gap does not exist. Lines in
+`dev-archive/recon/2026-10-08-hud-panel-live/lighting-eye-log-lines.txt`; recorded
+`lighting-eye_2026-10-08_19-10-30.mp4`. The build stays installed (it only adds the log line). Shine is from the head
+centre, not each eye (~3 cm off per eye), judged not visible `[hypothesis]`.
