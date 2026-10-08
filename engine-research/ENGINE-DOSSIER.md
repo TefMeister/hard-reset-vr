@@ -101,7 +101,7 @@ Note `modding-notes/2026-10-08-lm-units-are-metres-and-head-position-works.md`; 
 - **`[xr] units_per_metre=1.0`, `head_position=1`** (read at start-up): sideways and forward head moves give
   correct parallax on the held gun; back to 0 restores exactly `[verified-live 2026-10-08, n=1 each]`; maths
   checked numerically, no bug `[verified-numerically 2026-10-08, n=1]`. Gap: the game's own eye position
-  (lighting/fog constants c15/c51) is not moved `[inferred-static 2026-10-08]`.
+  (lighting/fog constants c15/c51) is not moved `[disproved 2026-10-08]`: c15/c51 and light sorting read the inverse of the published (already head-moved) view at `0xdccde0`, and fog uses depth and height only; live, head leaned +0.3 m, the renderer's eye = our moved eye to 0.000 m `[verified-live 2026-10-08, n=1]` (log-only build `f413b2778afe`).
 - **The HUD dial is a 3D object on the gun**, not a flat overlay: it shows head parallax like the gun, and
   the panel test (`d3d9_hud.txt`) placed only ~1 draw per frame with no visible change `[verified-live 2026-10-08, n=1]`.
   The orthographic-HUD idea is wrong for the dial `[disproved 2026-10-08]`; it may still hold for text.
