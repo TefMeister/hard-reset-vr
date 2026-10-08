@@ -78,10 +78,38 @@ is `dev-archive/recon/2026-09-14-dev-pc-static-pass/cvar-names.txt`. ⚠️ **Ro
 | `r_wireframe`, `r_debug_render_mode`, `r_dump_render_lists`, `r_dump_buffers` | the game's own render debugging | pass inventory for free |
 | (Squirrel) | "Run external squirrel file (by default in data/scripts/debug directory)." | ⭐ **script execution from a folder, no injection** — if it survived into the retail build |
 
+## Inbox folds, 2026-10-08 (`/lm`, dev PC)
+
+Folded and deleted: `2026-10-07-gr-steamvr-has-a-32-bit-openxr-runtime.md`, `2026-10-08-pd-nvapi-stand-in-eye-labels.md`.
+
+- **Home-PC runtime:** SteamVR 2.17+ (stable 2026-09-10) ships a 32-bit OpenXR runtime, `...\SteamVR\steamxr_win32.json`,
+  so `runtime_json=` can point there on the home PC; Virtual Desktop's VDXR is the fallback `[reported]`. Not tried on
+  our machines. Source: `external-research/topics/2026-10-07-steamvr-2-17-ships-a-32-bit-openxr-runtime.md`.
+- **nvapi stand-in log labels:** `staging/hard-reset-vr/proxy-nvapi/src/nvapi_proxy.c` still has `EYE_LEFT 1`,
+  `EYE_RIGHT 2`; NVIDIA's `NV_StereoActiveEye` is RIGHT = 1, LEFT = 2 `[reported]`. Only the stand-in's own log names
+  are crossed; pictures are right (the d3d9 proxy passes the raw number through). Swap the two defines when next built.
+
+## ⭐ 2026-10-08 (`/lm`): ONE UNIT IS A METRE; HEAD POSITION WORKS IN THE SIMULATOR
+
+Note `modding-notes/2026-10-08-lm-units-are-metres-and-head-position-works.md`; evidence `dev-archive/recon/2026-10-08-units-and-hud/`.
+
+- **World z is up**; `camera at` in the log is a world position `[verified-live 2026-10-08, n=3 walks]`.
+- **Units = metres:** walk ~7 units/s live vs the player template's Speed 6.6; capsule height 2.0, radius 0.5,
+  eye 1.65 above the feet (`scriptsbin/main/gameSystem/player/user.nut` CAMERA_POS; `.../base_templates/player/player.nut`),
+  Jump 6.6, no crouch `[inferred-static 2026-10-08]` + `[verified-live 2026-10-08, n=3]`. Scripts are compiled
+  Squirrel; the reader's disassembler is not in a repo yet.
+- **`[xr] units_per_metre=1.0`, `head_position=1`** (read at start-up): sideways and forward head moves give
+  correct parallax on the held gun; back to 0 restores exactly `[verified-live 2026-10-08, n=1 each]`; maths
+  checked numerically, no bug `[verified-numerically 2026-10-08, n=1]`. Gap: the game's own eye position
+  (lighting/fog constants c15/c51) is not moved `[inferred-static 2026-10-08]`.
+- **The HUD dial is a 3D object on the gun**, not a flat overlay: it shows head parallax like the gun, and
+  the panel test (`d3d9_hud.txt`) placed only ~1 draw per frame with no visible change `[verified-live 2026-10-08, n=1]`.
+  The orthographic-HUD idea is wrong for the dial `[disproved 2026-10-08]`; it may still hold for text.
+
 ## 10. Autonomous harness recipe (this game)
 - Launch to a known scene (commands used): `steam://run/98400` → Escape/Enter through the films → the main menu
   answers absolute mouse clicks ("Resume game" at client 636,288 in 1280x720) → ~70 s of loading and comic panels →
-  any key (Space) → gameplay `[verified-live 2026-10-07, n=1]`. Console: Ctrl+~, then type (SendInput unicode).
+  any key (Space) → gameplay `[verified-live 2026-10-07, n=1]`; about 4 Enters at the intro (more opens NEW GAME → New campaign). Console: Ctrl+~, then type (SendInput unicode). Stereo: `r_stereo_enable 1` every launch. Close: console `quit` `[verified-live 2026-10-08, n=2]`.
 - In-process input / camera drive method that worked:
 - Frame-capture method; where images land:
 
