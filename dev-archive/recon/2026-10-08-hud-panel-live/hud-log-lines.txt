@@ -1,0 +1,242 @@
+[18:57:11.788] hud: panel placement switched ON (distance 2.00 m, width 50.0 deg, aspect 1.778)
+[18:57:12.424] hud: CreateVertexShader, SetVertexShader and SetVertexShaderConstantF watched (all three)
+[18:57:13.126] hud: HUD vertex shader 0E4FBA20 created (1 so far)
+[18:57:13.127] hud: HUD vertex shader 0E4F9E40 created (2 so far)
+[18:57:13.188] hud: HUD vertex shader 0E4FDD80 created (3 so far)
+[18:57:13.189] hud: HUD vertex shader 0E4FD5E0 created (4 so far)
+[18:57:13.190] hud: HUD vertex shader 0E4FB500 created (5 so far)
+[18:57:13.191] hud: HUD vertex shader 0E4FC440 created (6 so far)
+[18:57:13.194] hud: HUD vertex shader 0E4FB000 created (7 so far)
+[18:57:13.195] hud: HUD vertex shader 0E4F91A0 created (8 so far)
+[18:57:13.196] hud: HUD vertex shader 0E4F9420 created (9 so far)
+[18:57:13.197] hud: HUD vertex shader 0E4FA340 created (10 so far)
+[18:57:13.201] hud: HUD vertex shader 0E4FD880 created (11 so far)
+[18:57:13.202] hud: HUD vertex shader 0E4F9920 created (12 so far)
+[18:57:13.203] hud: HUD vertex shader 0E4FC940 created (13 so far)
+[18:57:13.204] hud: HUD vertex shader 0E4FB780 created (14 so far)
+[18:57:13.207] hud: HUD vertex shader 0E4FBCA0 created (15 so far)
+[18:57:13.208] hud: HUD vertex shader 0E4FCBC0 created (16 so far)
+[18:57:13.209] hud: HUD vertex shader 0E4FDB00 created (17 so far)
+[18:57:13.210] hud: HUD vertex shader 0E4FAD60 created (18 so far)
+[18:57:13.214] hud: HUD vertex shader 0E4FEA20 created (19 so far)
+[18:57:13.214] hud: HUD vertex shader 0E824920 created (20 so far)
+[18:57:13.215] hud: HUD vertex shader 0E827BC0 created (21 so far)
+[18:57:13.216] hud: HUD vertex shader 0E823240 created (22 so far)
+[18:57:13.221] hud: HUD vertex shader 0E826780 created (23 so far)
+[18:57:13.222] hud: HUD vertex shader 0E827E40 created (24 so far)
+[18:57:13.223] hud: HUD vertex shader 0E827920 created (25 so far)
+[18:57:13.224] hud: HUD vertex shader 0E8234E0 created (26 so far)
+[18:57:13.228] hud: HUD vertex shader 0E824BA0 created (27 so far)
+[18:57:13.229] hud: HUD vertex shader 0E824400 created (28 so far)
+[18:57:13.229] hud: HUD vertex shader 0E823F00 created (29 so far)
+[18:57:13.230] hud: HUD vertex shader 0E826260 created (30 so far)
+[18:57:13.234] hud: HUD vertex shader 0E823C60 created (31 so far)
+[18:57:13.235] hud: HUD vertex shader 0E8271A0 created (32 so far)
+[18:57:13.237] hud: HUD vertex shader 0E824180 created (33 so far)
+[18:57:13.238] hud: HUD vertex shader 0E824680 created (34 so far)
+[18:57:14.023] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:15.043] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:16.048] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:17.049] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:18.049] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:19.044] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:20.045] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:21.045] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:22.045] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:23.044] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:24.044] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:25.045] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:26.044] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:27.045] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:28.043] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:29.062] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:30.061] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:31.063] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:32.060] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:33.062] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:34.063] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:35.060] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:36.062] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:37.061] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:38.073] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:39.529] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:41.800] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 0; HUD shaders known 34
+[18:57:42.800] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 26, no headset pose 0, no eye 1254; HUD shaders known 34
+[18:57:43.800] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:44.799] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:45.800] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:46.799] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:47.799] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:49.872] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 38; HUD shaders known 34
+[18:57:50.873] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:51.874] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:52.873] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:53.874] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:54.873] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:55.874] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:56.874] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:57.873] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:57:58.874] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 2280; HUD shaders known 34
+[18:58:00.105] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 1262; HUD shaders known 34
+[18:58:01.109] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 262; HUD shaders known 34
+[18:58:02.115] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:03.152] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 302; HUD shaders known 34
+[18:58:04.151] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:05.156] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:06.152] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 292; HUD shaders known 34
+[18:58:07.152] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:08.147] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:09.192] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 302; HUD shaders known 34
+[18:58:10.186] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:11.190] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:12.191] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 288; HUD shaders known 34
+[18:58:13.190] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:14.186] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:15.192] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:16.231] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 308; HUD shaders known 34
+[18:58:17.226] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:18.235] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:19.229] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:20.227] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:21.226] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:22.230] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:23.234] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:24.231] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:25.229] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:26.228] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:27.232] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:28.231] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 284; HUD shaders known 34
+[18:58:29.227] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:30.229] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:31.232] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 284; HUD shaders known 34
+[18:58:32.231] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:33.226] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 292; HUD shaders known 34
+[18:58:34.228] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:35.228] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:36.601] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 136; HUD shaders known 34
+[18:58:37.645] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:38.647] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 308; HUD shaders known 34
+[18:58:39.651] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 262; HUD shaders known 34
+[18:58:40.648] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:41.687] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 308; HUD shaders known 34
+[18:58:42.687] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:43.690] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:44.690] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:45.692] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:46.684] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:58:47.687] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:48.683] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:49.684] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 274; HUD shaders known 34
+[18:58:50.686] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:51.830] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 188; HUD shaders known 34
+[18:58:52.852] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 334; HUD shaders known 34
+[18:58:53.849] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:54.891] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 302; HUD shaders known 34
+[18:58:55.883] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:56.889] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:58:57.886] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 288; HUD shaders known 34
+[18:58:58.883] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 294; HUD shaders known 34
+[18:58:59.887] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:00.884] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 288; HUD shaders known 34
+[18:59:01.887] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:02.883] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:03.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 0, no headset pose 0, no eye 290; HUD shaders known 34
+[18:59:04.890] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 493, no headset pose 0, no eye 258; HUD shaders known 34
+[18:59:05.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 710, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:06.892] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 661, no headset pose 0, no eye 290; HUD shaders known 34
+[18:59:07.892] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 644, no headset pose 0, no eye 294; HUD shaders known 34
+[18:59:08.894] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 618, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:09.891] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 600, no headset pose 0, no eye 292; HUD shaders known 34
+[18:59:10.891] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 587, no headset pose 0, no eye 294; HUD shaders known 34
+[18:59:11.892] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 575, no headset pose 0, no eye 296; HUD shaders known 34
+[18:59:12.889] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 575, no headset pose 0, no eye 292; HUD shaders known 34
+[18:59:13.892] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 575, no headset pose 0, no eye 294; HUD shaders known 34
+[18:59:14.889] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 575, no headset pose 0, no eye 246; HUD shaders known 34
+[18:59:15.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 62; HUD shaders known 34
+[18:59:16.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 1140, no headset pose 0, no eye 188; HUD shaders known 34
+[18:59:17.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 1140, no headset pose 0, no eye 380; HUD shaders known 34
+[18:59:18.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 1140, no headset pose 0, no eye 480; HUD shaders known 34
+[18:59:19.893] hud per s: HUD draws placed 0 (registers by columns 0, by rows 0); left alone: not screen-space 1140, no headset pose 0, no eye 536; HUD shaders known 34
+[18:59:20.912] hud per s: HUD draws placed 364 (registers by columns 364, by rows 0); left alone: not screen-space 1339, no headset pose 0, no eye 390; HUD shaders known 34
+[18:59:21.939] hud per s: HUD draws placed 776 (registers by columns 776, by rows 0); left alone: not screen-space 1748, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:22.931] hud per s: HUD draws placed 560 (registers by columns 560, by rows 0); left alone: not screen-space 1666, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:23.928] hud per s: HUD draws placed 592 (registers by columns 592, by rows 0); left alone: not screen-space 1776, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:24.938] hud per s: HUD draws placed 544 (registers by columns 544, by rows 0); left alone: not screen-space 1632, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:25.948] hud per s: HUD draws placed 270 (registers by columns 270, by rows 0); left alone: not screen-space 1632, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:26.944] hud per s: HUD draws placed 302 (registers by columns 302, by rows 0); left alone: not screen-space 1680, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:27.951] hud per s: HUD draws placed 340 (registers by columns 340, by rows 0); left alone: not screen-space 1632, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:28.947] hud per s: HUD draws placed 350 (registers by columns 350, by rows 0); left alone: not screen-space 1680, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:29.955] hud per s: HUD draws placed 272 (registers by columns 272, by rows 0); left alone: not screen-space 1632, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:30.966] hud per s: HUD draws placed 254 (registers by columns 254, by rows 0); left alone: not screen-space 1680, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:31.958] hud per s: HUD draws placed 400 (registers by columns 400, by rows 0); left alone: not screen-space 1734, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:32.963] hud per s: HUD draws placed 504 (registers by columns 504, by rows 0); left alone: not screen-space 1700, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:33.962] hud per s: HUD draws placed 600 (registers by columns 600, by rows 0); left alone: not screen-space 1650, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:34.962] hud per s: HUD draws placed 740 (registers by columns 740, by rows 0); left alone: not screen-space 1848, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:35.972] hud per s: HUD draws placed 700 (registers by columns 700, by rows 0); left alone: not screen-space 1666, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:36.987] hud per s: HUD draws placed 740 (registers by columns 740, by rows 0); left alone: not screen-space 1640, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:38.003] hud per s: HUD draws placed 680 (registers by columns 680, by rows 0); left alone: not screen-space 1470, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:38.997] hud per s: HUD draws placed 700 (registers by columns 700, by rows 0); left alone: not screen-space 1340, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:39.994] hud per s: HUD draws placed 680 (registers by columns 680, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:41.002] hud per s: HUD draws placed 620 (registers by columns 620, by rows 0); left alone: not screen-space 1178, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:41.995] hud per s: HUD draws placed 660 (registers by columns 660, by rows 0); left alone: not screen-space 1254, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:42.990] hud per s: HUD draws placed 374 (registers by columns 374, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:43.990] hud per s: HUD draws placed 70 (registers by columns 70, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:45.013] hud per s: HUD draws placed 74 (registers by columns 74, by rows 0); left alone: not screen-space 1406, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:46.014] hud per s: HUD draws placed 70 (registers by columns 70, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:47.009] hud per s: HUD draws placed 70 (registers by columns 70, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:48.015] hud per s: HUD draws placed 72 (registers by columns 72, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:49.028] hud per s: HUD draws placed 78 (registers by columns 78, by rows 0); left alone: not screen-space 1482, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:50.035] hud per s: HUD draws placed 72 (registers by columns 72, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:51.029] hud per s: HUD draws placed 68 (registers by columns 68, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:52.046] hud per s: HUD draws placed 70 (registers by columns 70, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:53.048] hud per s: HUD draws placed 70 (registers by columns 70, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:54.042] hud per s: HUD draws placed 74 (registers by columns 74, by rows 0); left alone: not screen-space 1406, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:55.064] hud per s: HUD draws placed 64 (registers by columns 64, by rows 0); left alone: not screen-space 1216, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:56.071] hud per s: HUD draws placed 992 (registers by columns 992, by rows 0); left alone: not screen-space 1216, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:57.083] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:58.087] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[18:59:59.099] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:00.107] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:01.119] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:02.116] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:03.134] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:04.152] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:05.148] hud per s: HUD draws placed 1980 (registers by columns 1980, by rows 0); left alone: not screen-space 1254, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:06.175] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:07.171] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:08.173] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:09.188] hud per s: HUD draws placed 2220 (registers by columns 2220, by rows 0); left alone: not screen-space 1406, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:10.196] hud per s: HUD draws placed 2220 (registers by columns 2220, by rows 0); left alone: not screen-space 1406, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:11.199] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:12.220] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:13.223] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:14.234] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:15.264] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:16.263] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:17.286] hud per s: HUD draws placed 1680 (registers by columns 1680, by rows 0); left alone: not screen-space 1064, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:18.285] hud per s: HUD draws placed 1980 (registers by columns 1980, by rows 0); left alone: not screen-space 1254, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:19.288] hud per s: HUD draws placed 2220 (registers by columns 2220, by rows 0); left alone: not screen-space 1406, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:20.306] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:21.315] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:22.313] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:23.310] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:24.320] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:25.331] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:26.340] hud per s: HUD draws placed 1980 (registers by columns 1980, by rows 0); left alone: not screen-space 1254, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:27.364] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:28.355] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:29.363] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:30.365] hud per s: HUD draws placed 1980 (registers by columns 1980, by rows 0); left alone: not screen-space 1254, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:31.389] hud per s: HUD draws placed 1920 (registers by columns 1920, by rows 0); left alone: not screen-space 1216, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:32.395] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:33.397] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:34.405] hud per s: HUD draws placed 2040 (registers by columns 2040, by rows 0); left alone: not screen-space 1292, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:35.425] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:36.430] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:37.447] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:38.457] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:39.450] hud per s: HUD draws placed 2100 (registers by columns 2100, by rows 0); left alone: not screen-space 1330, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:40.465] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:41.482] hud per s: HUD draws placed 1920 (registers by columns 1920, by rows 0); left alone: not screen-space 1216, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:42.490] hud per s: HUD draws placed 2160 (registers by columns 2160, by rows 0); left alone: not screen-space 1368, no headset pose 0, no eye 0; HUD shaders known 34
+[19:00:42.490] hud: panel placement switched OFF (distance 2.00 m, width 50.0 deg, aspect 1.778)
