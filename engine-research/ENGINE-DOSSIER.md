@@ -234,3 +234,11 @@ Folded and deleted: inbox `2026-10-07-pd-headset-fov-and-tracking.md`. Evidence:
   HUD matrix being orthographic are `[hypothesis]` until the `hud per s` log line, live. Note
   `modding-notes/2026-10-07-pd-hud-on-a-panel.md`.
 
+## The HUD is 3D on purpose (2026-10-08, `/pd`, static)
+
+`[inferred-static 2026-10-08]`: the HUD item `data/items/hud/hud.rhs` (script `base_templates/item/hud.nut`) spawns two
+animatix screens attached to the player: `animatix_hud_3d_stats` at `arm02_attachment` (radar, health, shield, ammo)
+and `animatix_hud_3d_bars` at `main_attachment` (bars). They draw in world space, already correct in stereo; leave
+them. The flat `animatix_hud_2d` template is referenced by nothing. Screen-space draws are crosshairs, damage
+indicators, blood, menus, loading and briefing: those are what the panel (`d3d9_hud.txt`) is for. Note
+`modding-notes/2026-10-08-pd-the-hud-is-built-in-3d.md`.
