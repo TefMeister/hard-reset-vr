@@ -17,7 +17,8 @@ part of this repository**; only code, notes, and tools we wrote ourselves.
 
 | Source / Work | Creator(s) | Link |
 |---|---|---|
-| *(none yet; engine research is just beginning)* | | |
+| wiz3D: listed Hard Reset as a 3D Vision Direct Mode game that draws both eyes itself, which pointed us at the game's own eye loop | effcol and the wiz3D contributors | https://github.com/effcol/wiz3D |
+| OpenXR loader (`openxr_loader.dll`, shipped in the release zip under the Apache License 2.0) | The Khronos Group | https://github.com/KhronosGroup/OpenXR-SDK |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)**

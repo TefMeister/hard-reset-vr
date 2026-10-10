@@ -1,0 +1,12 @@
+Hard Reset VR 0.1.0 - the files this mod adds to the game folder (from the HardReset folder of this package)
+
+d3d9.dll  sha256 65f6e54b8410
+d3d9_head_track.txt  sha256 e3b0c44298fc
+d3d9_headset_fov.txt  sha256 e3b0c44298fc
+d3d9_openxr.txt  sha256 e3b0c44298fc
+d3d9_readback_async.txt  sha256 e3b0c44298fc
+d3d9_sbs.txt  sha256 e3b0c44298fc
+d3d9_vr.ini  sha256 7f935c9ce00b
+nvapi.dll  sha256 8a666b9f2a11
+nvapi_fake_stereo.txt  sha256 e3b0c44298fc
+openxr_loader.dll  sha256 fb1e06de9653
