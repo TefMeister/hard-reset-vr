@@ -12,6 +12,9 @@ or supported by Flying Wild Hog. You need your own copy of Hard Reset Extended.
 
 | Version | Date | What changed |
 | --- | --- | --- |
-| 0.1.0 | 2026-10-10 | First build: the game in 3D in the headset with head tracking, the 3D switches on by itself, no flicker. |
+| 0.1.0 | 2026-10-10 | First playable build: the game in 3D in the headset with head tracking, the 3D switches on by itself, no flicker. |
+
+There are two planned releases: this first playable build, and v1.0 when the mod is complete (then only fixes
+to 1.0).
 
 The readme and file list of each version are kept here as `README-<version>.txt` and `FILES-<version>.txt`.
