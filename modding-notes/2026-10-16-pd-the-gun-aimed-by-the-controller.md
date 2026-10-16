@@ -68,3 +68,30 @@ replace is what THIS frame is drawn and culled with. Both are upstream of render
 3. `test/sim_hands_drive.py`-style controller commands for hand 1 with yaw/pitch: the gun turns to follow, the world
    does not; `aim per s` reports mouse sent > 0, error → 0, learned counts/° stable.
 4. If the camera never moves: `mouse sent` > 0 but error stays → the game ignores injected mouse → method two.
+
+## ⭐ FIRST LIVE RUN, same afternoon (dev PC, the game running, simulator; Tefa launched it): IT WORKS
+
+Build `da3f75079a11`, `d3d9_aim.txt` created at gameplay (alley at the start). Recorded:
+`hr-gun-aim-first_2026-10-16_15-51-24.mp4` (game window, 118 s) and `hr-gun-aim-first_second_...` (simulator
+preview), MEGA transfer `Videos\hard-reset-vr\`. Measured `[verified-live 2026-10-16, n=1]`:
+
+- **The game obeys injected relative mouse (SendInput) as look input.** Within the first second the loop steered the
+  game camera onto the simulator's default aim pose (17° down): 10 mouse frames, then error 0.0 / 0.1°.
+- **Learned: −5.0 mouse counts per degree on both axes** (mouse right = turn right, mouse down = look down, at this
+  install's sensitivity) after 3–10 samples; the guess of 10 was 2× off and corrected itself.
+- **Steps:** controller 30° left, 30° right, 20° up: the camera reached each to 0.1° within ~10–12 mouse frames
+  (~0.2 s) and stayed. ![four moments](images/2026-10-16-gun-follows-the-controller.png)
+- **Decoupled view confirmed by eye on the pictures:** the street, buildings and signs stay exactly in place in all
+  four; the gun, its HUD dial and our blocky right hand turn with the controller.
+- **Smooth sweep:** controller round an oval (yaw ±25°, pitch ±12°, a lap per 5 s, 30 commands/s) for 12 s: worst
+  sampled error 2.3° yaw / 1.0° pitch (one sample a second, the loop's one-frame lag on a moving target), ~70 mouse
+  frames a second.
+- **One shot fired** (left click via SendInput, game in front) with the controller 30° left. The picture a second later
+  and a contact sheet of the video show no flash or mark at that size: whether the shot left along the hand is NOT yet
+  checked `[hypothesis]` (frame-by-frame look at the video, or a run aimed at a wall).
+- Hands in the game for the first time: ~150 eye pictures a second with hands, 0 failures; grip and aim poses found
+  60/s each.
+
+Switch put back off afterwards (`d3d9_aim.off`), game left running. What it means: **the gun and the game's own aim
+follow the hand while the view is fixed to the body and the head**. Next: the gun's POSITION at the hand (it still
+swings round the eye), turning the body (snap turn on the stick), walking relative to the head, and the shot check.
