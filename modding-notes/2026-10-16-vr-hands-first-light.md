@@ -87,3 +87,26 @@ or a manifest missing). Verified on the dev PC: with the stale one-copy registra
 the 32-bit copy within 3 s `[verified-numerically 2026-10-16, n=1]`. Both copies are now registered on the dev PC, so
 Hard Reset starts with Hand Freeze ON and needs no `DISABLE_HAND_FREEZE_LAYER`. The home PC needs the same: install
 v3.2 and open it once (owed item raised).
+
+## Later the same day: the hands MOVE with the controllers (simulator, recorded on video)
+
+Tefa asked for the hands to be seen moving, using the simulator. The OpenXR Simulator takes controller commands
+through a small file (`controller_pose_command.json`: hand, position, yaw, pitch; the position is relative to the head,
+and the file channel takes about 15 commands a second). `test/sim_hands_drive.py` (staging `proxy-d3d9`) runs the
+no-game self-test with the hands on, drives the LEFT controller and photographs the simulator's preview.
+
+Measured `[verified-numerically 2026-10-16, n=3 runs each]`:
+- **Nine positions and two wrist turns:** 25 cm left, 25 cm up, 25 cm right, 25 cm down, 15 cm nearer (bigger), 30 cm
+  farther (smaller), wrist turned 90° about the up axis (fingers point left), wrist tipped 60° down, then the head moved
+  50 cm right (the hand goes with it, the picture stays the same). In every photo the hand's measured centre sits within
+  a few per cent of the eye width of the spot the add-on's own numbers predict, in BOTH eyes; the right hand never
+  moves. ![four moments](images/2026-10-16-hands-follow-simulator-controllers.png)
+- **A circle, continuously:** 20 cm radius, one lap every 6 s, ~15 commands/s for 14 s, with the wrist turning: the
+  add-on's once-a-second positions trace the circle (x −0.40…0.00, y 1.22…1.58 around (−0.20, 1.40)) and the photos'
+  hand centres go round with it. No drop-outs: 60 eye pictures with hands every second, 0 draw failures.
+- **Videos (Tefa asked for it on film):** `hands-move-steps_2026-10-16_14-51-09.mp4` (33 s) and
+  `hands-move-circle_2026-10-16_14-53-09.mp4` (20 s), 1280×720 60 fps, in the MEGA transfer folder's
+  `Videos\hard-reset-vr\`, recorded from the simulator's preview window (the self-test's own window is never shown).
+
+So the whole chain works on the simulator: controller pose → action space → per-frame matrices → both eyes, moving.
+What is still untested is the same inside the real game (the [FLAT] row) and the real headset.
