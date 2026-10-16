@@ -66,3 +66,24 @@ Freeze's layer switched off.
 3. [PD] Hand Poser's second mode: our own bones (wrist, five fingers × 3) in a shared-memory channel to this
    add-on, the mesh skinned on the CPU; the same window, sliders and builds as the RE version.
 4. [PD] Hand Freeze / Window View: per-bitness layer registration.
+
+## Correction, later the same day: the cause was a STALE registration, not HKCU itself
+
+Supersedes: this file, section "Found on the way" (the "fix belongs in those two tools: register per bitness under
+HKLM" conclusion), and the matching rows on the Hard Reset and Window View boards.
+
+Checked: Hand Freeze v3.1 (2026-10-14) already registers a 32-bit copy of its layer beside the 64-bit one, and the
+OpenXR loader skips a layer it cannot load as long as another one loads. On the dev PC only the 64-bit copy was
+registered because **ON had last been pressed before v3.1 was installed**; nothing re-registers on an update. With the
+32-bit copy registered as well (the same registry entry v3.1's ON makes), Hard Reset's own loader 1.0.10 logs
+"skipping layer ... error 193" for the 64-bit copy and **the session runs: `d3d9_selftest.exe xr <sim-32> secs=5`
+passes 14 of 14 with no environment variable** `[verified-numerically 2026-10-16, n=1]`. So the earlier n=2 result
+("fails with 1.0.10 and 1.1.63") was measured with a one-copy registration, and the per-bitness HKLM rewrite (an
+administrator prompt on every ON/OFF) is not needed.
+
+What changed instead: **Hand Freeze v3.2 and Window View v1.1** check the registration against the files beside the
+exe each time the app opens and re-do the ON press when they do not match (the 32-bit copy present but not registered,
+or a manifest missing). Verified on the dev PC: with the stale one-copy registration restored, opening v3.2 registered
+the 32-bit copy within 3 s `[verified-numerically 2026-10-16, n=1]`. Both copies are now registered on the dev PC, so
+Hard Reset starts with Hand Freeze ON and needs no `DISABLE_HAND_FREEZE_LAYER`. The home PC needs the same: install
+v3.2 and open it once (owed item raised).
