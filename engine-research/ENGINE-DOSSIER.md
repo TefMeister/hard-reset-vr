@@ -250,3 +250,12 @@ and `animatix_hud_3d_bars` at `main_attachment` (bars). They draw in world space
 them. The flat `animatix_hud_2d` template is referenced by nothing. Screen-space draws are crosshairs, damage
 indicators, blood, menus, loading and briefing: those are what the panel (`d3d9_hud.txt`) is for. Note
 `modding-notes/2026-10-08-pd-the-hud-is-built-in-3d.md`.
+
+## 🏆 2026-10-16: THE GUN AIMED BY THE CONTROLLER (live, simulator)
+
+The game obeys **SendInput relative mouse** as look input while its window is in front `[verified-live 2026-10-16,
+n=1]`: −5.0 counts per degree both axes at this install's sensitivity, mouse right = turn right, down = look down.
+Steering the game camera to the controller's aim pose that way (in the camera update, slot 25) turns gun, HUD dial
+and aim together; drawing the picture from a body frame locked at switch-on keeps the world still `[verified-live
+2026-10-16, n=1]`. Steps reached in ~0.2 s, a moving target followed within ~2°. Whether shots leave along the new
+aim is not yet checked. Code `staging/hard-reset-vr/proxy-d3d9/src/hr_aim*.c`, switch `d3d9_aim.txt`.
