@@ -259,3 +259,13 @@ Steering the game camera to the controller's aim pose that way (in the camera up
 and aim together; drawing the picture from a body frame locked at switch-on keeps the world still `[verified-live
 2026-10-16, n=1]`. Steps reached in ~0.2 s, a moving target followed within ~2°. Whether shots leave along the new
 aim is not yet checked. Code `staging/hard-reset-vr/proxy-d3d9/src/hr_aim*.c`, switch `d3d9_aim.txt`.
+
+## 2026-10-16: input for the motion controllers
+
+The exe imports XINPUT9_1_0.dll XInputGetState / XInputSetState (IAT 0xA4105C / 0xA41058) [inferred-static], plus
+raw input and GetAsyncKeyState. Keys and mouse bindings live in the player's binds.cfg (Documents, Hard Reset
+Extended, profiles); the pad's button layout is not stored there (s_pad_layout_buttons / _sticks pick a built-in
+layout). Pad aim assist: s_pad_autoaim (always / when firing / never), radius, speed. Our controls press the
+binds.cfg keys with SendInput and walk through a virtual pad on that import [compile-verified 2026-10-16]; whether the
+game takes a pad stick and the mouse together is not yet known [hypothesis]. Note:
+modding-notes/2026-10-16-pd-the-motion-controllers-play-the-game.md.
