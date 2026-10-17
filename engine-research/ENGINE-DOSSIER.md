@@ -339,3 +339,36 @@ is set in `config.cfg`. Why the raw route ignores it is open. Keys through it: w
 (only a force-close ends it) `[verified-live 2026-10-17, n=1]`: close with the console `quit` instead.
 
 Notes: `modding-notes/2026-10-17-lm-dial-grip-and-no-focus.md`.
+
+## 2026-10-17 late (`/lm`, dev PC): RAW MOUSE FIXED, THE GUN MOVER BY SHADER ROLE, THE JITTER WAS THE TEST (live, simulator; reader notes folded)
+
+**Raw mouse.** The game's message pump (0x99c500) has no filters and no `GetRawInputBuffer`; the window procedure
+sends `WM_INPUT` to 0x9642f0 when 0xdd4c28 is set, which calls `GetRawInputData` (IAT slot 0xa412e0, no cached
+pointer) only while the window is active (0xdcd570) AND in relative mouse mode (0xdcd57c; off in menus and the
+console) `[inferred-static 2026-10-17]`. The 0-answers result was OUR bug: `hr_focus.c` cleared its one-post-in-flight
+flag only inside the `GetRawInputData` hook, so one post the game skipped (likely while the console was open) froze
+it for good. Reproduced with a stand-in window at the game's addresses: old code 2 of 7 checks, fixed 7 of 7
+`[verified-numerically 2026-10-17, n=1]`. Fix: the subclassed window clears the flag whenever our message passes, a
+skipped move is dropped (no jump after the console), a post lost 250 ms is re-sent, and after 40 re-sends never seen
+it writes 0 to the cvar (plain mode). Live: raw mode on, the game answered every post (5 of 5) and the camera
+reached its target, in front and with another window in front `[verified-live 2026-10-17, n=1 each]`. Both mouse
+modes now work for VR.
+
+**Gun mover by shader role** (`hr_vs_roles.c`, `[gun] by_role=1`, default on). Each vertex shader is classified at
+`CreateVertexShader` from its constant table (bones at c28 / object matrix c16..c18 / neither / unknown) in a
+lock-free table (the device is MULTITHREADED); c28+ uploads are moved only while a bones shader is set, c16..c18
+only while an object shader is set; unknown shaders keep the old register rule. The main draw path binds the
+shader before uploading constants (0x96e710: 0x8a9a80 -> 0x8a97c0, then the constant loop at 0x96ea80)
+`[inferred-static 2026-10-17]`; other draw paths unread. Live: 1226 shaders known, per second ~6800 uploads under
+bones shaders, ~13600 under object shaders, ~240 unknown, ~120 bone-like and ~120 object-like uploads left alone,
+and the gun and dial still follow the hand `[verified-live 2026-10-17, n=1]`. Test `hr_vs_roles_test.c` 21 of 21 (it
+fails when the gate or the classifier is broken on purpose).
+
+**Jitter.** A slow turn by the simulator's own pose sweep (renewed every frame): JITTER in 2 of 35 turning seconds,
+both on the sweep's start and stop `[verified-live 2026-10-17, n=1]`; the same turn by 20 head commands a second:
+20 of 20 `[measured 2026-10-17, n=1]`. Hand-made head paths step; use the simulator's sweep for jitter checks.
+
+**No-focus keys.** With another window in front the left stick (keys) walked the player 13.5 m backwards in 3 s
+`[verified-live 2026-10-17, n=1]`.
+
+Notes: `modding-notes/2026-10-17-lm-raw-mouse-roles-and-smooth-sweep.md`.
