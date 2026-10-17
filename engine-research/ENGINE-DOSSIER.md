@@ -276,3 +276,18 @@ layout). Pad aim assist: s_pad_autoaim (always / when firing / never), radius, s
 binds.cfg keys with SendInput and walk through a virtual pad on that import [compile-verified 2026-10-16]; whether the
 game takes a pad stick and the mouse together is not yet known [hypothesis]. Note:
 modding-notes/2026-10-16-pd-the-motion-controllers-play-the-game.md.
+
+## 🏆 2026-10-17 (`/lm`, dev PC): THE GAME'S OWN GUN MOVED TO THE CONTROLLER (live, simulator)
+
+- The held gun is a **skinned** model: its bones arrive as VS `c28` onward (`float4x3 mSkinning[76]`, three
+  registers per bone, one column each, place in each register's last number), already in **world space**, about
+  0.5 m from the game's eye. Moving only `c16..c18` (`mObjectToWorld`) moved the HUD dial on the gun, not the gun.
+  `[verified-live 2026-10-17, n=1]`
+- The view model's object matrix sits exactly at the game camera's eye (0.00 m): the game builds the held gun around
+  the eye. `[measured 2026-10-17]`
+- Shifting every object and every bone within 0.9 m of the eye by one per-frame move (from the game's hold spot to
+  the controller) carried the gun left, up and nearer with the hand. `[verified-live 2026-10-17, n=1]`
+- Open: the dial on the gun lands in the wrong place after the move (n=1); the hold spot is a guess.
+- `c28`/`c29` are also `vPPAnimatixUV` / `vHUDStereoParams` in the HUD shaders, so the bone path only accepts calls
+  that start on a whole bone (`(start-28) % 3 == 0`) and only moves bones near the eye.
+  Notes: `modding-notes/2026-10-17-pd-the-gun-at-the-controller.md`.
