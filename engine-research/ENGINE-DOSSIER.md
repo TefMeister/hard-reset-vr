@@ -372,3 +372,30 @@ both on the sweep's start and stop `[verified-live 2026-10-17, n=1]`; the same t
 `[verified-live 2026-10-17, n=1]`.
 
 Notes: `modding-notes/2026-10-17-lm-raw-mouse-roles-and-smooth-sweep.md`.
+
+## 2026-10-17 night (`/lm`, dev PC): GHOST HAND RECORDS THE HOLDS; THE OFF HAND ON THE FORE-GRIP (live, simulator; reader notes folded)
+
+**Ghost Hand BeG0nE** (lanes rule: a mod with two-handed aim carries it). `src/ghosthand.h` is a C twin of the plugin's
+`ghosthand.lua` (same lines, same filer; now also shipped in the plugin's `begone/ghost-hand/`). `hr_ghost.c`: the
+headset thread logs each controller (with its tracked flag) every headset frame (`hxr.c locate_hands`); once per
+PRESENTED picture (from Present, `ghost_on_present`, using the pose and matrices that picture was built with) the
+drawn hands, the hold (0 none, 1 stacked, 2 front), the aim target and the off hand's grip, then the frame mark.
+Each two-handed hold is one gesture: "done" when let go with both controllers tracked, "fail" when it ends on a
+lost controller. ⚠️ First wiring marked frames from `patch_camera`, which runs ~13 times a game frame: 795 "frames"
+a second and a 17.8 MB log in 2 minutes `[measured 2026-10-17, n=1]`; from Present it is 60 a second. Live: stacked
+1 of 1 and front 1 of 1 finished, the drawn left hand 1 frame (23 ms) behind its controller
+`[verified-live 2026-10-17, n=1]`; the jumps it counts are VR Bench teleporting the hands between poses. Gaps: no
+`_need` distance for holds, no weapon parts logged.
+
+**The off hand on the fore-grip** (`[hands] foregrip=1`, `foregrip_ahead_m` 0.30, `foregrip_up_m` 0.04, read when the
+hands switch on). The bone dump cannot give a fore-grip point: the logged positions are skinning-matrix
+translations (where the model origin lands under each bone), bones 0-3 and 16-26 sit on the grip, 4-13 near
+(0.25, 0.02, -0.11), 14-15 behind the camera, and the log line stops at bone 26 `[inferred-static 2026-10-17]`. So
+the spot is a fixed offset from the grip along the gun's forward and up, which are the game camera's own axes (the
+gun mover shifts, never turns) `[hypothesis]` for the numbers, tuned by eye. `gm_gun_in_local` (hr_gun_math.c) gives
+the grip, forward and up in the headset's space through the gun mover's own chain. While the presented picture has
+a hold, the off hand is drawn there with its own rotation (the blocky hand has no fingers to wrap a barrel). Live:
+in both holds the left hand sits ahead of the right on the gun, and returns to its controller on release
+`[verified-live 2026-10-17, n=1, pictures]`. Tests: fore-grip 17/17, Ghost Hand 14/14 (each fails when broken on purpose).
+
+Notes: `modding-notes/2026-10-17-lm-ghost-hand-and-foregrip.md`.
