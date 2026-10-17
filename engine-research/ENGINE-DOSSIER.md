@@ -407,3 +407,31 @@ update so all ~13 camera updates of a frame share one body turn (snap stays at t
 once-per-frame guard or the direction is broken. Live: "smooth turn 115-121 deg in 39-58 frames" a second at full
 push, and the view turned left `[verified-live 2026-10-17, n=1]`. Untested: whether a stick turn reads as smooth to
 BeG0nE (it measures head turns).
+
+## 2026-10-17 night (`/lm`, dev PC): THE PAUSE MENU'S FRAMES ARE ONE SHADER; PLACED, THEY COME OUT TOO SMALL (live, simulator; reader note folded)
+
+**Candidates read from the shipped shader sources** (unpacked outside every repo, nothing committed): besides font,
+font_out and animatix, three families draw with c0..c3 and no per-eye HUD shift: `texture.hlsl` (mWorldToScreen,
+position + COLOR, VERTEX_COLOR / WORLD_SPACE variants), `hudGamma.hlsl` (mWorldToScreen + texture + gamma) and the
+assembled `color.vs` (mViewProj at c0..c3, no constant table) `[inferred-static 2026-10-17]`.
+
+**Census build** (`d3d9.dll 1fc47c0b4b51`, staging commit "HUD census and the switch for other flat 2D draws"):
+`d3d9_hud_census.txt` logs, each second, every HUD / flat-screen / fixed-function draw grouped by shader + primitive
+with what was done to it. `d3d9_hud_more.txt` (off by default) puts other flat c0..c3 draws on the panel (c0..c3 only,
+c29 untouched), only after a HUD draw in that eye (`2` as first character: always). Test 31/31.
+
+**Live census** (gameplay 20:24:58-20:25:07, menu 20:25:09-20:25:15): one row exists only in the menu: vertex shader
+`0ECC3D20`, kind "c0-3" (it HAS a constant table, so it is not the assembled color.vs), triangles AND lines, ~840 draws
+per eye a second, all after the HUD began, all to the screen, flat-screen, all left alone. Its c0..c3 has the same w
+parts as the font HUD shaders (-1 -0.9972 0.5 1). The fixed-function draws (fvf 0x42) and the other rows are the same
+in menu and gameplay `[verified-live 2026-10-17, n=1]`. So the frames are the reader's first case.
+
+**With `d3d9_hud_more.txt` = 1**: every 0ECC3D20 draw is "placed plain", and the frames move off their flat spot, but
+the result is wrong: the menu's fills sit right (centre x 402 / 238 in each 640-px eye, as the lens maths says), while
+the frames shrink to a thin column of ticks ~1% of the eye wide inside the fill, at its left edge in the left eye and
+its right edge in the right eye (so still not at the panel's depth) `[verified-live 2026-10-17, n=1, pictures]`. Same
+matrix in, different result out: the frame shader most likely does not use c0..c3 the way the font shader does
+`[hypothesis]`. The reader is reading that shader. The switch is off again.
+
+⚠️ The simulator's preview window had been squashed to 1691x235; pictures from it then look flattened. Resized to
+1300x760 before the pictures above.
