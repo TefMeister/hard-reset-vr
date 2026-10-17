@@ -287,7 +287,55 @@ modding-notes/2026-10-16-pd-the-motion-controllers-play-the-game.md.
   the eye. `[measured 2026-10-17]`
 - Shifting every object and every bone within 0.9 m of the eye by one per-frame move (from the game's hold spot to
   the controller) carried the gun left, up and nearer with the hand. `[verified-live 2026-10-17, n=1]`
-- Open: the dial on the gun lands in the wrong place after the move (n=1); the hold spot is a guess.
+- ~~Open: the dial lands wrong; the hold spot is a guess.~~ Both answered the same evening, next section.
 - `c28`/`c29` are also `vPPAnimatixUV` / `vHUDStereoParams` in the HUD shaders, so the bone path only accepts calls
   that start on a whole bone (`(start-28) % 3 == 0`) and only moves bones near the eye.
   Notes: `modding-notes/2026-10-17-pd-the-gun-at-the-controller.md`.
+
+## 🏆 2026-10-17 evening (`/lm`, dev PC): THE DIAL, THE GRIP, AND NO FOCUS (live, simulator; reader notes folded)
+
+**The dial.** The HUD item is its own skinned model (skeleton Root, main, arm_pivot, arm01, arm02, arm_end; 5 bones,
+the 15-register c28 uploads), and its numbers and arcs are two animatix screens on 1x1 quads (`hud\hud3d.aix`)
+`[inferred-static 2026-10-17]`. Near the camera, with `r_animatix_pp_enable` on, they go through a post-process route:
+`animatix.hlsl` (RENDER_TO_TEXTURE, reads only `mWorldToScreen`) draws into `#rtAnimatixTarget`, then
+`ppAnimatix.hlsl` draws the quad and samples that target at a rectangle the CPU works out from where the GAME thinks
+the dial is (0x96c6e0; `vPPAnimatixUV` uploaded alone at c28 by 0x96e83d), with alpha inverted, so a moved quad
+samples an empty patch and shows as a black slab `[inferred-static 2026-10-17]`. With `r_animatix_pp_enable "0"` the
+direct route draws it (c16..c18 plus a per-eye shift in c29): live, the dial keeps its numbers and moves with the
+gun `[verified-live 2026-10-17, n=1]` (pictures). The pp route exists for distortion, colour fringing and
+desaturation, which the VR screen-effects rule switches off anyway. Set in the profile's `config.cfg`.
+
+**The grip.** The gun skeleton's root sits at (0.23, -0.37, -0.23) m in the game camera's frame (x right, y up, -z
+ahead) and the dial set at (-0.31, -0.35, -0.25) `[measured 2026-10-17]`. `d3d9_vr.ini [gun] grip = 0.23, -0.37,
+-0.23` puts the handle in the hand in the headset pictures `[verified-live 2026-10-17, n=1]` (by eye).
+
+**Risks in the gun mover (reader)** `[inferred-static 2026-10-17]`: the bone path takes any c28+ upload of 3+
+registers on a bone boundary, and `decal.hlsl` uses c28 (`mProjection`) and c31 (`mTBN`); the "within 0.9 m" test
+reads where the model origin lands under a bone, not the bone itself. Neither seen live yet (bones held = bones
+every second) `[measured 2026-10-17]`. Fix when needed: classify vertex shaders by what they read
+(`staging/hard-reset-vr/reader/hr_vs_kinds.c`, right on 6 of 6 of the game's own shaders
+`[verified-numerically 2026-10-17, n=6]`) and move at draw time by role.
+
+**Input and focus** `[inferred-static 2026-10-17]` unless tagged. No DirectInput. Imports `RegisterRawInputDevices`,
+`GetRawInputData`, `GetAsyncKeyState`, `GetCursorPos`, `SetCursorPos`, `ClipCursor`, XInput 9_1_0; none of
+`GetForegroundWindow`/`GetActiveWindow`/`GetFocus`. Window procedure 0x99ee20: keys go into an event ring (0xbafa48)
+and a pressed table (0xbaf92c[vk]); every frame 0x992550 asks `GetAsyncKeyState` for each held key and releases it
+if Windows says it is up, so a posted key-down alone lasts one frame. The mouse is read only while the "active" byte
+0xdcd570 is set: raw (`s_mouse_raw_input`, 0xdd4c28) through `WM_INPUT` -> `GetRawInputData`, else `WM_MOUSEMOVE`
+-> `GetCursorPos` minus the centre (0xdcd574/0xdcd578); raw is registered without `RIDEV_INPUTSINK`. Only
+`WM_ACTIVATE` is handled (0x992f90: sets the active bytes, frees the mouse, and with `g_autopause_enabled`
+(0xdd6ee0) pauses). XInput IAT slots are 0xA4135C (Get) and 0xA41358 (Set), not the 0xA4105C/0xA41058 written on
+2026-10-16.
+
+**No focus, built** (`hr_focus.c`): our d3d9 file subclasses the window and drops `WM_ACTIVATE(WA_INACTIVE)`, hooks
+the exe's `GetAsyncKeyState` (ORs in our held keys), `GetRawInputData`, `GetCursorPos`, `SetCursorPos`, `ClipCursor`
+(the desktop cursor is left alone while the game is not in front), and posts keys, buttons and mouse moves to the
+game's window. Live: with another window in front the aim turned the camera to its target
+`[verified-live 2026-10-17, n=1]`, in PLAIN mouse mode. ⚠️ With raw mouse on, the game never called
+`GetRawInputData` for our posted `WM_INPUT` (0 answers in ~30 s) `[measured 2026-10-17]`, so `s_mouse_raw_input "0"`
+is set in `config.cfg`. Why the raw route ignores it is open. Keys through it: wired, not yet tried live.
+
+**Closing the game.** `WM_CLOSE` posted to the window destroys the window but the game keeps running without one
+(only a force-close ends it) `[verified-live 2026-10-17, n=1]`: close with the console `quit` instead.
+
+Notes: `modding-notes/2026-10-17-lm-dial-grip-and-no-focus.md`.
