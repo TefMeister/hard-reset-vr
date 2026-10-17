@@ -115,6 +115,13 @@ menu, ~550/s in gameplay. The menu's outline frames are NOT placed: same image p
 divergent) `[measured 2026-10-08, n=1]`. Panel off: the menu is whole again. Next: find the frame-line shader.
 
 ## 10. Autonomous harness recipe (this game)
+- **2026-10-17 (VR Bench run, dev PC):** `hardreset.exe` started directly from its folder (no Steam run, so no
+  DirectX installer and no admin prompt) → Enter ×4 → main menu, "Resume game" click at 0.497, 0.322 (often needs a
+  second click) → ~90 s loading → Space `[verified-live 2026-10-17, n=2]`. **Start with `d3d9_aim.off`**: with the aim
+  on, clicks never land (it moves the mouse 100+ times a second). Quit: console `quit` (the ~ key can leave a stray
+  character; Backspace first). **Music:** `s_sound_musicvolume "0"` in the profile `config.cfg`. **The game never asks
+  for a pad** (`XInputGetState` 0 calls a second while playing) `[measured 2026-10-17, n=2]`. Full list: control
+  profile `routes/hard-reset/KNOWN.md`.
 - Launch to a known scene (commands used): `steam://run/98400` → Escape/Enter through the films → the main menu
   answers absolute mouse clicks ("Resume game" at client 636,288 in 1280x720) → ~70 s of loading and comic panels →
   any key (Space) → gameplay `[verified-live 2026-10-07, n=1]`; about 4 Enters at the intro (more opens NEW GAME → New campaign). Console: Ctrl+~, then type (SendInput unicode). Stereo: `r_stereo_enable 1` every launch. Close: console `quit` `[verified-live 2026-10-08, n=2]`.
