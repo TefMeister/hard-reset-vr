@@ -49,6 +49,27 @@ answered. When a nudge turns the camera again, steering comes back.
   turned straight to −30.0° `[verified-live 2026-10-17, n=1]`. Leftover: in the pause menu the pointer sat ~100 px
   right of where it was put; still inside the game.
 
+## Afternoon: walking, two hands, shots, jitter again
+
+All with VR Bench setting the hands and the simulator setting the head.
+
+- **Walking follows the head.** Head 45° left, both hands pointing straight ahead, stick forward: the mod turned the
+  stick to −0.71 / 0.71 and pressed W and A together `[verified-live 2026-10-17, n=1]`. With the hand turned along
+  with the head it pressed W alone, which is right too: the game's view already faces that way.
+- **Two-handed holds.** Left hand apart: none. 30 cm ahead of the gun hand on its line: "front" (still "front" 8 cm
+  off the line). 15 cm above the gun hand: "stacked". Apart again: none. The gun's aim stayed put throughout
+  `[verified-live 2026-10-17, n=1]`.
+- **Shots go where the hand points.** At a near wall with the head still: hand 15° left hit left of the middle,
+  straight hit near the middle (a little right, where the gun sits), 15° right a little right, 25° right further
+  right `[measured 2026-10-17, n=1]`. The holes were told apart by the order they appeared.
+- **Jitter at the slow ends of a swing did not repeat.** A second smooth sweep read "smooth" in all 11 seconds, the
+  slow ends holding the camera in 12-15% of pictures (22-39% the first time). The "JITTER" seconds in that log are
+  all where VR Bench jumps the head in one go, which is not a real movement `[measured 2026-10-17, n=2]`.
+- **Hazards found:** `vrbench.py learn` switches its layer off at the end (run `vrbench.py start` again before a
+  hand-made test); with controls on, typing in the game's console picks up extra letters because the simulator
+  turns some keys into controller presses and the mod then presses its own keys; the game opens its pause menu when
+  it loses focus, and the aim correctly stays quiet there.
+
 ## Driving it
 
 Launch to play, quitting, the music setting and the hazards are in the control profile
