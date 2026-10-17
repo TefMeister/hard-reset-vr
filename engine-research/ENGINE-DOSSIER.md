@@ -431,7 +431,28 @@ the result is wrong: the menu's fills sit right (centre x 402 / 238 in each 640-
 the frames shrink to a thin column of ticks ~1% of the eye wide inside the fill, at its left edge in the left eye and
 its right edge in the right eye (so still not at the panel's depth) `[verified-live 2026-10-17, n=1, pictures]`. Same
 matrix in, different result out: the frame shader most likely does not use c0..c3 the way the font shader does
-`[hypothesis]`. The reader is reading that shader. The switch is off again.
+`[hypothesis]`. The reader then found the real cause (next paragraph).
 
 ⚠️ The simulator's preview window had been squashed to 1691x235; pictures from it then look flattened. Resized to
 1300x760 before the pictures above.
+
+**The cause was the game's scissor rectangle, not the shader** (reader, folded). The placed square sat exactly where
+the maths puts the menu (predicted x 373..432 / y 265..325 in the 640-px left eye, measured 374..431 / 265..326) and
+the visible strip's edges were exactly the flat list's edges (left eye ticks end at 380 = the flat buttons' right
+edge; right eye start at 260 = their left edge) `[measured 2026-10-17, n=1]`: everything outside the list's FLAT
+rectangle was cut, at the same pixels in both eyes. The game clips with SetScissorRect: its render-state applier sets
+D3DRS_SCISSORTESTENABLE at 0x8a9926 and calls SetScissorRect at 0x8a9959 (the exe's only call; no clip planes)
+`[inferred-static 2026-10-17]`. Side fact: the shader cache (`default_cache.bin` inside `data_10_shaders.bin`) holds
+478 vertex shaders as plain SM3 bytecode with tables, readable with d3dcompiler_47's D3DDisassemble; 0ECC3D20 is most
+likely texture.hlsl WORLD_SPACE + VERTEX_COLOR, a plain `pos * c0..c3` `[hypothesis]`.
+
+**Fix** (`d3d9.dll 377990d19f6a`, staging "move the game's clipping box with the HUD panel"): `hm_hud_scissor` puts
+the game's rectangle's corners through the same per-eye panel matrix (bounding box +1 px, clamped; whole picture if a
+corner is behind the eye); `hr_hud.c` keeps its own copy of the rectangle (forgotten on SetRenderTarget(0), Reset and
+device creation), sets the moved one around each placed draw to the back buffer and puts the game's back after.
+`d3d9_hud_scissor.off` leaves it alone. Log line `hud scissor per s:`. Test 38/38 (planted faults caught). Live: the
+whole pause menu (frames, buttons, words, and the "quit?" box) shows on the panel, the same in both eyes; with
+`d3d9_hud_scissor.off` the boxes go empty again `[verified-live 2026-10-17, n=1]`. ~10,500 placed draws a second had
+the scissor test on. Installed with `d3d9_hud.txt` and `d3d9_hud_more.txt` ON (the panel is now the default here).
+
+Menu note: Esc inside the pause menu opens the "quit to main menu?" box, not play; Esc on that box closes it.
