@@ -32,6 +32,23 @@ controller button in turn. Build installed: the 2026-10-16 controls build, uncha
   every second. Fixed the same session (lanes plugin `b4243b8`): it now learns the log's usual lines first and
   reports the words that changed.
 
+## Later the same day: the aim leaves menus alone
+
+The mod needed no "menu is open" flag. It already reads where the camera points every frame, so it now notices when
+the camera stops answering the mouse: after 10 frames of counts sent and no camera move it goes quiet, sending only a
+3-count nudge every 30 frames, left and right in turn, and puts the pointer back where it was when the camera last
+answered. When a nudge turns the camera again, steering comes back.
+
+- First build (`3d3e11b6185d`, staging `df3687b`): main menu `quiet 120/s, mouse sent 0`, and a click worked
+  `[verified-live 2026-10-17, n=1]`. But the 10 frames before it went quiet dragged the pointer to the left screen
+  edge. On the comic "Press any key" pages a key press then minimised the game (with aim AND controls on; either
+  alone did not), most likely a fire click landing outside the window `[inferred-static]`; and closing the pause menu
+  overshot the turn to 42° for a 30° head turn before settling.
+- Second build (`ab76b43a4113`, staging `5ec78dc`) puts the pointer back. Both switches on from launch: menus,
+  comic pages and play all fine, the pointer stayed over the game, the pause menu read `quiet 60/s`, and closing it
+  turned straight to −30.0° `[verified-live 2026-10-17, n=1]`. Leftover: in the pause menu the pointer sat ~100 px
+  right of where it was put; still inside the game.
+
 ## Driving it
 
 Launch to play, quitting, the music setting and the hazards are in the control profile
