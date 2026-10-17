@@ -12,9 +12,13 @@ Same `/lm` as the raw-mouse note. The reader built both in staging; the live ses
   the grip, keeping its own rotation, and goes back to the controller when the hold ends. `[verified-live
   2026-10-17, n=1]` (pictures) The spot is a guess to tune by eye in the headset.
 
+- **Smooth turn, as an option.** `turn=smooth` in `d3d9_vr.ini` turns the body continuously with the right stick,
+  about 120° a second at full push, once per picture. Live: the view turned left at that rate. Snap stays the
+  default, and the installed ini is back on snap. `[verified-live 2026-10-17, n=1]`
+
 ## Installed
 
-`d3d9.dll 60f57ec6112b` (backup of `623ab36a6cb9` beside it). staging commit "Ghost Hand recorder (once per
+`d3d9.dll 962b6f8f9ed2` (with smooth turn; backups of `60f57ec6112b` and `623ab36a6cb9` beside it). staging commit "Ghost Hand recorder (once per
 picture), off hand on the gun's fore-grip".
 
 ## Also

@@ -399,3 +399,11 @@ in both holds the left hand sits ahead of the right on the gun, and returns to i
 `[verified-live 2026-10-17, n=1, pictures]`. Tests: fore-grip 17/17, Ghost Hand 14/14 (each fails when broken on purpose).
 
 Notes: `modding-notes/2026-10-17-lm-ghost-hand-and-foregrip.md`.
+
+**Smooth turn** (`[controls] turn=smooth`, `smooth_deg_per_s` 120, snap stays the default). Right stick past a 0.20
+deadzone, squared curve (half push = a quarter of the rate), by real elapsed time once per presented picture
+(`pad_frame_mark` after Present; a gap over 0.25 s only restarts the clock), applied at the START of the camera
+update so all ~13 camera updates of a frame share one body turn (snap stays at the end). Test 34/34, fails when the
+once-per-frame guard or the direction is broken. Live: "smooth turn 115-121 deg in 39-58 frames" a second at full
+push, and the view turned left `[verified-live 2026-10-17, n=1]`. Untested: whether a stick turn reads as smooth to
+BeG0nE (it measures head turns).
