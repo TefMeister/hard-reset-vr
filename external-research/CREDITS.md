@@ -23,3 +23,5 @@ are not, or you are a rights holder who wants something corrected or removed, op
 
 - **vr.org**, SteamVR 2.17 and 32-bit OpenXR (2026-09-12): https://vr.org/articles/steamvr-2-17-stable-32-bit-openxr-runtime-2026
 - **GamingOnLinux**, SteamVR 2.17 (2026-09): https://www.gamingonlinux.com/2026/09/steamvr-2-17-arrives-ready-to-go-for-the-steam-frame/
+- **The Exploit mod team** (ModDB) — the public note on what Hard Reset's files let modders change: <https://www.moddb.com/mods/exploit/news/breaking-ground-in-hard-reset-modding>
+- **PC Gamer** — Hard Reset Redux and its newer engine version: <https://pcgamer.com/hard-reset-redux-is-on-the-way>
