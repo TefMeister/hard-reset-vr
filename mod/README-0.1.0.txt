@@ -96,5 +96,5 @@ Claude Code for all the coding
 the wiz3D project (https://github.com/effcol/wiz3D) for showing the game draws both eyes itself
 The Khronos Group for the OpenXR loader (openxr_loader.dll, Apache License 2.0, included as LICENSE-OpenXR-loader-Apache-2.0.txt)
 
-If you helped or inspired this and are not listed, email (an issue on this repository) and it will be fixed as soon as
+If you helped or inspired this and are not listed, open an issue on this repository and it will be fixed as soon as
 possible. We honour correction and removal requests from rights holders.
