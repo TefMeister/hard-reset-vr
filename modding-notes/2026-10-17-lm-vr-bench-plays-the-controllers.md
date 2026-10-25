@@ -29,7 +29,7 @@ controller button in turn. Build installed: the 2026-10-16 controls build, uncha
   nobody turning a head. Pose fresh in 95-97% of frames; mid-swing read "smooth"; near the slow ends of the swing the
   camera held still in 22-39% of pictures `[measured 2026-10-17, n=1]`. To be repeated before anything is changed.
 - **VR Bench itself was wrong at first:** its button check passed every button because this mod writes a log line
-  every second. Fixed the same session (lanes plugin `b4243b8`): it now learns the log's usual lines first and
+  every second. Fixed the same session (lanes plugin `0207d3b`): it now learns the log's usual lines first and
   reports the words that changed.
 
 ## Later the same day: the aim leaves menus alone
