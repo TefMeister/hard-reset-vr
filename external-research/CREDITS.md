@@ -25,3 +25,5 @@ are not, or you are a rights holder who wants something corrected or removed, op
 - **GamingOnLinux**, SteamVR 2.17 (2026-09): https://www.gamingonlinux.com/2026/09/steamvr-2-17-arrives-ready-to-go-for-the-steam-frame/
 - **The Exploit mod team** (ModDB) — the public note on what Hard Reset's files let modders change: <https://www.moddb.com/mods/exploit/news/breaking-ground-in-hard-reset-modding>
 - **PC Gamer** — Hard Reset Redux and its newer engine version: <https://pcgamer.com/hard-reset-redux-is-on-the-way>
+
+- GOG forum, Hard Reset Redux, "invisible menu" thread (delete the profile config to regenerate defaults): <https://gog.com/forum/hard_reset_redux/invisible_menu> (read 2026-10-27, /gr)

@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-10-23 (estate sweep) — CHECK-IN.** Inbox empty. Looked for a public tool for the game's model files (the dossier's "no tools anywhere"): none found; the one public modding group edited fonts, text, HUD animations and textures only. Topic filed.
+**Last `/gr` pass: 2026-10-27 (estate sweep) — CHECK-IN.** Inbox empty. One search on the raw-mouse row found nothing for this game; reading this PC's own profile showed the home PC never got the dev PC's 2026-10-17 settings (pointer sent to the dossier inbox).
+
+_Previous: Last `/gr` pass: 2026-10-23 (estate sweep) — CHECK-IN. Inbox empty. Looked for a public tool for the game's model files (the dossier's "no tools anywhere"): none found; the one public modding group edited fonts, text, HUD animations and textures only. Topic filed._
 
 _Previous: **Last `/gr` pass: 2026-10-07 (estate sweep) — CHECK-IN.** Inbox empty. SteamVR 2.17 (2026-09-10) ships a 32-bit OpenXR runtime, which answers the home-PC row's first question; topic filed and a pointer sent to the dossier inbox._
 
