@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-10-27 (estate sweep) — CHECK-IN.** Inbox empty. One search on the raw-mouse row found nothing for this game; reading this PC's own profile showed the home PC never got the dev PC's 2026-10-17 settings (pointer sent to the dossier inbox).
+**Last `/gr` pass: 2026-11-07 (estate sweep) — CHECK-IN.** Inbox empty; one combined search found no Hard Reset VR mod; the raw-mouse row is ours to run. Nothing new.
+
+_Previous: **Last `/gr` pass: 2026-10-27 (estate sweep) — CHECK-IN.** Inbox empty. One search on the raw-mouse row found nothing for this game; reading this PC's own profile showed the home PC never got the dev PC's 2026-10-17 settings (pointer sent to the dossier inbox)._
 
 _Previous: Last `/gr` pass: 2026-10-23 (estate sweep) — CHECK-IN. Inbox empty. Looked for a public tool for the game's model files (the dossier's "no tools anywhere"): none found; the one public modding group edited fonts, text, HUD animations and textures only. Topic filed._
 
