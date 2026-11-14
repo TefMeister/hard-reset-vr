@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-11-07 (estate sweep) — CHECK-IN.** Inbox empty; one combined search found no Hard Reset VR mod; the raw-mouse row is ours to run. Nothing new.
+**Last `/gr` pass: 2026-11-14 (check-ins beside the Keeper's sweep of the same day) — CHECK-IN.** Inbox empty; one search found no Hard Reset VR mod. Nothing new.
+
+_Previous: **Last `/gr` pass: 2026-11-07 (estate sweep) — CHECK-IN.** Inbox empty; one combined search found no Hard Reset VR mod; the raw-mouse row is ours to run. Nothing new._
 
 _Previous: **Last `/gr` pass: 2026-10-27 (estate sweep) — CHECK-IN.** Inbox empty. One search on the raw-mouse row found nothing for this game; reading this PC's own profile showed the home PC never got the dev PC's 2026-10-17 settings (pointer sent to the dossier inbox)._
 
