@@ -456,3 +456,33 @@ whole pause menu (frames, buttons, words, and the "quit?" box) shows on the pane
 the scissor test on. Installed with `d3d9_hud.txt` and `d3d9_hud_more.txt` ON (the panel is now the default here).
 
 Menu note: Esc inside the pause menu opens the "quit to main menu?" box, not play; Esc on that box closes it.
+
+## 2026-11-24 (`/lm`, Build PC): CYBORG HANDS FROM BLENDER, FINGERS THAT MOVE (live, simulator; inbox folded)
+
+- **Our hand model format** (`hr_hands_math.c`, `hr_hands_rig.c`): OBJ, metres, the add-on's grip frame (fingers -Z,
+  back +Y, thumb +X, left hand; the right is mirrored). `v`, `vn`, `f` in any of the usual forms, n-gons to 64 corners,
+  at most 40,000 triangles; one colour (`[hands] colour=`), CPU-lit by one light. Parts named
+  `<thumb|index|middle|ring|pinky>_<1..3>[suffix]` move with their segment; `pivot <segment> x y z ax ay az max_deg`
+  lines (sidecar `hand_left.pivots`, or `# pivot` in the OBJ) set the joints; positive turn = toward the palm
+  (`palm` line, default 0 -1 0); rest pose = open hand. Index follows the trigger, the rest the grip; gun hand: a fixed
+  hold `[compile-verified 2026-11-24]`, free-hand curl `[verified-live 2026-11-24, n=1]`. Own depth surface for the
+  hands when a rig is loaded. The OBJ parser overran its array on quads without normals before 2026-11-24 (fixed).
+- **The cyborg hand** is built by `dev-archive/blender/cyborg_hand.py` (headless Blender), which writes the OBJs per
+  pose and the pivots file. Live: 5,876 triangles, 53 moving parts, 15 pivots a hand `[verified-live 2026-11-24, n=1]`.
+- **Dock gap:** the game's gun, moved to the controller, sits ~0.1-0.15 m above and ahead of the hand drawn at the
+  same controller (pictures) `[verified-live 2026-11-24, n=1]`.
+- **Open: which way up.** The OpenXR grip frame (as recalled, not checked here) has +X normal to the palm and -Z
+  through the fist, so a held controller would show our palm-down hand rolled ~90 degrees `[hypothesis]`. One look in
+  the headset settles it; the rig takes `palm 1 0 0` for that frame.
+- **Folded inbox notes:** (1) 2026-10-27 /gr: the Build PC's profile config lacked the dev PC's settings — set on
+  2026-11-24 (music 0, raw mouse 0, 1280x720 incl. `r_fullscreen_modes`, `r_animatix_pp_enable 0`). (2) 2026-11-01
+  /gd: the jitter recorder's camera-write call fires 2-170 times a picture, so "camera held" seconds cannot be told
+  from repeated writes; proposed: write once a picture, at the last write before the eye draws (board row).
+  (3) 2026-10-23 /gs: OPEN block stale — re-dated 2026-11-24.
+- **Finger rig settings** (`[hands]`, read when the hands switch on): `fingers=0` off; `gun_pose=0` no fixed hold;
+  `depth=0|1` (unset = on only with a rig); `curl_test=0..1` for pictures; hold values `gun_grip` 0.80 (middle, ring,
+  pinky), `gun_thumb` 0.65, `gun_index` 0.30 to `gun_index_pull` 0.60 with the trigger, `finger_relax` 0.12 minimum.
+  Free hand: index = trigger, the rest = grip. The off hand on the fore-grip: every finger at `gun_grip`. The gun hold
+  needs the frame to know where the gun is (`gun_local_valid`), so menus always show the free hand. Max degrees by
+  default: fingers 80/95/65, thumb 35/45/60. `d3d9_controls_test.txt` does not reach the fingers. Controller values:
+  `HrPose.in` trigger/squeeze/stick/buttons from `hxb_read` (hxr.c); no touch sensors read.
