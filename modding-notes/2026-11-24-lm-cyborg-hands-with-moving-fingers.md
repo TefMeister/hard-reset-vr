@@ -45,3 +45,7 @@ fingers so we can have an idea where they will dock on the weapons". Done in one
 - The game rewrites the window size from `r_fullscreen_modes`; set that to `"1280x720"` too.
 - Steam asks for a Windows "Yes" on this PC at every Steam start of Hard Reset: its `directx` first-run mark is missing
   here (the dev PC got it on 2026-10-07). A one-click fix file was left on the Desktop for Tefa.
+
+## Tefa's word
+
+- 2026-11-24, after the pictures: "hands look cool!" The look stays as made; no changes asked for.
