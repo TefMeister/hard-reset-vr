@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-11-14 (check-ins beside the Keeper's sweep of the same day) — CHECK-IN.** Inbox empty; one search found no Hard Reset VR mod. Nothing new.
+**Last `/gr` pass: 2026-11-25 — CHECK-IN.** Inbox empty; watch check: one search, still no Hard Reset (Redux) VR mod found. Nothing new.
+
+_Previous: **Last `/gr` pass: 2026-11-14 (check-ins beside the Keeper's sweep of the same day) — CHECK-IN.** Inbox empty; one search found no Hard Reset VR mod. Nothing new._
 
 _Previous: **Last `/gr` pass: 2026-11-07 (estate sweep) — CHECK-IN.** Inbox empty; one combined search found no Hard Reset VR mod; the raw-mouse row is ours to run. Nothing new._
 
