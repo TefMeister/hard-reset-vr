@@ -83,6 +83,5 @@ on the gun: the hold per morph (`[pose.*]`) is the knob.
 - Staging `f8886c2` (code only): `src/hr_hands_skin.{c,h}`, `hr_hands.c`, `test/hr_hands_skin_test.c`, `build.sh`
   (runs the golden check when `assets/gloves/` and `test/evidence/gloves/` hold the files), README, ini example.
   d3d9.dll **`eeec92e98437`** (staging `f8886c2` + the once-a-frame bend), not deployed (the game folder's crash state comes first, board row 1).
-- ⚠️ The glove files themselves are NOT in git: the upload of the model and texture was refused by this session's
-  safety check; they sit in the staging working copy (untracked) and in the Blender folder above, waiting for
-  Tefa's word.
+- The glove files themselves (`assets/gloves/` and `test/evidence/gloves/`) are in the private staging repo,
+  commit `faabed9`, on Tefa's yes (2026-11-27); the report files carry only the file's base name, no home path.
