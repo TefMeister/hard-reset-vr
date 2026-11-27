@@ -48,3 +48,17 @@ to be our own add-on ("please save that tool as our own add-on in blender").
 
 Tefa's eye on the skinned glove; then the left glove the same way (stitch first); then the add-on (hr_hands.c) learns
 to bend a skinned mesh (it draws rigid parts today), and the grip point is set.
+
+## Later the same evening: fingers going thin at the bends (Tefa's eye)
+
+Tefa: "these are parts that look like they get thinner to avoid clipping, but they have to be thicker" (the inside
+of bent bare fingers). The checker had no measure for it, and had wrongly counted Preserve Volume as worse (more
+contact) when it is what keeps a finger full. New measure: per joint, the width of the ring of skin round it, bent
+against straight (open pose = 1.00 everywhere). Grip, before: index middle joint 0.73, thumb tip joint 0.78-0.81,
+middle finger middle joint 0.82-0.87.
+
+Fix: **Preserve Volume on, and every finger hinge moved 4 mm towards the inside of its bend** (the thumb tip joint
+6 mm more), as a real knuckle turns nearer the palm side; end-joint stretch 10 mm. Grip after: every joint 0.90 or
+more, clipping 637 -> 260, torn 0; trigger pose clipping 93; fist joints 0.88 or more. Checked by picture at Tefa's
+three spots: full, rounded bends. 5 mm was thicker still but brought the first tear and 7x stretch on the knuckle
+backs. The add-on gained "Hinges towards palm" and the per-joint thickness line in Check bend.

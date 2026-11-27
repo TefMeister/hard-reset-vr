@@ -2,10 +2,12 @@
 
 Side panel (N) -> "Skin Checker":
   Stitch patches a Meshy import comes in as hundreds of separate patches; this joins them so the surface bends as one
+  Hinges towards palm  moves each finger hinge towards the inside of its bend, so a bent finger keeps its thickness
   Make weights   each point of the mesh gets its pull from the finger bones (nearest finger, stretch across each
                  joint, then averaged in space so thin layers lying on each other move as one)
   Check bend     measures the bent mesh against its rest shape: overstretched or crushed spots, places the
-                 surface passes through itself that it did not before bending, torn edges; marks them in red
+                 surface passes through itself that it did not before bending, torn edges, and fingers going
+                 thin at a bend (skin pulled in towards the bone); marks them in red
   Next spot      turns the view to the next worst spot, so each fault can be looked at in turn
   Clear marks    removes the red marks
 Before weights: the mesh must be ONE connected surface. A Meshy .glb imports split into hundreds of patches along
@@ -48,7 +50,7 @@ class SkinCheckerSettings(bpy.types.PropertyGroup):
     smooth_n: bpy.props.IntProperty(name="Blend passes", default=5, min=0, max=10)
     blend1: bpy.props.FloatProperty(name="Big knuckle stretch (mm)", default=10.0, min=1.0, max=30.0)
     blend2: bpy.props.FloatProperty(name="Middle joint stretch (mm)", default=7.0, min=1.0, max=30.0)
-    blend3: bpy.props.FloatProperty(name="End joint stretch (mm)", default=6.0, min=1.0, max=30.0)
+    blend3: bpy.props.FloatProperty(name="End joint stretch (mm)", default=10.0, min=1.0, max=30.0)
     stretch_max: bpy.props.FloatProperty(name="Too stretched (x)", default=1.6, min=1.05, max=10.0)
     squash_min: bpy.props.FloatProperty(name="Too crushed (x)", default=0.5, min=0.01, max=0.95)
     tear_jump: bpy.props.FloatProperty(name="Torn (pull difference)", default=0.5, min=0.05, max=1.0)
@@ -94,6 +96,29 @@ class SKINCHK_OT_stitch(bpy.types.Operator):
         bm = bmesh.new(); bm.from_mesh(me); bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=self.dist / 1000); bm.to_mesh(me); bm.free()
         b = _islands(me)
         self.report({'INFO'}, f"Patches {a} -> {b}; points {v0} -> {len(me.vertices)}"); return {'FINISHED'}
+
+
+class SKINCHK_OT_hinges(bpy.types.Operator):
+    bl_idname = "skin_checker.hinges"; bl_label = "Hinges towards palm"
+    bl_description = ("Move each finger hinge towards the inside of its bend, as a real knuckle turns: the finger keeps its "
+                      "thickness when bent. 4 mm measured best on the Hard Reset right glove; its thumb tip took 6 mm more")
+    bl_options = {'REGISTER', 'UNDO'}
+    mm: bpy.props.FloatProperty(name="Distance (mm)", default=4.0, min=-20.0, max=20.0)
+    only: bpy.props.StringProperty(name="Only bones (comma list, empty = every finger bone)", default="")
+
+    def execute(self, ctx):
+        p = _props(ctx); arm = p.armature
+        if not arm:
+            self.report({'ERROR'}, "Pick the rig first"); return {'CANCELLED'}
+        names = [s.strip() for s in self.only.split(",") if s.strip()]
+        prev = ctx.view_layer.objects.active; ctx.view_layer.objects.active = arm
+        bpy.ops.object.mode_set(mode='EDIT')
+        for b in arm.data.edit_bones:
+            if b.parent is None or (names and b.name not in names):
+                continue
+            roll_to = b.z_axis.copy(); b.head = b.head + b.z_axis.normalized() * (self.mm / 1000); b.align_roll(roll_to)
+        bpy.ops.object.mode_set(mode='OBJECT'); ctx.view_layer.objects.active = prev
+        self.report({'INFO'}, f"Hinges moved {self.mm} mm; press Make weights again"); return {'FINISHED'}
 
 
 class SKINCHK_OT_weights(bpy.types.Operator):
@@ -153,9 +178,10 @@ class SKINCHK_OT_check(bpy.types.Operator):
         p = _props(ctx)
         if not p.mesh:
             self.report({'ERROR'}, "Pick the mesh first"); return {'CANCELLED'}
-        r = check.skin_check(p.mesh.name, True, p.stretch_max, p.squash_min, p.tear_jump)
+        r = check.skin_check(p.mesh.name, True, p.stretch_max, p.squash_min, p.tear_jump, p.discs.name if p.discs else None)
         lo, hi = r['squash_or_stretch_worst']
-        p.result = f"stretched/crushed {r['stretch_edges']} (worst {hi}x / {lo}x) | clipping {r['clip_pairs']} | torn {r['tear_edges']}"
+        p.result = (f"stretched/crushed {r['stretch_edges']} (worst {hi}x / {lo}x) | clipping {r['clip_pairs']} | torn {r['tear_edges']}"
+                    f" | thin joints {len(r['thin_joints'])} of {len(r['joint_width'])} (thinnest {r['thin_worst']}x)")
         p.spots = ";".join(",".join(str(float(x)) for x in s['centre']) for s in r['spots'][:40])
         p.spot_i = -1
         self.report({'INFO'}, p.result); return {'FINISHED'}
@@ -197,6 +223,7 @@ class SKINCHK_PT_panel(bpy.types.Panel):
         p = _props(ctx); col = self.layout.column()
         col.prop(p, "mesh"); col.prop(p, "armature"); col.prop(p, "discs")
         col.operator("skin_checker.stitch", icon='AUTOMERGE_ON')
+        col.operator("skin_checker.hinges", icon='BONE_DATA')
         box = col.box(); box.label(text="Weights")
         for k in ("smooth_r", "smooth_n", "web_depth", "blend1", "blend2", "blend3"):
             box.prop(p, k)
@@ -213,7 +240,7 @@ class SKINCHK_PT_panel(bpy.types.Panel):
                 box.label(text=part)
 
 
-CLASSES = (SkinCheckerSettings, SKINCHK_OT_stitch, SKINCHK_OT_weights, SKINCHK_OT_pose, SKINCHK_OT_check, SKINCHK_OT_next, SKINCHK_OT_clear, SKINCHK_PT_panel)
+CLASSES = (SkinCheckerSettings, SKINCHK_OT_stitch, SKINCHK_OT_hinges, SKINCHK_OT_weights, SKINCHK_OT_pose, SKINCHK_OT_check, SKINCHK_OT_next, SKINCHK_OT_clear, SKINCHK_PT_panel)
 
 
 def register():

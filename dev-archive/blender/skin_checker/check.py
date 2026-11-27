@@ -7,6 +7,9 @@ What it measures, posed against rest (the mesh with the armature off):
             overlap themselves in places; only NEW crossings count), faces sharing a vertex ignored
   tear    : edges whose two ends are pulled by different bones (largest weight difference > TEAR_JUMP),
             which is what leaves flaps and spikes standing off the surface
+  thin    : per joint, the ring of skin round it: its width across the finger bent against straight; below
+            THIN_MIN the finger goes thin at that bend (Tefa's eye found it 2026-11-27 after the other three
+            were clean). Needs the joint discs collection.
 Each fault is put in a "spot" (a 12 mm grid cell); the spots are returned worst first, with the bones involved,
 so pictures can be taken there. It also builds an object "<name> faults" that marks the faulty faces in red,
 for the close-ups (delete it after)."""
@@ -17,6 +20,8 @@ from mathutils.bvhtree import BVHTree
 STRETCH_MAX = 1.6
 SQUASH_MIN = 0.5
 TEAR_JUMP = 0.5
+THIN_MIN = 0.92     # a joint whose bent width is below this share of its straight width counts as thinned
+RING = 0.002        # the ring of skin measured at each joint: this far either side of the joint's plane
 CELL = 0.012
 MIN_EDGE = 0.0003
 
@@ -44,7 +49,7 @@ def _overlaps(co, polys):
     return out
 
 
-def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, tear_jump=TEAR_JUMP):
+def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, tear_jump=TEAR_JUMP, discs=None):
     ob = bpy.data.objects[name]; me = ob.data
     rest = _coords(ob, False); pose = _coords(ob, True)
     nv = len(me.vertices)
@@ -62,6 +67,46 @@ def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, 
     stretch = np.where(ok & ((ratio > stretch_max) | (ratio < squash_min)))[0]
     jump = np.abs(W[ed[:, 0]] - W[ed[:, 1]]).max(axis=1)
     tear = np.where(jump > tear_jump)[0]
+    # thinning, per joint: the ring of skin round each joint (within RING of its plane, owned by that finger),
+    # its mean width across the finger, straight against bent (across = perpendicular to the average of the two
+    # bones' directions)
+    arm_ob = next((m.object for m in ob.modifiers if m.type == 'ARMATURE' and m.object), None)
+    thin = np.array([], int); joints = {}
+    if arm_ob is not None and discs:
+        mw = arm_ob.matrix_world
+        pb = arm_ob.pose.bones
+        def bdir(name, posed):
+            b = pb[name]
+            h, t = (b.head, b.tail) if posed else (b.bone.head_local, b.bone.tail_local)
+            v = (mw @ t) - (mw @ h); return np.array(v.normalized())
+        planes = {o.name.split(' ', 1)[1]: (np.array(o.matrix_world.translation), np.array((o.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()))
+                  for o in bpy.data.collections[discs].objects}
+        # each point's finger: the one whose bone line is nearest at rest
+        fingers = sorted({k.split(' ')[0] for k in planes})
+        def line(f):
+            pts = [np.array(mw @ pb[f'{f}_{i}'].bone.head_local) for i in (1, 2, 3)] + [np.array(mw @ pb[f'{f}_3'].bone.tail_local)]
+            d = np.full(nv, 9.0)
+            for a, b in zip(pts[:-1], pts[1:]):
+                ab = b - a; t = np.clip(((rest - a) @ ab) / (ab @ ab), 0, 1); d = np.minimum(d, np.linalg.norm(rest - (a + t[:, None] * ab), axis=1))
+            return d
+        D = np.stack([line(f) for f in fingers]); own = D.argmin(axis=0); dmin = D.min(axis=0)
+        bad = []
+        for k, (o, nr) in planes.items():
+            f, i = k.split(' '); i = int(i); fi = fingers.index(f)
+            ring = np.where((own == fi) & (dmin < 0.02) & (np.abs((rest - o) @ nr) < RING))[0]
+            if len(ring) < 8:
+                continue
+            prev = 'hand' if i == 1 else f'{f}_{i - 1}'
+            def width(co, ax):
+                ax = ax / np.linalg.norm(ax); q = co - np.outer(co @ ax, ax); c = q.mean(axis=0)
+                return float(np.linalg.norm(q - c, axis=1).mean())
+            w0 = width(rest[ring], bdir(prev, False) + bdir(f'{f}_{i}', False))
+            w1 = width(pose[ring], bdir(prev, True) + bdir(f'{f}_{i}', True))
+            joints[k] = round(w1 / w0, 2)
+            if w1 / w0 < THIN_MIN:
+                bad.extend(ring.tolist())
+        thin = np.array(bad, int)
+    thin_worst = min(joints.values()) if joints else 1.0
     polys = [tuple(p.vertices) for p in me.polygons]
     clip = _overlaps(pose, polys) - _overlaps(rest, polys)
     # spots
@@ -69,7 +114,7 @@ def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, 
     def add(kind, verts):
         c = rest[list(verts)].mean(axis=0)
         key = tuple((c // CELL).astype(int))
-        s = spots.setdefault(key, {'stretch': 0, 'clip': 0, 'tear': 0, 'bones': set(), 'pts': []})
+        s = spots.setdefault(key, {'stretch': 0, 'clip': 0, 'tear': 0, 'thin': 0, 'bones': set(), 'pts': []})
         s[kind] += 1; s['pts'].append(pose[list(verts)].mean(axis=0))
         for v in verts:
             s['bones'].add(groups[dom[v]])
@@ -79,7 +124,9 @@ def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, 
         add('tear', ed[e])
     for a, b in clip:
         add('clip', polys[a] + polys[b])
-    ranked = sorted(spots.values(), key=lambda s: -(s['stretch'] + 3 * s['clip'] + s['tear']))
+    for v in thin:
+        add('thin', (int(v),))
+    ranked = sorted(spots.values(), key=lambda s: -(s['stretch'] + 3 * s['clip'] + s['tear'] + s['thin']))
     for s in ranked:
         s['centre'] = tuple(np.round(np.mean(s['pts'], axis=0), 4)); del s['pts']
         s['bones'] = sorted(s['bones'])
@@ -87,6 +134,7 @@ def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, 
         bad = set()
         for e in list(stretch) + list(tear):
             bad.update(ed[e].tolist())
+        bad.update(int(v) for v in thin)
         badf = {i for i, p in enumerate(polys) if set(p) & bad}
         for a, b in clip:
             badf.update((a, b))
@@ -119,4 +167,6 @@ def skin_check(name, mark=True, stretch_max=STRETCH_MAX, squash_min=SQUASH_MIN, 
         fo = bpy.data.objects.new(name + ' faults', m2); bpy.context.scene.collection.objects.link(fo)
         fo.show_in_front = True; fo.hide_render = False
     return {'stretch_edges': int(len(stretch)), 'squash_or_stretch_worst': (round(float(ratio[ok].min()), 2), round(float(ratio[ok].max()), 2)),
-            'clip_pairs': len(clip), 'tear_edges': int(len(tear)), 'spots': ranked}
+            'clip_pairs': len(clip), 'tear_edges': int(len(tear)),
+            'thin_joints': {k: v for k, v in sorted(joints.items()) if v < THIN_MIN}, 'thin_worst': round(thin_worst, 2),
+            'joint_width': dict(sorted(joints.items())), 'thin_points': int(len(thin)), 'spots': ranked}

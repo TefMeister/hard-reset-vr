@@ -15,7 +15,7 @@ from mathutils import Vector
 from mathutils.kdtree import KDTree
 
 RAD = {'index': 0.022, 'middle': 0.022, 'ring': 0.022, 'pinky': 0.021, 'thumb': 0.024}
-BLEND = {1: 0.010, 2: 0.007, 3: 0.006}
+BLEND = {1: 0.010, 2: 0.007, 3: 0.010}
 SMOOTH_R = 0.012
 SMOOTH_N = 5
 WEB_DEPTH = 0.040   # past the big knuckle by more than this, a finger no longer blends with its neighbours
