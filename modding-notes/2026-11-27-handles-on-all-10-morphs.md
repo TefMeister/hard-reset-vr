@@ -82,3 +82,19 @@ Tefa, on the lowered NRG stock (handle moved 10 cm down, 9.5 cm forward: "this i
 
 Still to do: the other 9 morphs' graft files; the join remodelled and the handle unwrapped onto the gun's texture
 (Blender, together with Tefa); the hand's pose on the new grip.
+
+## Later the same evening: the graft on all 10 morphs `[verified-live 2026-11-27, n=1, simulator]`
+
+Tefa: "that looks really cool! can you do the same with the bullet gun and then give me the glb files, I'll let Meshy
+go over these and then we can go from there".
+- CLN anchor = the lower body, index 45663 x 182 triangles (143 vertices, all on bone 2, residual 0), plus the batched
+  first-pass draw that contains it (45201 x 3480); the same in all five CLN morphs. Stand-in UVs: the dark scratched
+  plate of the CLN texture (u 0.73..0.86, v 0.64..0.76). NRG anchor 48135 x 1164 is in all five NRG morphs.
+- Live: every morph cln1..nrg5 showed 320-344 handles drawn a second, 0 failed, 80 fps. nrg2..nrg5 gun_grip lowered
+  like nrg1 (y -0.10, z -0.095).
+- GLBs for Meshy (gun parts joined, HUD dial and crosshair left out, handle a second object), made by
+  `dev-archive/blender/export_glb.py`; they hold the game's model, so they stay on the PC (work folder
+  blender/hard-reset-vr/glb for Meshy), never in a repo. A few gun parts are untextured in them (draws with no
+  colour texture in the rip: the glass and glow parts).
+- What comes back from Meshy needs: the handle as its own part again (only OUR part can go into the game), its UVs on
+  the gun's texture or its own texture (then hr_graft.c must swap the texture stages too: not built).
