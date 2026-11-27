@@ -62,3 +62,15 @@ Fix: **Preserve Volume on, and every finger hinge moved 4 mm towards the inside 
 more, clipping 637 -> 260, torn 0; trigger pose clipping 93; fist joints 0.88 or more. Checked by picture at Tefa's
 three spots: full, rounded bends. 5 mm was thicker still but brought the first tear and 7x stretch on the knuckle
 backs. The add-on gained "Hinges towards palm" and the per-joint thickness line in Check bend.
+
+## The left glove (all metal fingers), the same night
+
+Built straight with what the right glove taught: stitched at import (one surface from the start), the right glove's
+joint spots mirrored and fitted to the left fingers, Tefa checked and dragged them ("that should do it"), hinges at the
+middle of each joint ring then 4 mm towards the palm (thumb tip 6 mm more), thumb roll mirrored ((-1,-1,0)), Preserve
+Volume on, the same weight settings. First check: 11 torn edges in every pose, all long triangles (7-14 mm) lying
+across a joint; split edges over 4 mm within 6 mm of a joint (1,874 edges, 60,000 -> 61,508 faces) -> 0 torn.
+Grip: thinnest joint 0.96, clipping 317, worst stretch 2.9x; trigger 218; fist thinnest 0.92, clipping 797. The thumb
+folds in over the fingers in the fist (mirrored bend direction right, by picture). Seen: the metal finger plates
+curve a little at the joints instead of staying rigid; left for Tefa to judge. The add-on gained "Add points at
+joints". File `meshy_hand_left_skinned.blend`; the right glove's spots kept in `right_joint_spots.json`.

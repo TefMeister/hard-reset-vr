@@ -3,6 +3,7 @@
 Side panel (N) -> "Skin Checker":
   Stitch patches a Meshy import comes in as hundreds of separate patches; this joins them so the surface bends as one
   Hinges towards palm  moves each finger hinge towards the inside of its bend, so a bent finger keeps its thickness
+  Add points at joints  splits long edges that run across a joint (they fold with a kink and show as torn)
   Make weights   each point of the mesh gets its pull from the finger bones (nearest finger, stretch across each
                  joint, then averaged in space so thin layers lying on each other move as one)
   Check bend     measures the bent mesh against its rest shape: overstretched or crushed spots, places the
@@ -121,6 +122,40 @@ class SKINCHK_OT_hinges(bpy.types.Operator):
         self.report({'INFO'}, f"Hinges moved {self.mm} mm; press Make weights again"); return {'FINISHED'}
 
 
+class SKINCHK_OT_joint_points(bpy.types.Operator):
+    bl_idname = "skin_checker.joint_points"; bl_label = "Add points at joints"
+    bl_description = ("Split long edges that run across a joint, so the skin has points to bend on (a long flat face "
+                      "across a joint folds with a kink and shows as torn). The texture follows")
+    bl_options = {'REGISTER', 'UNDO'}
+    longer: bpy.props.FloatProperty(name="Edges longer than (mm)", default=4.0, min=1.0, max=30.0)
+    near: bpy.props.FloatProperty(name="Within this of a joint (mm)", default=6.0, min=1.0, max=30.0)
+
+    def execute(self, ctx):
+        import bmesh
+        p = _props(ctx)
+        if not (p.mesh and p.discs):
+            self.report({'ERROR'}, "Pick the mesh and the joint discs first"); return {'CANCELLED'}
+        me = p.mesh.data
+        planes = [(o.matrix_world.translation.copy(), (o.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()) for o in p.discs.objects]
+        total = 0
+        for _ in range(3):
+            bm = bmesh.new(); bm.from_mesh(me); pick = []
+            for e in bm.edges:
+                a, b = e.verts[0].co, e.verts[1].co
+                if (a - b).length < self.longer / 1000:
+                    continue
+                for c, n in planes:
+                    da = (a - c).dot(n); db = (b - c).dot(n)
+                    if ((a + b) / 2 - c).length < 0.025 and (min(abs(da), abs(db)) < self.near / 1000 or da * db < 0):
+                        pick.append(e); break
+            if not pick:
+                bm.free(); break
+            bmesh.ops.subdivide_edges(bm, edges=pick, cuts=1, use_grid_fill=True)
+            bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
+            bm.to_mesh(me); bm.free(); total += len(pick)
+        self.report({'INFO'}, f"Split {total} edges; faces now {len(me.polygons)}; press Make weights again"); return {'FINISHED'}
+
+
 class SKINCHK_OT_weights(bpy.types.Operator):
     bl_idname = "skin_checker.weights"; bl_label = "Make weights"
     bl_description = "Give the mesh its bone weights from the rig's finger bones and the joint discs"
@@ -224,6 +259,7 @@ class SKINCHK_PT_panel(bpy.types.Panel):
         col.prop(p, "mesh"); col.prop(p, "armature"); col.prop(p, "discs")
         col.operator("skin_checker.stitch", icon='AUTOMERGE_ON')
         col.operator("skin_checker.hinges", icon='BONE_DATA')
+        col.operator("skin_checker.joint_points", icon='MOD_SUBSURF')
         box = col.box(); box.label(text="Weights")
         for k in ("smooth_r", "smooth_n", "web_depth", "blend1", "blend2", "blend3"):
             box.prop(p, k)
@@ -240,7 +276,7 @@ class SKINCHK_PT_panel(bpy.types.Panel):
                 box.label(text=part)
 
 
-CLASSES = (SkinCheckerSettings, SKINCHK_OT_stitch, SKINCHK_OT_hinges, SKINCHK_OT_weights, SKINCHK_OT_pose, SKINCHK_OT_check, SKINCHK_OT_next, SKINCHK_OT_clear, SKINCHK_PT_panel)
+CLASSES = (SkinCheckerSettings, SKINCHK_OT_stitch, SKINCHK_OT_hinges, SKINCHK_OT_joint_points, SKINCHK_OT_weights, SKINCHK_OT_pose, SKINCHK_OT_check, SKINCHK_OT_next, SKINCHK_OT_clear, SKINCHK_PT_panel)
 
 
 def register():
