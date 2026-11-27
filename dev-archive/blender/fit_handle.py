@@ -59,10 +59,16 @@ front_top = (0.0, max(v[1] for v in front), hz_min)
 t = (rear_bottom[0] - front_top[0], rear_bottom[1] - front_top[1] + a.lift, rear_bottom[2] - front_top[2] - a.overlap)
 grip_cam = (0.0 + t[0], a.grip_y + t[1], a.grip_z + t[2])
 
-def write_moved(src_lines, path, shift, header):
+def write_moved(src_lines, path, shift, header, drop=frozenset()):
+    """drop: group names whose faces are left out (their vertices stay, so the numbering holds)"""
     with open(path, "w", encoding="latin1", newline="\n") as f:
         f.write(header)
+        grp = None
         for l in src_lines:
+            if l.startswith(("o ", "g ")):
+                grp = l.split(None, 1)[1].strip()
+            if grp in drop and l.startswith("f "):
+                continue
             if l.startswith("v "):
                 p = l.split()
                 xyz = [float(p[1]) + shift[0], float(p[2]) + shift[1], float(p[3]) + shift[2]]
@@ -79,7 +85,7 @@ with open(os.path.join(a.out, "%s.gun_grip.txt" % a.morph), "w") as f:
     f.write("gun_grip = %.3f %.3f %.3f\n" % grip_cam)
 # preview: gun + handle in the gun's frame (vertex numbers of the handle shifted after the gun's)
 prev = os.path.join(a.out, "preview_%s.obj" % a.morph)
-write_moved(glines, prev, (0, 0, 0), hdr)
+write_moved(glines, prev, (0, 0, 0), hdr, frozenset(skip))   # the left-out groups (HUD, crosshair) not drawn
 nv = len(gv)
 with open(prev, "a", encoding="latin1", newline="\n") as f:
     f.write("o handle\n")
