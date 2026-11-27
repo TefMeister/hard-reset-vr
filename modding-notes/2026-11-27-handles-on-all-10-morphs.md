@@ -136,3 +136,12 @@ one solid mesh, about 2.09x the game's size, own colour / roughness-metal / norm
   the window (not 0.497); "Resume game" y 0.319.
 - Not checked: the hand on Meshy's grip (gun_grip still handle B's), the normal map's direction, the other 4 CLN modes
   in the game (same file), how it looks in the headset.
+
+## The energy gun's Meshy frame (installed, NOT yet seen in the game)
+
+Tefa's second Meshy file (695,020 faces, 2.22x size) fitted onto our NRG base frame + handle A (median gap 8.5-12.8 mm),
+slimmed to 15,999 faces, grafted on the cone (48135 x 1164, bone 32), hiding the 6 NRG frame parts (the cone and the
+lower arm pieces 74292, 29115, 28275, 27579, 25251). Same file for nrg1..nrg5. Known limit: the game's arm pieces move
+up to 3.5 cm between modes, ours stays in mode 1's place, so the game's knuckles and ring may sit a little off it in
+modes 2-5. Its s6 came out a faint blue glow average (NRG's s6 is the glow map). d3d9_vr.ini now points at Virtual
+Desktop (runtime_json) for Tefa's headset look at both guns; the simulator line is kept, commented.
