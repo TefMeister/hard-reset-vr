@@ -112,3 +112,27 @@ moving parts will be added to that?"
   gun: base frame alone, base frame + our handle (separate object), and mode 1's moving parts, all with one shared
   shift so they still fit together. Work folder `blender/hard-reset-vr/glb for Meshy/base frames` (the game's model:
   never in a repo). The CLN frame carries a flat textured card at its front (one of the fixed parts).
+
+## Night: Meshy's whole bullet-gun frame in the game, the game's frame hidden `[verified-live 2026-11-27, n=1, simulator]`
+
+Tefa sent a Meshy model made from our base frame + handle ("please add wires, low-tech connectors"): 660,824 faces,
+one solid mesh, about 2.09x the game's size, own colour / roughness-metal / normal maps (2048).
+- `meshy_fit.py` (Blender, numpy ICP with scale over 8 orientations): matched onto our base frame + handle, median gap
+  13-16 mm. `meshy_slim.py`: decimated to 16,000 faces (the paint carries the detail; picture checked), written in
+  the cln1 rip's camera frame with its UVs, plus its three textures.
+- `graft_build.py` now: `--keep-uv` (its own UVs, tangents from them), `--hide @base_groups.json:cln` (the 28 fixed
+  CLN parts it replaces), `--tex` (Meshy's maps -> the game's s0 colour, s2 specular+gloss, s4 normal with green
+  flipped to DirectX, s6; brightness matched to the texels of ALL replaced parts: matching to the anchor part alone
+  came out near black), written as "HRG2".
+- `hr_graft.c` (build `2b6b7e7df9aa`): reads HRG2; a draw of the held gun's index buffer that covers a hidden part is
+  drawn in the pieces around it (the batched first-pass draws), a wholly hidden part not at all; our textures set for
+  our draw only, the game's put back. Live: 28 parts hidden (about 4,700 hidden part draws and 480 cut draws a
+  second), the frame drawn 328-336 times a second, 85 fps; the game's moving top bar and barrel sit on Meshy's frame.
+  Pictures `dev-archive/recon/2026-11-27-handles-in-game/cln-meshy-frame-in-game-*.png` (taken at r_gamma 2.2, put
+  back to the default after).
+- Learned the hard way: `start_level <name>` from the MAIN MENU crashes the game ("internal application error"; it
+  then exits by itself; saves untouched, backed up first to profiles-backup-2026-11-27-before-start-level). The
+  levels in data_10_levels.bin: level2, level11, low3, low3b, low4, mid1, mid3. The main menu panel sits at x 0.586 of
+  the window (not 0.497); "Resume game" y 0.319.
+- Not checked: the hand on Meshy's grip (gun_grip still handle B's), the normal map's direction, the other 4 CLN modes
+  in the game (same file), how it looks in the headset.
