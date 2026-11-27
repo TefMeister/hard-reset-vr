@@ -43,3 +43,13 @@ nrg3 0.271 -0.291 -0.132 · nrg4 0.269 -0.296 -0.138 · nrg5 0.270 -0.295 -0.133
 
 Tefa in the headset (runtime_json in `d3d9_vr.ini` points at the simulator: comment it out for Virtual Desktop), a
 look at all 10 morphs; then adjust lift/overlap per morph in `fit_all.py` and rerun (game closed; handles load at start).
+
+## Correction, same afternoon (Tefa, from the sheet of all 10)
+
+Tefa: "the gun stocks are swapped on the weapons, the one that is on the energy gun is for the bullet gun". Now
+**handle B (the receiver with the AR stock) on CLN** (grip z -0.25 y -0.07, `--lift 0.15`: its receiver's middle on
+the middle of CLN's back block) and **handle A (the skeleton stock) on NRG** (grip z -0.27 y -0.02, `--lift 0.06`: its
+top bar on the middle of NRG's back cone); overlap 0.05 both. Installed (game closed), not yet looked at in game.
+gun_grip now: cln1-3 0.225 -0.329 -0.082 · cln4 0.225 -0.399 -0.087 · cln5 0.225 -0.329 -0.086 ·
+nrg1 0.272 -0.222 -0.155 · nrg2 0.271 -0.225 -0.127 · nrg3 0.271 -0.218 -0.152 · nrg4 0.269 -0.223 -0.158 ·
+nrg5 0.270 -0.222 -0.153. The pictures in `dev-archive/recon/2026-11-27-handles-in-game/` show the OLD pairing.

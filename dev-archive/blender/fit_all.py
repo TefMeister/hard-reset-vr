@@ -6,9 +6,11 @@ OUT = os.path.join(RIPS, "fit")
 REPO = os.path.expanduser("~/github-backups/hard-reset-vr/dev-archive")
 FIT = os.path.join(REPO, "blender", "fit_handle.py")
 H = os.path.join(REPO, "recon", "2026-11-27-morph-poses", "handles")
-HANDLES = {"cln": (os.path.join(H, "handle_a.obj"), -0.27, -0.02), "nrg": (os.path.join(H, "handle_b.obj"), -0.25, -0.07)}
-# NRG's back end is a cone whose middle is at about y -0.173: lift handle B so its receiver's middle meets it
-EXTRA = {"cln": ["--lift", "0.10", "--overlap", "0.05"], "nrg": ["--lift", "0.08", "--overlap", "0.05"]}
+# Tefa 2026-11-27: B (the receiver with the AR stock) is the bullet gun's, A (the skeleton stock) the energy gun's
+HANDLES = {"cln": (os.path.join(H, "handle_b.obj"), -0.25, -0.07), "nrg": (os.path.join(H, "handle_a.obj"), -0.27, -0.02)}
+# each handle's front middle onto the middle of the gun's back end (CLN block about 0.10 above its bottom, NRG cone
+# about y -0.173): B's receiver middle is 0.045 under its top, A's top bar 0.02
+EXTRA = {"cln": ["--lift", "0.15", "--overlap", "0.05"], "nrg": ["--lift", "0.06", "--overlap", "0.05"]}
 
 
 def junk_groups(path):
