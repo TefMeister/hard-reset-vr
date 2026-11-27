@@ -145,3 +145,17 @@ lower arm pieces 74292, 29115, 28275, 27579, 25251). Same file for nrg1..nrg5. K
 up to 3.5 cm between modes, ours stays in mode 1's place, so the game's knuckles and ring may sit a little off it in
 modes 2-5. Its s6 came out a faint blue glow average (NRG's s6 is the glow map). d3d9_vr.ini now points at Virtual
 Desktop (runtime_json) for Tefa's headset look at both guns; the simulator line is kept, commented.
+
+## Close of the day: pictures, and where things stand
+
+- Tefa on the Blender picture set: "some parts look bent" and "guns are too bright". Both were the pictures: the rip
+  holds the gun as the game does (turned about 9.6 degrees toward the crosshair, tipped 3.9 degrees up: model x/y/z in
+  the camera frame from the cln1 anchor fit), and a 50 mm camera close up bends a long gun. `photo_set.py` now turns
+  the gun onto its own axes (model x right, y muzzle, z up), shoots the four flat views orthographic, and darkens
+  Meshy's colour by the game file's scale (0.71) under dimmer light. The game's batched first-pass draws (no colour
+  texture) are left out of pictures: they showed as white plates and never show in the game.
+- d3d9_vr.ini runtime_json = Virtual Desktop (the simulator line kept, commented) for Tefa's headset look.
+- **Next:** Tefa in the headset: both Meshy frames, all 10 modes, brightness at the normal r_gamma, the hand on
+  Meshy's grips; then tune brightness (graft_build's s0 scale) / grip points per what is seen.
+- Helper: `dev-archive/hr_start_simulator.sh` (start, intro, Resume game at x 0.586 y 0.319, into play) and
+  `dev-archive/shot_zoom.py`.
