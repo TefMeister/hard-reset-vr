@@ -98,3 +98,17 @@ go over these and then we can go from there".
   colour texture in the rip: the glass and glow parts).
 - What comes back from Meshy needs: the handle as its own part again (only OUR part can go into the game), its UVs on
   the gun's texture or its own texture (then hr_graft.c must swap the texture stages too: not built).
+
+## The base frame of each gun, for Meshy (Opus)
+
+Tefa: "can you just give me the base gun model without the morphing parts? so we can model the base frame and all the
+moving parts will be added to that?"
+- Every gun part is its own draw on its own bone (`part_bones.py`). Each mode's copy lined up on the handle's anchor
+  part, then every part measured against mode 1 `[measured 2026-11-27, n=1 per mode]`:
+  **CLN: 28 of 50 parts stay within 1 mm in all five modes** (the body, the lower block, the rails): the base frame.
+  **NRG: only the back cone is rigid**; the lower arm, its front ring and the knuckles move up to 3.5 cm, everything
+  else 13-27 cm (the orb cage, the coils): base frame = parts within 4 cm, in mode 1's pose.
+- `export_base.py` (base list from `base_parts.py`-style measuring, kept as base_groups.json in the work folder) writes per
+  gun: base frame alone, base frame + our handle (separate object), and mode 1's moving parts, all with one shared
+  shift so they still fit together. Work folder `blender/hard-reset-vr/glb for Meshy/base frames` (the game's model:
+  never in a repo). The CLN frame carries a flat textured card at its front (one of the fixed parts).
