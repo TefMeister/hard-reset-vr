@@ -53,3 +53,32 @@ top bar on the middle of NRG's back cone); overlap 0.05 both. Installed (game cl
 gun_grip now: cln1-3 0.225 -0.329 -0.082 · cln4 0.225 -0.399 -0.087 · cln5 0.225 -0.329 -0.086 ·
 nrg1 0.272 -0.222 -0.155 · nrg2 0.271 -0.225 -0.127 · nrg3 0.271 -0.218 -0.152 · nrg4 0.269 -0.223 -0.158 ·
 nrg5 0.270 -0.222 -0.153. The pictures in `dev-archive/recon/2026-11-27-handles-in-game/` show the OLD pairing.
+
+## Evening (Fable): the handle drawn THROUGH THE GAME'S RENDERER ("graft"), lit like the gun `[verified-live 2026-11-27, n=1, simulator, nrg1 only]`
+
+Tefa, on the lowered NRG stock (handle moved 10 cm down, 9.5 cm forward: "this is getting better now!"): it "has to be
+'melted' into the gun model with same sort of look and lighting and reflection and all that".
+
+- **Why the old handle could not**: hr_hands.c paints it on the finished picture in a flat colour. **New: `hr_graft.c`**
+  (switch `d3d9_graft.txt`, files `gun_graft_<morph>.bin`): right after the game draws one chosen gun part (the anchor,
+  found by its index range), the same draw is repeated with our vertex and index buffer; shaders, textures, bones and
+  states are the game's. Live on nrg1: 340 anchor draws a second, 340 handles drawn, 0 failures, 84 fps; the handle
+  shows in the gun's worn grey metal with the scene's light and highlights
+  (`dev-archive/recon/2026-11-27-handles-in-game/nrg1-handle-grafted-lit-by-the-game.png`, brightened).
+- **The game's skinned vertex** (32 bytes): FLOAT16_4 position, UBYTE4N tangent, binormal, normal, FLOAT16_2 uv,
+  D3DCOLOR weights, UBYTE4 bone indices. `tools/graft_build.py` (staging, proxy-d3d9) puts a fitted handle into the gun
+  model's space on the anchor's bone: model -> camera map fitted from the rip itself, residual 0.00001 m on nrg1
+  (anchor = the back cone, index 48135 x 1164 triangles, all 961 vertices on bone 32) `[verified-numerically]`.
+- **How the game draws the gun** (from the rips): a depth/normal pass and a colour pass per eye. NRG's cone and lower
+  arm are single draws in both passes; most CLN parts are single draws in the colour pass but BATCHED in the first pass
+  (one draw whose index range contains several parts): graft_build.py writes every containing draw as an anchor too.
+  CLN not yet tried.
+- **Fault made and fixed the same hour**: asking weapon_morph() on every draw took the game to 2 fps; now only on a
+  draw whose index range matches a graft (build `157eedb0a98a`).
+- A side view in the simulator: aim OFF, then the head turned (yaw -75, pitch -20): the gun keeps the body's forward
+  and crosses the picture.
+- nrg1 `gun_grip` is now 0.272 -0.322 -0.250 (the lowered stock). Stand-in UVs: a strip of bare metal from the gun's
+  texture (u 0.150..0.180, v 0.42..0.76).
+
+Still to do: the other 9 morphs' graft files; the join remodelled and the handle unwrapped onto the gun's texture
+(Blender, together with Tefa); the hand's pose on the new grip.
