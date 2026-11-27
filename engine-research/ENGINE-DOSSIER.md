@@ -486,3 +486,55 @@ Menu note: Esc inside the pause menu opens the "quit to main menu?" box, not pla
   needs the frame to know where the gun is (`gun_local_valid`), so menus always show the free hand. Max degrees by
   default: fingers 80/95/65, thumb 35/45/60. `d3d9_controls_test.txt` does not reach the fingers. Controller values:
   `HrPose.in` trigger/squeeze/stick/buttons from `hxb_read` (hxr.c); no touch sensors read.
+
+## 2026-11-27 (`/lm`, Build PC): WHICH MORPH IS IN HAND, UNLOCK-ALL, A HOLD PER MORPH (live, simulator; reader note folded)
+
+Tefa asked for "different poses for each morph on each weapon", then said the guns "were not meant to be held in the
+flat game and have no clear triggers and such, handles", and sent two Meshy handle models (grip, trigger, stock) to
+blend into the back of each gun.
+
+- **The ten morphs, key order** `[inferred-static 2026-11-27]`, names seen live on the dial for RIFLE, PLASMA,
+  SHOTGUN: CLN (W1) 1 assault rifle, 2 shotgun, 3 grenade launcher, 4 rocket launcher, 5 sticky mine launcher;
+  NRG (W2) 1 plasma rifle, 2 shock blaster, 3 electric mortar, 4 particle cannon (railgun), 5 smartgun. Each has an
+  alt fire and an "upgrade" variant.
+- **Where the game keeps them: Squirrel members, no C++ field** `[verified-live 2026-11-27, n=1 per gun]`:
+  `HSQUIRRELVM*` at `[0xADDEDC]` -> root table -> `q_World.qm_User.qm_PC` (int id) -> `q_World.qm_Objects[id]` = the
+  player: `.qm_CurrentWeaponSlot` "W1"/"W2", `.qm_oidWeapon` -> `qm_Objects[oid].qm_WeaponMode` 1..5 (1-based, set
+  the moment a switch is accepted, before the morph animation). `qm_User.qm_DesiredWeapon` differs from the slot
+  during a gun swap. Read from outside and from the add-on (`hr_weapon.c`); a gun switch both ways was followed.
+  This build's Squirrel layout (object = {type, value}; table nodes 20 bytes at +0x14, count +0x18; string chars
+  +0x1C; instance class +0x10, fields from +0x20 by 8; class members table +0x0C; a member value with bit 0x02000000
+  is a field index) `[inferred-static]`, confirmed by every live walk.
+- **Locked or not:** `player.qm_Template.Upgrades["kin_M_C" | "el_M_C" | "misc_M_C"].Active` (bool), read live on
+  every mode select. Key order -> id: CLN `kin_0, kin_1, kin_3, kin_2, kin_4`; NRG `el_0, el_1, el_3, el_2, el_4`;
+  suffix `_0` the mode, `_1` alt fire, `_2` upgrade. **Unlock-all = write Active 1 on the 28 kin/el flags**
+  `[verified-live 2026-11-27, n=2]`: all 10 morphs selectable at once, no reload, and the morph pieces show (pictures
+  of all 10, side-on: `dev-archive/recon/2026-11-27-morph-poses/`). Built into the add-on as the testing switch
+  `d3d9_unlock_all.txt` (once per player object; "misc" in the file also sets player upgrades, without their stat
+  effects). Untried second route: console `sqrun <file>` running the game's own `BuyUpgrade` (staging
+  `tools/unlockall.nut`). Console `imbad` = immortal `[inferred-static]`. Saves hold the upgrade table, so a save
+  made after unlocking keeps it: test on a copy, never on Tefa's own saves.
+- **A hold per morph** (`hr_hands_rig.c`, `hr_hands.c`): `d3d9_vr.ini` sections `[pose.cln1]` .. `[pose.nrg5]` with
+  `gun` (five curls), `index_pull`, `off` (the other hand on the fore-grip), `foregrip_ahead_m/up_m`, and in
+  `hr_gun.c` `gun_grip = x y z` (where that gun's back meets the hand). The fingers blend over `[hands]
+  morph_blend_s` when the morph changes; a mode change lands before the gun finishes morphing (CLN clips swap parts
+  at "0.9"), so 0.5-1 s suits. Bridge: `pose cln3` forces a morph's hold for pictures, `pose auto`, `pose reload`.
+  Live: the add-on read every morph and switched holds by itself `[verified-live 2026-11-27, n=1]`; whether the
+  drafts look right is Tefa's call.
+- **Handles:** `gun_handle_<morph>.obj` or `gun_handle.obj` beside the exe, drawn in the gun hand while it holds the
+  gun, with per-point colours from Blender ("v x y z r g b"). Tefa's two Meshy models slimmed from 382k / 469k to 6k
+  triangles each, 42 cm long, muzzle -Z, the back end at the origin
+  (`dev-archive/blender/handle_from_glb.py`); pistol grip about 0.27 m (A) / 0.25 m (B) ahead of the back end.
+- **Menus with the HUD panel on:** clicks did not reach the main menu; `switch hud off`, `switch aim off`, game in
+  front, a real click at 0.497, 0.322 worked (control profile KNOWN.md).
+- **Dead ends:** no C++ field holds the mode (all weapon logic is script); hooking the input dispatch of
+  `PCSelectWeaponMode` would miss mouse-wheel, scripted and initial modes.
+- **The gun ripper and the game's skinning** (reader, from the shipped `compose.hlsl` / `shadow.hlsl` /
+  `common.hlsl`) `[inferred-static 2026-11-27]`: skinned verts carry BLENDWEIGHT float4 + BLENDINDICES int4, paired
+  crosswise as shipped: `M = bone[ind.w]*w.w + bone[ind.z]*w.x + bone[ind.y]*w.y + bone[ind.x]*w.z`; `mSkinning[76]`
+  at c28, float4x3 column-packed (each register one column, .w translation); normal = NORMAL.xyz*2-1 (PACKED_TANGENT),
+  vertex colour in the .w's. Stages: s0 diffuse, s2 specular, s4 normal, s6 emissive. Every VB and IB the game makes
+  is DEFAULT-pool, so the ripper (`hr_rip.c`, bridge `rip <label>`) keeps CPU copies at Unlock when `d3d9_rip.txt` is
+  present (lock-free since the first version hung a level load; `nocopy` reads with Lock(READONLY) instead). Output
+  `rips/<label>/gun.obj` in the game camera's frame. **Ripped guns are the game's models: they stay in the game folder,
+  never in a repo.**
