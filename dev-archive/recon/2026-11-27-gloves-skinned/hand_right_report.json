@@ -1,0 +1,184 @@
+{
+ "side": "right",
+ "mesh": "R glove skinned",
+ "rig": "HandRig_R",
+ "discs": "cut discs",
+ "full": {
+  "faces": 60000,
+  "vertices": 29998,
+  "check": {
+   "GRIP": {
+    "stretch_edges": 969,
+    "stretch_worst": [
+     0.07,
+     5.91
+    ],
+    "clip_pairs": 260,
+    "torn": 0,
+    "thinnest_joint": 0.9,
+    "thin_joints": {
+     "thumb 3": 0.9
+    }
+   },
+   "TRIGGER": {
+    "stretch_edges": 830,
+    "stretch_worst": [
+     0.07,
+     5.91
+    ],
+    "clip_pairs": 93,
+    "torn": 0,
+    "thinnest_joint": 0.9,
+    "thin_joints": {
+     "middle 2": 0.91,
+     "thumb 3": 0.9
+    }
+   },
+   "FIST": {
+    "stretch_edges": 2052,
+    "stretch_worst": [
+     0.08,
+     9.69
+    ],
+    "clip_pairs": 1216,
+    "torn": 0,
+    "thinnest_joint": 0.88,
+    "thin_joints": {
+     "index 2": 0.9,
+     "middle 2": 0.88,
+     "thumb 3": 0.88
+    }
+   }
+  }
+ },
+ "grip": {
+  "centre_blend": [
+   0.0151,
+   0.029,
+   -0.2002
+  ],
+  "tube_radius_m": 0.0488,
+  "axes_blend_XYZ": [
+   [
+    -0.0171,
+    0.9999,
+    -0.0011
+   ],
+   [
+    -0.0668,
+    0.0,
+    0.9978
+   ],
+   [
+    0.9976,
+    0.0172,
+    0.0668
+   ]
+  ],
+  "centre_used": "circle",
+  "clearance_at_circle_centre_m": 0.0102,
+  "roomiest_spot_blend": [
+   0.0147,
+   0.041,
+   -0.1972
+  ],
+  "clearance_at_roomiest_m": 0.0202,
+  "roomiest_from_circle_centre_m": 0.0124,
+  "finger_circle_radius_m": [
+   0.0492,
+   0.0476,
+   0.0594,
+   0.0389
+  ],
+  "tube_axis_vs_knuckle_line_deg": 4.8,
+  "centres": [
+   [
+    -0.0444,
+    0.0221,
+    -0.2041
+   ],
+   [
+    -0.0046,
+    0.037,
+    -0.2081
+   ],
+   [
+    0.0347,
+    0.0302,
+    -0.1856
+   ],
+   [
+    0.0749,
+    0.0267,
+    -0.2029
+   ]
+  ]
+ },
+ "slim": {
+  "8000": {
+   "faces": 8120,
+   "vertices": 4058,
+   "check": {
+    "GRIP": {
+     "stretch_edges": 178,
+     "stretch_worst": [
+      0.13,
+      3.42
+     ],
+     "clip_pairs": 93,
+     "torn": 0,
+     "thinnest_joint": 0.91,
+     "thin_joints": {
+      "thumb 3": 0.91
+     }
+    },
+    "TRIGGER": {
+     "stretch_edges": 152,
+     "stretch_worst": [
+      0.13,
+      3.42
+     ],
+     "clip_pairs": 17,
+     "torn": 0,
+     "thinnest_joint": 0.9,
+     "thin_joints": {
+      "middle 2": 0.9,
+      "thumb 3": 0.91
+     }
+    },
+    "FIST": {
+     "stretch_edges": 342,
+     "stretch_worst": [
+      0.16,
+      7.99
+     ],
+     "clip_pairs": 543,
+     "torn": 0,
+     "thinnest_joint": 0.88,
+     "thin_joints": {
+      "middle 2": 0.88,
+      "thumb 3": 0.89
+     }
+    }
+   }
+  }
+ },
+ "split": {
+  "8000": {
+   "after_decimate": 8000,
+   "torn_per_round": [
+    60,
+    0
+   ],
+   "final_faces": 8120
+  }
+ },
+ "export": {
+  "file": "hand_right.hrsk",
+  "points": 7885,
+  "triangles": 8120,
+  "blender_vertices": 4058,
+  "bytes": 508652,
+  "texture": "Image_0.001"
+ }
+}
