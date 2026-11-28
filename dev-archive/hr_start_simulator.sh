@@ -1,6 +1,6 @@
 #!/bin/bash
-# Start Hard Reset (simulator), get through the intro and "Resume game", into play. Aim and HUD stay OFF (menus need
-# that); controls on. M is no longer used for the menu. Prints the first weapon line.
+# Start Hard Reset (simulator), get through the intro and "Resume game", into play. Aim OFF for the menus and back ON
+# once in play; HUD off; controls on. End a run with hr_stop.sh. M is no longer used for the menu. Prints the first weapon line.
 g="/d/SteamLibrary/steamapps/common/HardReset"
 B="python $HOME/github-backups/mcp-game-bridge-cubed/tools/bridge_cli.py hardreset.exe"
 M="$HOME/github-backups/_lanes-next-wt/plugins/lanes/tools/menu-o-matic/menu_o_matic.py"
@@ -20,5 +20,6 @@ $B in tap down >/dev/null; sleep 1; $B in tap enter >/dev/null
 for i in $(seq 1 30); do sleep 3; tail -c 20000 "$L" | grep -aq "weapon: morph [0-9]" && break; done
 tail -c 20000 "$L" | grep -aq "weapon: morph [0-9]" || { echo "not in play: look at the menu (bridge shot) before pressing anything"; exit 2; }
 sleep 5; $B in tap space >/dev/null; sleep 2
+$B switch aim on >/dev/null   # off only for the menus; Tefa 2026-11-28 got a gun that would not turn when it stayed off
 tail -c 20000 "$L" | grep -a "weapon: morph" | tail -1 | cut -c1-80
 $B stats

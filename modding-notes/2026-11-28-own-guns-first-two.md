@@ -52,3 +52,23 @@ fully hidden draw).
   menu); then three mouse clicks aimed at "Resume game" opened "New game" and its lists (backed out with Escape, no
   campaign started, saves untouched). The arrow keys work: Down, Enter. `hr_start_simulator.sh` now uses them;
   `set_runtime.py sim|vd` (work folder) switches the runtime line. Left on Virtual Desktop for Tefa's headset look.
+
+## 21:47-21:50, Tefa in the headset (Virtual Desktop) `[reported 2026-11-28, Tefa, n=1]`
+
+Tefa: "size of the gun looked right! brightness was a bit too dark for guns and quite a bit too light for gloves.
+gloves were too big, have to be taken down 30%. controller buttons didn't work, i could only move my hands around, and
+the weapon but not rotate it, RT worked and the trigger finger curled. the graphics are really low in the headset. it
+does look awesome though"; and "hands are visible through the gun" (the hands have no depth yet: the open DEPTH row).
+
+- **Buttons and the gun's turn: my fault.** `d3d9_aim.txt` and `d3d9_controls.txt` were gone: the start helper's
+  `switch aim off` (for the menus) and my `switch controls off` (before typing `quit`) delete the switch files, and
+  nothing put them back. Log of Tefa's run: controllers ON, "keys/buttons posted 0" all through. Fixed: both files back;
+  `hr_start_simulator.sh` switches aim on once in play; new `hr_stop.sh` quits and puts both back (and the runtime on
+  Virtual Desktop, `set_runtime.py`).
+- **Low picture**: each eye is the game's back buffer, 1280x720 (`xr: two 1280x720 eye swapchains`), stretched over
+  about 94 x 99 degrees of lens: about 7 pixels a degree up and down. `r_texture_quality "0"` in config.cfg too, its
+  meaning (low or high) not yet known; the game also has r_aa_quality, r_fxaa, r_anisotropy, r_shadows_quality,
+  r_quality_lighting. Headset frames in play: 59-66 a second at this size. Not changed yet: needs a test run.
+- Changed (game closed; the old files in the game folder's `_backup-2026-11-28-before-headset-fixes`): both guns
+  rebuilt with `graft_build.py --bright 1.35`; gloves `[hands] scale=0.7`; glove textures darkened to 0.6
+  (with a texture the add-on lights the glove white, so `colour=` does not tint it).

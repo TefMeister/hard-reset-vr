@@ -9,6 +9,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RIPS = r"D:\SteamLibrary\steamapps\common\HardReset\rips"
 GB = os.path.expanduser("~/github-backups/staging/hard-reset-vr/proxy-d3d9/tools/graft_build.py")
 ANCHOR = (45663, 182)
+BRIGHT = 1.35                        # Tefa 2026-11-28 in the headset: "a bit too dark"
 FRONT_M = 0.05                       # the game gun's front slice that gives its barrel line
 # name, morph, grip (right, ahead, up) and off-hand spot in gun-local metres
 GUNS = [
@@ -66,6 +67,6 @@ for name, morph, s, grip_l, off_l in GUNS:
     print("  [pose.%s] gun_grip = %.3f %.3f %.3f   foregrip_ahead_m=%.3f foregrip_up_m=%.3f"
           % (morph, grip[0], grip[1], grip[2], off_l[1] - ahead, off_l[2] - up))
     r = subprocess.run([sys.executable, GB, RIPS, morph, "%d,%d" % ANCHOR, dst, "0,0,0", out, "--keep-uv",
-                        "--hide", ",".join(sorted(gun)), "--tex", HERE, "--tex-prefix", name])
+                        "--hide", ",".join(sorted(gun)), "--tex", HERE, "--tex-prefix", name, "--bright", str(BRIGHT)])
     if r.returncode:
         sys.exit("graft_build failed for " + morph)
