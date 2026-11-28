@@ -5,3 +5,4 @@
 - 2026-10-18 chosen `all-games--software-that-cancels-controller-drift-when-one-controller-hides-behin` - Software that cancels controller drift when one controller hides behind the other
 - 2026-10-18 dropped `all-games--a-launcher-to-switch-gameplay-features-on-or-off-before-playing` - A launcher to switch gameplay features on or off before playing
 - 2026-10-18 dropped `all-games--bullet-casings-stay-on-the-floor-until-the-level-ends` - Bullet casings stay on the floor until the level ends
+- 2026-11-28 chosen `hard-reset--our-own-guns-five-bullet-guns-five-energy-guns-and-melee` - Our own guns: five bullet guns, five energy guns, and melee

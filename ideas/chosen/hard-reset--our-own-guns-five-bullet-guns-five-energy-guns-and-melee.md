@@ -3,7 +3,7 @@
 Order: 24000
 From: the ideas repo, `games/hard-reset.md` (<https://github.com/TefMeister/mod-ideas/blob/main/games/hard-reset.md>), copied 2026-11-28
 
-`[raw]` · `[looks doable]` — *the add-on already draws our own models inside the game's gun; a whole gun per mode is unchecked*
+`[settled]` · `[looks doable]` — *the add-on already draws our own models inside the game's gun; a whole gun per mode is unchecked*
 
 > "what we might do, is actually make guns for this game, 5 physical guns and 5 energy ones. and i think there is melee
 > as well"
@@ -18,3 +18,7 @@ animates the morph between modes and the moving parts (barrel, drum) when firing
 movements from the game's bones (the parts we hide carry them) or does without, so the switch between modes would need
 its own look (a dissolve or a quick swap). **Melee:** unchecked whether Hard Reset has a melee attack at all; our notes
 do not mention one. First step is looking at the game's controls and scripts.
+
+**Chosen 2026-11-28 (Tefa):** ten separate guns, no morphing; switched by holster zones or a weapon wheel. Tefa makes the guns in Meshy one after another; each is cleaned up in Blender together.
+
+> "these would have to be holster zones or alternativly weapon wheel. this one gun morphs into all is what i think was why this game wasn't all that successful, even though the game world looks so lived in and like a real place. so i'll make guns with meshy, one after another and we'll make this game work completely differently." (Tefa, 2026-11-28)
