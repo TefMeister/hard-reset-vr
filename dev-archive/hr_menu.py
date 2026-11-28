@@ -62,6 +62,8 @@ while time.time() - start < GIVE_UP_S:
             d = draws()
             if d and min(d) < MENU_DRAWS:
                 print("off the screen; Down, Enter: loading started (try %d, draws %s)" % (attempt, d))
+                # back on the screen behind Tefa's windows: hidden only for the menu keys (Tefa wants games on screen)
+                subprocess.run([sys.executable, bs, "back", pid.group(1)], capture_output=True)
                 sys.exit(0)
             print("try %d: the menu scene is still up (draws %s): Escape, again" % (attempt, d))
             bridge("in", "tap", "escape"); time.sleep(3)
