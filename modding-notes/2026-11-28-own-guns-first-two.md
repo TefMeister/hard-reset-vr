@@ -36,3 +36,19 @@ fully hidden draw).
   and tracers start at our muzzle, and what is lost with every game part hidden (the firing movement, the ammo dial
   parts on the gun, the mode's glow). One mistake caught before install: the hand spots were first written unscaled.
 - The parts are joined into one rigid piece for this try; they are separate in the .blend for the moving parts later.
+
+## 21:10-21:23, live on the OpenXR Simulator (Tefa's yes): both guns are in the game `[verified-live 2026-11-28, n=1, simulator]`
+
+- Log: `gun_graft_cln1.bin` 21,458 vertices / 20,000 triangles, hides 50 game parts; `gun_graft_cln2.bin` 20,693 / 20,000,
+  hides 44. In play on cln1: 280 anchor draws a second, 280 of ours drawn, 0 failed, 7,700 game part draws hidden a
+  second; on cln2 the same with 6,720 hidden. 65 fps with the bridge taking pictures.
+- Seen (pictures `dev-archive/recon/2026-11-28-own-guns-in-game/`): the rifle in mode 1 and the drum shotgun in mode 2,
+  lit by the game, no game gun part left, the mode key swaps one whole gun for the other.
+- NOT established: the muzzle flash (two pictures taken while Space was held show none; whether the shot fired is not
+  known), brightness (the shotgun's wood reads near black: the colour is matched to the game part's dark average),
+  size and feel in the headset, the hand spots (the simulator's stand-in hands hang wrist-up over the gun: the open
+  "which way up" row, so the hold could not be judged).
+- Mistakes of this run: the ini edit by sed left Virtual Desktop as the runtime (the first start sat at a flat main
+  menu); then three mouse clicks aimed at "Resume game" opened "New game" and its lists (backed out with Escape, no
+  campaign started, saves untouched). The arrow keys work: Down, Enter. `hr_start_simulator.sh` now uses them;
+  `set_runtime.py sim|vd` (work folder) switches the runtime line. Left on Virtual Desktop for Tefa's headset look.
