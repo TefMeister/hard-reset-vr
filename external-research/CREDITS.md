@@ -27,3 +27,7 @@ are not, or you are a rights holder who wants something corrected or removed, op
 - **PC Gamer** — Hard Reset Redux and its newer engine version: <https://pcgamer.com/hard-reset-redux-is-on-the-way>
 
 - GOG forum, Hard Reset Redux, "invisible menu" thread (delete the profile config to regenerate defaults): <https://gog.com/forum/hard_reset_redux/invisible_menu> (read 2026-10-27, /gr)
+
+## Sources (2026-11-28)
+
+- **Meta Quest developer forum**, the "OpenXR 32bit runtime issues" thread and its replies — https://communityforums.atmeta.com/discussions/dev-openxr/openxr-32bit-runtime-issues/838981

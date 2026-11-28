@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-11-25 — CHECK-IN.** Inbox empty; watch check: one search, still no Hard Reset (Redux) VR mod found. Nothing new.
+**Last `/gr` pass: 2026-11-28 — CHECK-IN.** Inbox empty. The 11-28 headset crash inside Virtual Desktop's 32-bit Oculus runtime: no public report of that file crashing; one topic.
+
+_Previous: **Last `/gr` pass: 2026-11-25 — CHECK-IN.** Inbox empty; watch check: one search, still no Hard Reset (Redux) VR mod found. Nothing new._
 
 _Previous: **Last `/gr` pass: 2026-11-14 (check-ins beside the Keeper's sweep of the same day) — CHECK-IN.** Inbox empty; one search found no Hard Reset VR mod. Nothing new._
 
@@ -30,6 +32,7 @@ write-up in `topics/`. Status tags:
 
 | Date | Topic | Status | Why it matters |
 | --- | --- | --- | --- |
+| 2026-11-28 | [A crash inside Virtual Desktop's 32-bit Oculus runtime](topics/2026-11-28-virtual-desktop-32-bit-runtime-crash.md) | 🆕 | No public report of `VirtualDesktop.LibOVRRT32_1.dll` crashing; why an Oculus-API DLL is loaded at all is the open question. |
 | 2026-10-23 | [No public tool for the model files](topics/2026-10-23-no-public-tool-for-the-model-files.md) | 🆕 | Searched negative: the only public modders edited fonts, text, HUD animations and textures; our own drawn hands stay the route. |
 | 2026-10-07 | [SteamVR 2.17 ships a 32-bit OpenXR runtime](topics/2026-10-07-steamvr-2-17-ships-a-32-bit-openxr-runtime.md) | 🆕 | Answers the home-PC row: point `runtime_json=` at `steamxr_win32.json`, VDXR as fallback |
 | 2026-09-29 | [Hard Reset is listed as a 3D Vision "Direct Mode" game: it may draw each eye itself](topics/2026-09-29-hard-reset-is-a-3d-vision-direct-mode-game.md) | 🆕 | Answers the NVAPI `[PD]` row's question in public: the game may render both eyes itself, and an `nvapi.dll` of ours could switch that on |
