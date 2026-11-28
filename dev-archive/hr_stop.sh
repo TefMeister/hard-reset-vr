@@ -5,10 +5,15 @@
 # 2026-11-28 they were left off and Tefa's next headset run had no buttons and a gun that would not turn.
 g="/d/SteamLibrary/steamapps/common/HardReset"
 B="python $HOME/github-backups/mcp-game-bridge-cubed/tools/bridge_cli.py hardreset.exe"
+P=$(tasklist //FI "IMAGENAME eq hardreset.exe" //FO CSV //NH | head -1 | cut -d'"' -f4)
+[ -n "$P" ] && python "$HOME/github-backups/_lanes-next-wt/plugins/lanes/tools/backstage/backstage.py" back "$P" >/dev/null 2>&1
 $B switch controls off >/dev/null 2>&1
 $B console quit >/dev/null 2>&1
 for i in $(seq 1 15); do sleep 2; tasklist | grep -qi hardreset || break; done
 tasklist | grep -qi hardreset && { echo "STILL RUNNING: look before anything else (never force-kill)"; exit 1; }
 touch "$g/d3d9_aim.txt" "$g/d3d9_controls.txt"
+# the game saves its window place on quit: put Tefa's place back in case it was saved while parked off the screen
+C="$USERPROFILE/Documents/Hard Reset Extended/profiles/tefmeister/config.cfg"
+sed -i -e 's/^r_win_pos_x ".*"/r_win_pos_x "603"/' -e 's/^r_win_pos_y ".*"/r_win_pos_y "194"/' "$C"
 python "$HOME/github-backups/hard-reset-vr/dev-archive/set_runtime.py" vd >/dev/null 2>&1 && echo "runtime back on Virtual Desktop"
 echo "closed; aim and controls ON"

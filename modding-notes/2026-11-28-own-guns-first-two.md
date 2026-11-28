@@ -72,3 +72,37 @@ does look awesome though"; and "hands are visible through the gun" (the hands ha
 - Changed (game closed; the old files in the game folder's `_backup-2026-11-28-before-headset-fixes`): both guns
   rebuilt with `graft_build.py --bright 1.35`; gloves `[hands] scale=0.7`; glove textures darkened to 0.6
   (with a texture the add-on lights the glove white, so `colour=` does not tint it).
+
+## 22:00-22:45, the picture size on the simulator, the game behind Tefa's windows (Backstage) `[measured 2026-11-28, n=1 each]`
+
+Tefa: "yes, but on the background please, like re8 and the darkness do".
+
+| eye size (= game window) | game frames a second in play | headset frames | readback ms per frame |
+| --- | --- | --- | --- |
+| 1280x720 | 60-69, median 63 | the same | 1.6 |
+| 1920x1080 | 45-50, median 48 | the same | 3.5 |
+
+- The graphics card (RTX 5080) was 40% busy at 1920x1080: the limit is not the card but our way of getting each eye
+  to the headset (the copy back to the processor) and the game drawing every frame twice. That copy is the real job.
+- `r_texture_quality "0"` is the HIGHEST (2 is plainly blurrier, pictures compared); it stays 0. It and
+  `r_anisotropy` do not change live through the console, only at a start. `r_anisotropy "16"` is refused (the game
+  wrote 0 back on quit); `4` is kept but shows no difference from the default, so the line was taken out again.
+- Left for Tefa's headset look: `r_fullscreen_modes "1920x1080"` (config backed up first as
+  `config.cfg.bak-2026-11-28-before-picture-size`); runtime on Virtual Desktop; aim and controls on.
+
+## The menu behind Tefa's windows, and a new campaign started by mistake (my fault; put right)
+
+- The old start helper's three blind Enters (timed for a game in front) ran, with the game behind other windows,
+  through New game -> New campaign -> a difficulty and started a new campaign; it wrote over
+  `save_16a5f693347862aa52b37dabb1c8c9b3.bin`. The game was quit before any checkpoint; the save was put back from
+  `profiles-backup-2026-11-27-before-start-level` (fingerprint acc930ad..., the backup's); today's whole folder is kept
+  beside it as `profiles-after-accidental-new-campaign-2026-11-28`. profile.bin left as the game wrote it.
+- Learned: (1) Escape on the main menu opens "Are you sure you want to quit the game?" (Escape cancels it);
+  (2) behind Tefa's windows, Tefa's own mouse pointer passing over that part of the screen hovers the game's menu and
+  moves the selection, so keys seem to land anywhere; (3) the menu drops keys for its first seconds; (4) picture
+  matching of the menu fails (see-through panel over a moving scene, the panel sways); the add-on's log tells the
+  screens apart: intro logos about 360 draws a second, the main menu's scene 13,000-20,000, a load under 1,000.
+- `hr_menu.py` now: nothing pressed until the log shows the menu; the window parked past the screen edge
+  (`backstage.py away`); Down, Enter; if the menu scene is still drawn 5 s later, Escape and again (up to 3). Worked:
+  try 1 dropped, try 2 loaded. `hr_stop.sh` brings the window back, quits, restores aim and controls, the window place
+  (`r_win_pos` 603, 194) and the Virtual Desktop runtime. `hr_try_picture.sh <WxH> <texq> <tag> [aniso]` = one try.
